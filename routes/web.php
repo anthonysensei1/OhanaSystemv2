@@ -69,3 +69,21 @@ Route::get('/Admin/Pages/Roles_and_Permissions/assign_roles_permissions',[App\Ht
 
 //Report Route
 Route::get('/Admin/Pages/Report/report',[App\Http\Controllers\ReportController::class,'index'])->name('/Admin/Pages/Report/report');
+
+
+
+
+//Customer Side
+//Home Route
+Route::get('/Customer/Pages/Home/home',[App\Http\Controllers\HomeController::class,'index'])->name('/Customer/Pages/Home/home');
+
+
+//Book Route
+Route::get('/Customer/Pages/Book/book',[App\Http\Controllers\BookController::class,'index'])->name('/Customer/Pages/Book/book');
+
+//About Route
+Route::get('/Customer/Pages/About/about',[App\Http\Controllers\AboutController::class,'index'])->name('/Customer/Pages/About/about');
+
+
+//ContactUs Route
+Route::get('/Customer/Pages/ContactUs/contact_us',[App\Http\Controllers\ContactUsController::class,'index'])->name('/Customer/Pages/ContactUs/contact_us');

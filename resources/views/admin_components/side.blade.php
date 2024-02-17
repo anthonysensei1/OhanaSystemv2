@@ -32,6 +32,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon far fa-envelope"></i>
                         <p>
+                        <span class="badge badge-warning right">2</span>
                             MANAGE BOOKINGS
                             <i class="fas fa-angle-left right"></i>
                         </p>
@@ -41,6 +42,7 @@
                         <a href="{{route('/Admin/Pages/Bookings/pending_bookings')}}" class="nav-link" id="pending">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Pending Bookings</p>
+                            <span class="badge badge-light right">2</span>
                         </a>
                         </li>
                         <li class="nav-item">
