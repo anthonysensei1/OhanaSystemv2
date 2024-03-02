@@ -25,6 +25,11 @@
 <!-- fullCalendar -->
 <link rel="stylesheet" href="{{asset('plugins/fullcalendar/main.css')}}">
 
+<!-- SweetAlert2 -->
+<link rel="stylesheet" href="{{asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
+<!-- Toastr -->
+<link rel="stylesheet" href="{{asset('plugins/toastr/toastr.min.css')}}">
+
 <style type="text/css">
   #calendar {
             width: 100%;
@@ -70,6 +75,19 @@
 		background-color: #dc3545;
 		color: #fff!important;
 	}
+
+  /* For Chrome, Safari, and Opera */
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+  }
+
+  /* For Firefox */
+  input[type=number] {
+      -moz-appearance: textfield;
+  }
+
 </style>
 
 
@@ -125,7 +143,10 @@
 <script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
 <!-- InputMask -->
 <script src="{{asset('plugins/inputmask/jquery.inputmask.min.js')}}"></script>
-
+<!-- SweetAlert2 -->
+<script src="{{asset('plugins/sweetalert2/sweetalert2.min.js')}}"></script>
+<!-- Toastr -->
+<script src="{{asset('plugins/toastr/toastr.min.js')}}"></script>
 
 
 

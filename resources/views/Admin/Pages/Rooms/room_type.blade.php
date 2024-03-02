@@ -23,20 +23,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Ordinary</td>
-                                <td>P500/per hour</td>
-                                <td class="text-center">
-                                    <button class="btn btn-info btn-md" data-toggle="modal" data-target="#edit_room_type">
-                                        <i class="fas fa-pen"></i>
-                                        edit
+                           @foreach ($room_types as $room_type)
+                              <tr>
+                                 <td>{{ $room_type['room_type'] }}</td>
+                                 <td>{{ $room_type['room_rate'] }}</td>
+                                 <td class="text-center">
+                                    <button class="btn btn-info btn-md" data-toggle="modal" data-id="{{ $room_type['id'] }}" data-target="#edit_room_type" onclick="edit('{{ $room_type['id'] }}', '{{ $room_type['room_type'] }}', '{{ $room_type['room_rate'] }}')">
+                                          <i class="fas fa-pen"></i>
+                                          edit
                                     </button>
-                                    <button class="btn btn-danger btn-md" data-toggle="modal" data-target="#delete_room_type">
-                                        <i class="fas fa-trash"></i>
-                                        delete
+                                    <button class="btn btn-danger btn-md" data-toggle="modal" data-id="{{ $room_type['id'] }}" data-target="#delete_room_type" onclick="edit('{{ $room_type['id'] }}', '{{ $room_type['room_type'] }}', '{{ $room_type['room_rate'] }}')">
+                                          <i class="fas fa-trash"></i>
+                                          delete
                                     </button>
-                                </td>
-                            </tr>
+                                 </td>
+                              </tr>
+                           @endforeach
                         </tbody>
                     </table>
                   </div>
@@ -55,28 +57,28 @@
          <div class="modal-header bg-gradient-success">
             <h4 class="modal-title">Add Room Type</h4>
          </div>
-         <div class="modal-body">
-            <form action="">
-               <div class="row">
-                  <div class="col-lg-12">
-                     <label for="room_type">Room Type :</label>
-                     <input type="text" class="form-control" name="room_type" id="room_type">
-                     <label for="room_rate">Rate :</label>
-                     <input type="text" class="form-control" name="room_rate" id="room_rate">
+         <form action="{{ route('room_type_store') }}" class="formPost">
+            <div class="modal-body">
+                  <div class="row">
+                     <div class="col-lg-12">
+                        <label for="room_type">Room Type :</label>
+                        <input type="text" class="form-control" name="room_type" id="room_type" required>
+                        <label for="room_rate">Rate :</label>
+                        <input type="number" class="form-control" name="room_rate" id="room_rate" required>
+                     </div>
                   </div>
-               </div>
-            </form>
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-outline-success btn-md">
-               <i class="fas fa-check"></i>
-               Submit
-            </button>
-            <button type="button" class="btn btn-outline-danger btn-md" data-dismiss="modal">
-               <i class="fas fa-times"></i>
-               Cancel
-            </button>
-         </div>
+            </div>
+            <div class="modal-footer">
+               <button type="submit" class="btn btn-outline-success btn-md">
+                  <i class="fas fa-check"></i>
+                  Submit
+               </button>
+               <button type="button" class="btn btn-outline-danger btn-md cancelBtn" data-dismiss="modal">
+                  <i class="fas fa-times"></i>
+                  Cancel
+               </button>
+            </div>
+         </form>
       </div><!-- /.modal-content -->
    </div> <!-- /.modal-dialog -->
 </div><!-- /.modal -->
@@ -89,28 +91,29 @@
          <div class="modal-header bg-gradient-info">
             <h4 class="modal-title">Update Room Type</h4>
          </div>
-         <div class="modal-body">
-            <form action="">
-               <div class="row">
-                  <div class="col-lg-12">
-                     <label for="u_room_type">Room Type :</label>
-                     <input type="text" class="form-control" name="u_room_type" id="u_room_type">
-                     <label for="u_room_rate">Rate :</label>
-                     <input type="text" class="form-control" name="u_room_rate" id="u_room_rate">
+         <form action="{{ route('room_type_update') }}" class="formPost">
+            <div class="modal-body">
+                  <div class="row">
+                     <div class="col-lg-12">
+                        <input type="text" class="form-control u_id" name="u_id" id="u_id" readonly hidden>
+                        <label for="u_room_type">Room Type :</label>
+                        <input type="text" class="form-control" name="u_room_type" id="u_room_type" required>
+                        <label for="u_room_rate">Rate :</label>
+                        <input type="number" class="form-control" name="u_room_rate" id="u_room_rate" required>
+                     </div>
                   </div>
-               </div>
-            </form>
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-outline-success btn-md">
-               <i class="fas fa-check"></i>
-               Save
-            </button>
-            <button type="button" class="btn btn-outline-danger btn-md" data-dismiss="modal">
-               <i class="fas fa-times"></i>
-               Cancel
-            </button>
-         </div>
+            </div>
+            <div class="modal-footer">
+               <button type="submit" class="btn btn-outline-success btn-md">
+                  <i class="fas fa-check"></i>
+                  Save
+               </button>
+               <button type="button" class="btn btn-outline-danger btn-md cancelBtn" data-dismiss="modal">
+                  <i class="fas fa-times"></i>
+                  Cancel
+               </button>
+            </div>
+         </form>
       </div><!-- /.modal-content -->
    </div> <!-- /.modal-dialog -->
 </div><!-- /.modal -->
@@ -123,19 +126,22 @@
          <div class="modal-header bg-gradient-danger">
             <h4 class="modal-title">Confirmation</h4>
          </div>
-         <div class="modal-body">
-            <h4>Are you certain you wish to proceed with the deletion?</h4>
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-outline-success btn-md">
-               <i class="fas fa-check"></i>
-               Yes
-            </button>
-            <button type="button" class="btn btn-outline-danger btn-md" data-dismiss="modal">
-            <i class="fas fa-times"></i>
-               Cancel
-            </button>
-         </div>
+         <form action="{{ route('room_type_destroy') }}" class="formPost">
+            <div class="modal-body">
+               <input type="text" class="form-control u_id" name="d_id" id="d_id" readonly hidden>
+               <h4>Are you certain you wish to proceed with the deletion?</h4>
+            </div>
+            <div class="modal-footer">
+               <button type="submit" class="btn btn-outline-success btn-md">
+                  <i class="fas fa-check"></i>
+                  Yes
+               </button>
+               <button type="button" class="btn btn-outline-danger btn-md" data-dismiss="modal">
+               <i class="fas fa-times"></i>
+                  Cancel
+               </button>
+            </div>
+         </form>
       </div><!-- /.modal-content -->
    </div> <!-- /.modal-dialog -->
 </div><!-- /.modal -->
@@ -144,6 +150,17 @@
 <script type="text/javascript">
    $('#open_manage_rooms').addClass('menu-open');
    $('#room_type').addClass('active');
+
+   $(".cancelBtn").click(function(){
+      $("#add_room_type input").val('');
+      $("#edit_room_type input").val('');
+   });
+
+   function edit(id, room_type, room_rate) {
+      $('.u_id').val(id);
+      $('#u_room_type').val(room_type);
+      $('#u_room_rate').val(room_rate);
+   }
 </script>
 
 @endsection

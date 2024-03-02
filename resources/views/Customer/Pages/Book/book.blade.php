@@ -196,9 +196,6 @@
 							<input type="text" class="form-control mb-3" id="room_rate" name="room_rate" disabled placeholder="Rate">
 						</div>
 					</div>
-					<div class="modal-footer">
-						<button class="btn btn-success"> Submit </button>
-					</div>
 				</form>
 			</div>
       </div><!-- /.modal-content -->
@@ -224,12 +221,12 @@
 							<input type="text" class="form-control mb-3" id="event_hall_contact_number" name="event_hall_contact_number" disabled placeholder="Contact Number">
 							<input type="text" class="form-control mb-3" id="event_hall_address" name="event_hall_address" disabled placeholder="Address">
 							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-									<span class="input-group-text">
-										<i class="far fa-calendar-alt"></i>
-									</span>
-								</div>
-								<input type="text" class="form-control" id="reservation1">
+									<div class="input-group-prepend">
+										<span class="input-group-text">
+											<i class="far fa-calendar-alt"></i>
+										</span>
+									</div>
+									<input type="text" class="form-control" id="reservation">
 							</div>
 							<select class="form-control mb-3 text-center">
 									<option value="Select Type" selected disabled>- Payment Method -</option>
@@ -238,9 +235,6 @@
 							</select>
 							<input type="text" class="form-control mb-3" id="event_hall_rate" name="room_rate" disabled placeholder="Rate">
 						</div>
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-success"> Submit </button>
 					</div>
 				</form>
 			</div>
@@ -257,7 +251,6 @@
   $(function () {
     //Date range picker
     $('#reservation').daterangepicker()
-	$('#reservation1').daterangepicker()
   })
 </script>
 

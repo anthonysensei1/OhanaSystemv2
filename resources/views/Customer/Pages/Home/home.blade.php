@@ -118,6 +118,7 @@
 
 <script type="text/javascript">
 	$('#home').addClass('c_active');
+	$('#home').parent().addClass('active');
 </script>
 
 

@@ -15,6 +15,8 @@ class CreateRoomTypesTable extends Migration
     {
         Schema::create('room_types', function (Blueprint $table) {
             $table->id();
+            $table->string('room_type');
+            $table->integer('room_rate');
             $table->timestamps();
         });
     }

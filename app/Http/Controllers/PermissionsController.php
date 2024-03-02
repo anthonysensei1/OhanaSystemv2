@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permission;
 use Illuminate\Http\Request;
 
 class PermissionsController extends Controller
@@ -13,7 +14,11 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-        return view('/Admin/Pages/Roles_and_Permissions/permissions');
+        $renderData = [
+            'permissions' => Permission::all(),
+        ];
+        
+        return view('/Admin/Pages/Roles_and_Permissions/permissions', $renderData);
     }
 
     /**
@@ -66,9 +71,29 @@ class PermissionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        if (count($request->u_sub_permission) < 1) {
+            $request->u_sub_permission = '';
+        }else {
+            $request->u_sub_permission = implode(',', $request->u_sub_permission);
+        }
+
+        $formData = [
+            'id' => $request->u_id,
+            'permission' => $request->u_permission,
+            'sub_permission' => $request->u_sub_permission,
+        ];
+
+        Permission::where('id', '=', $request->u_id)->update($formData);
+
+        $renderMessage = [
+            'response' => 1,
+            'message' => 'Update permission success!',
+            'path' => '/Admin/Pages/Roles_and_Permissions/permissions'
+        ];
+
+        return response()->json($renderMessage);
     }
 
     /**
@@ -80,5 +105,10 @@ class PermissionsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getAllPermission() {
+        $renderData = Permission::all();
+        return $renderData;
     }
 }

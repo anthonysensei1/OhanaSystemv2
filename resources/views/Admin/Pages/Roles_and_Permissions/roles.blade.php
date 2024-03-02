@@ -23,15 +23,17 @@
                            </tr>
                         </thead>
                         <tbody>
-                           <tr>
-                              <td>Admin</td>
-                              <td class="text-center">
-                                 <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#update_roles">
-                                    <i class="fas fa-pen"></i>
-                                    Update
-                                 </button>
-                              </td>
-                           </tr>
+                           @foreach ($roles as $role)
+                              <tr>
+                                 <td>{{ $role['role'] }}</td>
+                                 <td class="text-center">
+                                    <button type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#update_roles" onclick="edit('{{ $role['id'] }}', '{{ $role['role'] }}')">
+                                       <i class="fas fa-pen"></i>
+                                       Update
+                                    </button>
+                                 </td>
+                              </tr>
+                           @endforeach
                         </tbody>
                      </table>
                   </div>
@@ -50,26 +52,26 @@
          <div class="modal-header bg-gradient-success">
             <h4 class="modal-title">Create New Role</h4>
          </div>
-         <div class="modal-body">
-            <form action="">
+         <form action="{{ route('roles_store') }}" class="formPost">
+            <div class="modal-body">
                <div class="row">
                   <div class="col-lg-12">
-                     <label for="roles">Role Name :</label>
-                     <input type="text" class="form-control" name="roles" id="roles">
+                     <label for="role">Role Name :</label>
+                     <input type="text" class="form-control" name="role" id="role" required>
                   </div>
                </div>
-            </form>
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-outline-success btn-md">
-               <i class="fas fa-check"></i>
-               Submit
-            </button>
-            <button type="button" class="btn btn-outline-danger btn-md" data-dismiss="modal">
-               <i class="fas fa-times"></i>
-               Cancel
-            </button>
-         </div>
+            </div>
+            <div class="modal-footer">
+               <button type="submit" class="btn btn-outline-success btn-md">
+                  <i class="fas fa-check"></i>
+                  Submit
+               </button>
+               <button type="button" class="btn btn-outline-danger btn-md cancelBtn" data-dismiss="modal">
+                  <i class="fas fa-times"></i>
+                  Cancel
+               </button>
+            </div>
+         </form>
       </div><!-- /.modal-content -->
    </div> <!-- /.modal-dialog -->
 </div><!-- /.modal -->
@@ -82,26 +84,27 @@
          <div class="modal-header bg-gradient-info">
             <h4 class="modal-title">Update Role</h4>
          </div>
-         <div class="modal-body">
-            <form action="">
-               <div class="row">
-                  <div class="col-lg-12">
-                     <label for="u_roles">Role Name :</label>
-                     <input type="text" class="form-control" name="u_roles" id="u_roles">
+         <form action="{{ route('roles_update') }}" class="formPost">
+            <div class="modal-body">
+                  <div class="row">
+                     <div class="col-lg-12">
+                        <input type="text" class="form-control u_id" name="u_id" id="u_id" readonly hidden>
+                        <label for="u_role">Role Name :</label>
+                        <input type="text" class="form-control" name="u_role" id="u_role" required>
+                     </div>
                   </div>
-               </div>
-            </form>
-         </div>
-         <div class="modal-footer">
-            <button type="button" class="btn btn-outline-success btn-md">
-               <i class="fas fa-check"></i>
-               Save
-            </button>
-            <button type="button" class="btn btn-outline-danger btn-md" data-dismiss="modal">
-               <i class="fas fa-times"></i>
-               Cancel
-            </button>
-         </div>
+            </div>
+            <div class="modal-footer">
+               <button type="submit" class="btn btn-outline-success btn-md">
+                  <i class="fas fa-check"></i>
+                  Save
+               </button>
+               <button type="button" class="btn btn-outline-danger btn-md cancelBtn" data-dismiss="modal">
+                  <i class="fas fa-times"></i>
+                  Cancel
+               </button>
+            </div>
+         </form>
       </div><!-- /.modal-content -->
    </div> <!-- /.modal-dialog -->
 </div><!-- /.modal -->
@@ -109,5 +112,16 @@
 <script>
    $('#open_roles_permissions').addClass('menu-open');
    $('#roles').addClass('active');
+
+   $(".cancelBtn").click(function(){
+      $("#add_roles input").val('');
+      $("#update_roles input").val('');
+   });
+
+   function edit(id, role) {
+      $('.u_id').val(id);
+      $('#u_role').val(role);
+   }
+
 </script>
 @endsection

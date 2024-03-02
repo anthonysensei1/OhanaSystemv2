@@ -53,12 +53,6 @@
 		color: #000!important;
   }
 
-  .nav-item:hover{
-    background: #90EE90!important;
-    transition: 0.8s;
-    border-radius: 50px;
-  }
-
   .activeCancel{
     background: #dc3545!important;
     color: #000!important;
@@ -67,7 +61,6 @@
   .c_active{
     background: #90EE90!important;
 		color: #000!important;
-    border-radius: 60px!important;
   }
 
 	.active{

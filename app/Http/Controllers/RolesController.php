@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 class RolesController extends Controller
@@ -13,7 +14,11 @@ class RolesController extends Controller
      */
     public function index()
     {
-        return view('/Admin/Pages/Roles_and_Permissions/roles');
+        $renderData = [
+            'roles' => Role::all()
+        ];
+
+        return view('/Admin/Pages/Roles_and_Permissions/roles', $renderData);
     }
 
     /**
@@ -34,7 +39,31 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $role = Role::where('role', '=', $request->role)->first();
+        if (isset($role) && $role->exists()) {
+
+            $renderMessage = [
+                'response' => 0,
+                'message' => 'Role already exist!',
+            ];
+
+            return response()->json($renderMessage);
+        }
+
+        $request->role = ucfirst($request->role);
+        $formData = [
+            'role' => $request->role
+        ];
+
+        Role::create($formData);
+
+        $renderMessage = [
+            'response' => 1,
+            'message' => 'Adding role sucess',
+            'path' => '/Admin/Pages/Roles_and_Permissions/roles'
+        ];
+
+        return response()->json($renderMessage);
     }
 
     /**
@@ -66,9 +95,22 @@ class RolesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $request->u_role = ucfirst($request->u_role);
+        $formData = [
+            'role' => $request->u_role
+        ];
+
+        Role::where('id', '=', $request->u_id)->update($formData);
+
+        $renderMessage = [
+            'response' => 1,
+            'message' => 'Updating role sucess',
+            'path' => '/Admin/Pages/Roles_and_Permissions/roles'
+        ];
+
+        return response()->json($renderMessage);
     }
 
     /**
