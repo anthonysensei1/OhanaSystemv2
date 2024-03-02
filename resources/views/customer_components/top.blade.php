@@ -15,6 +15,9 @@
                     <a href="{{route('/Customer/Pages/Book/book')}}" class="nav-link" id="book_now">BOOK NOW</a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{route('/Customer/Pages/Calendar/guest_calendar')}}" class="nav-link" id="cal">CALENDAR</a>
+                </li>
+                <li class="nav-item">
                     <a href="{{route('/Customer/Pages/About/about')}}" class="nav-link" id="about">ABOUT</a>
                 </li>
                 <li class="nav-item">
