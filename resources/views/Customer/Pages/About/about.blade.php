@@ -109,6 +109,7 @@
         border: 2px solid #000;
         padding: 0;
         background: lightgrey;
+        transition: none;
     }
 
     .head_desc{

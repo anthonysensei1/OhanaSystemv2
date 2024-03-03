@@ -72,15 +72,22 @@ rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3
   .tops:hover{
     background: #90EE90!important;
     border-radius: 20px;
+    transition: .6s;
+		color: #000!important;
+  }
+
+  .tops:hover{
+    background: #90EE90!important;
+    border-radius: 20px;
     transition: .3s;
 		color: #000!important;
   }
 
-	.active{
+	/* .active{
 		background: #90EE90!important;
     transition: 3s;
 		color: #000!important;
-	}
+	} */
 
 	.active1{
 		background: #D4D8A4!important;
