@@ -25,6 +25,11 @@
 <!-- fullCalendar -->
 <link rel="stylesheet" href="{{asset('plugins/fullcalendar/main.css')}}">
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
 
 <style type="text/css">
 
@@ -60,11 +65,20 @@
 
   .c_active{
     background: #90EE90!important;
+    border-radius: 20px;
+		color: #000!important;
+  }
+
+  .tops:hover{
+    background: #90EE90!important;
+    border-radius: 20px;
+    transition: .3s;
 		color: #000!important;
   }
 
 	.active{
 		background: #90EE90!important;
+    transition: 3s;
 		color: #000!important;
 	}
 
@@ -82,6 +96,14 @@
 		background-color: #dc3545;
 		color: #fff!important;
 	}
+
+  .main-footer a{
+    text-decoration: none;
+  }
+
+  .display a{
+    text-decoration: none;
+  }
 </style>
 
 
@@ -137,6 +159,15 @@
 <script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
 <!-- InputMask -->
 <script src="{{asset('plugins/inputmask/jquery.inputmask.min.js')}}"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" 
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" 
+    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 
 

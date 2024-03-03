@@ -8,17 +8,17 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
+                <li class="nav-item tops">
                     <a href="{{route('/Customer/Pages/Home/home')}}" class="nav-link" id="home">HOME</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item tops">
                     <a href="{{route('/Customer/Pages/Book/book')}}" class="nav-link" id="book_now">BOOK NOW</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item tops">
                     <a href="{{route('/Customer/Pages/About/about')}}" class="nav-link" id="about">ABOUT</a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{route('/Customer/Pages/ContactUs/contact_us')}}" class="nav-link" id="contact_us">CONTACT US</a>
+                <li class="nav-item tops">
+                    <a href="#" class="nav-link" id="#"></a>
                 </li>
             </ul>
         </div>

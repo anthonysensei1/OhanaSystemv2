@@ -17,11 +17,11 @@ class DatabaseSeeder extends Seeder
     {
         Permission::factory()->create([
             'icon' => 'fa-tachometer-alt',
-            'permission_id' => '',
+            'permission_id' => 'dashboard',
             'permission' => 'DASHBOARD',
             'sub_permission_id' => '',
             'sub_permission' => '',
-            'permission_path' => '#', 
+            'permission_path' => '/Admin/Pages/Dashboard/dashboard', 
             'sub_permission_path' => ''
         ]);
 
