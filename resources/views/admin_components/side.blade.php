@@ -63,6 +63,17 @@
                         </li>
                     @endif
                 @endforeach
+                <li class="nav-item">
+                    @auth
+                        <form method="POST" action="{{ route('user_logout') }}">
+                            @csrf
+                            <button type="submit" class="btn text-white" style="font-size: 1.2rem; background-color: #15577e;">
+                                Logout
+                                <i class="fa fa-door-open"></i>
+                            </button>
+                        </form>
+                    @endauth
+                </li>
             </ul>
         </nav>
     <!-- /.sidebar-menu -->

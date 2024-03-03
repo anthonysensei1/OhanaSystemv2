@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AssignPermissionAndRole;
 use App\Models\Permission;
 use Illuminate\Http\Request;
 
@@ -108,7 +109,23 @@ class PermissionsController extends Controller
     }
 
     public function getAllPermission() {
-        $renderData = Permission::all();
+        $user = auth()->user();
+        $assign_permission_and_roles = AssignPermissionAndRole::where('assign_role', '=', $user->roles_id)->first();
+        $renderData = '';
+        if ($assign_permission_and_roles) {
+
+            $permission_ids = is_array($assign_permission_and_roles['assign_permission']) ? 
+            $assign_permission_and_roles['assign_permission'] : 
+            explode(',', $assign_permission_and_roles['assign_permission']);
+
+            $renderData = Permission::whereIn('id', $permission_ids)->get();
+
+        } 
+        else {
+            if ($user->roles_id == '1') {
+                $renderData = Permission::all();
+            }
+        }
         return $renderData;
     }
 }

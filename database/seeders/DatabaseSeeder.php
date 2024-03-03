@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\AssignPermissionAndRole;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -106,6 +108,31 @@ class DatabaseSeeder extends Seeder
 
         Role::factory()->create([
             'role' => 'Admin'
+        ]);
+
+        Role::factory()->create([
+            'role' => 'Dummy'
+        ]);
+
+        $password = "03blS3gj";
+        $hash = password_hash($password, PASSWORD_BCRYPT);
+        User::factory()->create([
+            'name' => 'Admin',
+            'username' => 'Admin',
+            'password' => $hash,
+            'roles_id' => '1'
+        ]);
+
+        User::factory()->create([
+            'name' => 'Dummy',
+            'username' => 'Dummy',
+            'password' => $hash,
+            'roles_id' => '2'
+        ]);
+
+        AssignPermissionAndRole::factory()->create([
+            'assign_role' => '2',
+            'assign_permission' => '1',
         ]);
     }
 }

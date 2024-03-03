@@ -3,9 +3,8 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
-class UserFactory extends Factory
+class AssignPermissionAndRoleFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -15,8 +14,8 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
-            'password' => '12345', // password
+            'assign_role' => $this->faker->numberBetween(2,2),
+            'assign_permission' => $this->faker->numberBetween(1,1),
         ];
     }
 }

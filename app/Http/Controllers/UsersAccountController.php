@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsersAccountController extends Controller
 {
@@ -80,5 +82,55 @@ class UsersAccountController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function index_login()
+    {
+        return view('/Admin/Pages/Login/login');
+    }
+
+    public function user_login(Request $request)
+    {
+        
+        $userCredentials = User::where('username', $request->username)->first();
+
+        if ($userCredentials && Hash::check($request->password, $userCredentials->password)) {
+
+            if (auth()->attempt(['username' => $request->username, 'password' => $request->password])) {
+                $request->session()->regenerate();
+
+                $renderMessage = [
+                    'response' => 1,
+                    'message' => 'Login successful! Hi ' . $userCredentials->name,
+                    'path' => '/Admin/Pages/Dashboard/dashboard'
+                ];
+
+                return response()->json($renderMessage);
+            } else {
+                $renderMessage = [
+                    'response' => 0,
+                    'message' => 'Failed to authenticate!',
+                ];
+
+                return response()->json($renderMessage);
+            }
+        } else {
+            $renderMessage = [
+                'response' => 0,
+                'message' => 'Wrong username or password!',
+            ];
+
+            return response()->json($renderMessage);
+        }
+
+    }
+
+    public function user_logout(Request $request) {
+        auth()->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect("/Admin/Pages/Login/login");
     }
 }
