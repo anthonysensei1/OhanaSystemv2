@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\RoomsController;
 use App\Http\Controllers\RoomTypeController;
@@ -19,15 +20,15 @@ use App\Http\Controllers\AssignRolesPermissionsController;
 |
 */
 
-Route::get('/', function () {
-    return view('/Admin/Pages/Dashboard/dashboard');
+Route::get('/Admin/Pages/Login/login', function () {
+    return view('/Admin/Pages/Login/login');
 });
 
-// Auth::routes();
+Auth::routes();
 
 
 // Dashboard Route
-// Route::get('/Pages/Dashboard/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('/Pages/Dashboard/dashboard');
+Route::get('/Admin/Pages/Dashboard/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('/Admin/Pages/Dashboard/dashboard');
 
 
 
@@ -105,6 +106,3 @@ Route::get('/Customer/Pages/Book/book',[App\Http\Controllers\BookController::cla
 //About Route
 Route::get('/Customer/Pages/About/about',[App\Http\Controllers\AboutController::class,'index'])->name('/Customer/Pages/About/about');
 
-
-//ContactUs Route
-Route::get('/Customer/Pages/ContactUs/contact_us',[App\Http\Controllers\ContactUsController::class,'index'])->name('/Customer/Pages/ContactUs/contact_us');
