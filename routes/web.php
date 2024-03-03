@@ -103,6 +103,11 @@ Route::get('/Customer/Pages/Home/home',[App\Http\Controllers\HomeController::cla
 //Book Route
 Route::get('/Customer/Pages/Book/book',[App\Http\Controllers\BookController::class,'index'])->name('/Customer/Pages/Book/book');
 
+
+//Calendar Route
+Route::get('/Customer/Pages/Calendar/guest_calendar',[App\Http\Controllers\GuestCalendarController::class,'index'])->name('/Customer/Pages/Calendar/guest_calendar');
+
+
 //About Route
 Route::get('/Customer/Pages/About/about',[App\Http\Controllers\AboutController::class,'index'])->name('/Customer/Pages/About/about');
 

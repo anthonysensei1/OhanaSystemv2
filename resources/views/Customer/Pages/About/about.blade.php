@@ -15,16 +15,16 @@
                         </div>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="{{asset ('../images/1.png') }}" class="d-flex w-100" >
+                                <img src="{{asset ('../images/1.png') }}" class="d-block w-100" >
                             </div>
                             <div class="carousel-item">
-                                <img src="{{asset ('/images/3.png') }}" class="d-flex w-100" >
+                                <img src="{{asset ('/images/3.png') }}" class="d-block w-100" >
                             </div>
                             <div class="carousel-item">
-                                <img src="{{asset ('/images/5.png') }}" class="d-flex w-100" >
+                                <img src="{{asset ('/images/5.png') }}" class="d-block w-100" >
                             </div>
                             <div class="carousel-item">
-                                <img src="{{asset ('/images/6.png') }}" class="d-flex w-100">
+                                <img src="{{asset ('/images/6.png') }}" class="d-block w-100">
                             </div>
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -37,13 +37,61 @@
                         </button>
                     </div>
                 </div>
-                <div class="col-lg-5">
-                    <div class="description">
-                        <div class="head_desc">
-                            <h3>Description</h3>
+                <div class="col-lg-5 desc_contact">
+                    <div class="row desc_contact_row">
+                        <div class="col-lg-12">
+                            <div class="description">
+                                <div class="head_desc">
+                                    <h3>Description</h3>
+                                </div>
+                                <div class="desc_cont">
+                                    <p>asdsadasdsad as,bsakj dsauidbnm, asbdjkasbdjklsad nsalkhnjkld</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="content">
-                            <p></p>
+                        <div class="col-lg-12">
+                            <div class="description">
+                                <div class="head_desc">
+                                    <h3>Contact Us</h3>
+                                </div>
+                                <div class="contact_cont">
+                                    <div class="row">
+                                        <div class="col-lg-4 cc_card">
+                                            <div class="info">
+                                                <i class="fab fa-facebook-square fa-4x"></i>
+                                                <span class="display">
+                                                    Visit us on our Facebook Page!
+                                                    <a href="https://web.facebook.com/profile.php?id=100083468221851">
+                                                        https://web.facebook.com/profile.php?id=100083468221851
+                                                    </a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 cc_card">
+                                            <div class="info">
+                                                <i class="fas fa-phone fa-4x"></i>
+                                                <span class="display">
+                                                    You can call or message us on this contact number.
+                                                    <a href="#">
+                                                        +639369900245
+                                                    </a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 cc_card">
+                                            <div class="info">
+                                                <i class="fas fa-envelope fa-4x"></i>
+                                                <span class="display">
+                                                    You can send message through our email
+                                                    <a href="#">
+                                                        myohanaplace@gmail.com
+                                                    </a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -51,16 +99,6 @@
         </div><!-- /.container-fluid -->
     </section><!-- /.content -->
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" 
-    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" 
-    integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
-rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
-integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
 	$('#about').addClass('c_active');
@@ -82,6 +120,51 @@ integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxV
         padding: 0;
         border-radius: 5px;
         border:1px solid #000;
+    }
+
+    .desc_contact{
+        display: flex;
+        flex-direction: wrap;
+        justify-content: center;
+    }
+
+    .desc_contact_row{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    
+    .cc_card{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-top: 30px;
+    }
+
+    .info{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+
+    .info span:nth-of-type(1){
+        margin-bottom: 20px;
+    }
+    .info span a{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+
+    .display{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: nowrap;
     }
 </style>
 
