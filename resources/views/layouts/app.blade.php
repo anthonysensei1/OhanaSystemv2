@@ -107,6 +107,40 @@
       });
 
   });
+  
+  $('.logout').on('submit',function(e) {
+      e.preventDefault();
+
+      const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 1500
+      });
+      
+      $.ajax({
+          type     : "POST",
+          cache    : false,
+          url      : $(this).attr('action'),
+          data     : $(this).serialize(),
+          headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          },
+          success  : function(data) {
+
+              Toast.fire({
+                  icon: 'success',
+                  title: '<p class="text-center pt-2 text-bold text-black">Logout sucess!</p>'
+              });
+
+              setTimeout(function() {
+                location.reload();
+              },1500);
+
+          }
+      });
+
+  });
 </script>
 
 </body>
