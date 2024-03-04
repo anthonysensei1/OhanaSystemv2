@@ -38,56 +38,72 @@
                     </div>
                 </div>
                 <div class="col-lg-5 desc_contact">
-                    <div class="row desc_contact_row">
-                        <div class="col-lg-12">
-                            <div class="description">
-                                <div class="head_desc">
-                                    <h3>Description</h3>
+                    <div class="columns">
+                        <div class="description">
+                            <div class="head_desc">
+                                <h3>Description</h3>
+                            </div>
+                            <div class="desc_cont">
+                                <div class="p1">
+                                    <p>
+                                        Experience affordable luxury in our small rooms at Ohana Mabini Event Place Resort, perfect for three guests. Enjoy the charm of bouncy beds paired with super-soft linens and fluffy pillows. Our rooms are thoughtfully curated with our favorite touches, making it a space you may never want to leave. And if staying in is your preference, no worries – we'll bring the Ohana Event Place experience to you!
+                                    </p>
                                 </div>
-                                <div class="desc_cont">
-                                    <p>asdsadasdsad as,bsakj dsauidbnm, asbdjkasbdjklsad nsalkhnjkld</p>
+                                <div class="p2">
+                                    <label class="exclusive_offer">*Exclusive Offer*</label>
+                                    <ul class="ul">
+                                        <li>
+                                            Stay includes breakfast for 2
+                                        </li>
+                                        <li>
+                                            Free Wifi for seamless connectivity
+                                        </li>
+                                        <li>
+                                            Dive into relaxation with complimentary use of our refreshing swimming pool.
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-12">
-                            <div class="description">
-                                <div class="head_desc">
-                                    <h3>Contact Us</h3>
-                                </div>
-                                <div class="contact_cont">
-                                    <div class="row">
-                                        <div class="col-lg-4 cc_card">
-                                            <div class="info">
-                                                <i class="fab fa-facebook-square fa-4x"></i>
-                                                <span class="display">
-                                                    Visit us on our Facebook Page!
-                                                    <a href="https://web.facebook.com/profile.php?id=100083468221851">
-                                                        https://web.facebook.com/profile.php?id=100083468221851
-                                                    </a>
-                                                </span>
-                                            </div>
+                    </div>
+                    <div class="columns">
+                        <div class="description">
+                            <div class="head_desc">
+                                <h3>Contact Us</h3>
+                            </div>
+                            <div class="contact_cont">
+                                <div class="row">
+                                    <div class="col-lg-4 cc_card">
+                                        <div class="info">
+                                            <i class="fab fa-facebook-square fa-3x"></i>
+                                            <span class="display">
+                                                Visit us on our Facebook Page!
+                                                <a href="https://web.facebook.com/profile.php?id=100083468221851">
+                                                    https://web.facebook.com/profile.php?id=100083468221851
+                                                </a>
+                                            </span>
                                         </div>
-                                        <div class="col-lg-4 cc_card">
-                                            <div class="info">
-                                                <i class="fas fa-phone fa-4x"></i>
-                                                <span class="display">
-                                                    You can call or message us on this contact number.
-                                                    <a href="#">
-                                                        +639369900245
-                                                    </a>
-                                                </span>
-                                            </div>
+                                    </div>
+                                    <div class="col-lg-4 cc_card">
+                                        <div class="info">
+                                            <i class="fas fa-phone fa-3x"></i>
+                                            <span class="display">
+                                                You can call or message us on this contact number.
+                                                <a href="#">
+                                                    +639369900245
+                                                </a>
+                                            </span>
                                         </div>
-                                        <div class="col-lg-4 cc_card">
-                                            <div class="info">
-                                                <i class="fas fa-envelope fa-4x"></i>
-                                                <span class="display">
-                                                    You can send message through our email
-                                                    <a href="#">
-                                                        myohanaplace@gmail.com
-                                                    </a>
-                                                </span>
-                                            </div>
+                                    </div>
+                                    <div class="col-lg-4 cc_card">
+                                        <div class="info">
+                                            <i class="fas fa-envelope fa-3x"></i>
+                                            <span class="display">
+                                                You can send message through our email
+                                                <a href="#">
+                                                    myohanaplace@gmail.com
+                                                </a>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -121,19 +137,49 @@
         padding: 0;
         border-radius: 5px;
         border:1px solid #000;
-    }
-
-    .desc_contact{
-        display: flex;
-        flex-direction: wrap;
-        justify-content: center;
-    }
-
-    .desc_contact_row{
-        display: flex;
-        flex-wrap: wrap;
         width: 100%;
     }
+    .desc_contact_row{
+        width: 102%;
+        margin: 0;
+        padding: 0;
+        background-color: red;
+    }
+
+    .columns{
+        margin: 5px;
+        width: 100%;
+    }
+
+    .desc_cont{
+        border:1px solid #000;
+        border-radius: 2px;
+        padding: .2rem;
+        margin-top: 10px;
+    }
+    .desc_cont .p1 p{
+        text-align: justify;
+        margin: .8rem;
+        font-size: 1.1rem;  
+    }
+
+    .exclusive_offer{
+        display: flex;
+        align-items: baseline;
+        align-content: flex-start;
+        justify-content: center;
+        font-size: 1.2rem;
+        letter-spacing: 5px;
+    }
+
+    .p2 .ul{
+        list-style-type: disc;
+    }
+
+    .p2 ul li{
+        text-decoration: underline;
+    }
+
     
     .cc_card{
         display: flex;
@@ -152,7 +198,7 @@
     }
 
     .info span:nth-of-type(1){
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
     .info span a{
         display: flex;
@@ -166,6 +212,14 @@
         align-items: center;
         flex-direction: column;
         flex-wrap: nowrap;
+    }
+
+
+    @media screen and (max-width:990px){
+        .desc_contact{
+            margin-top: 10px;
+            width: 100%;
+        }
     }
 </style>
 

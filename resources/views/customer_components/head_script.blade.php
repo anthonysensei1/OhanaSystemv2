@@ -32,7 +32,6 @@ rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3
 
 
 <style type="text/css">
-
   .navbar-nav .nav-item .nav-link {
       color: #333 !important; /* Set the text color to dark */
       font-weight: bold; /* Set the font weight to bold */
@@ -61,26 +60,6 @@ rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3
   .activeCancel{
     background: #dc3545!important;
     color: #000!important;
-  }
-
-  .c_active{
-    background: #90EE90!important;
-    border-radius: 20px;
-		color: #000!important;
-  }
-
-  .tops:hover{
-    background: #90EE90!important;
-    border-radius: 20px;
-    transition: .6s;
-		color: #000!important;
-  }
-
-  .tops:hover{
-    background: #90EE90!important;
-    border-radius: 20px;
-    transition: .3s;
-		color: #000!important;
   }
 
 	/* .active{

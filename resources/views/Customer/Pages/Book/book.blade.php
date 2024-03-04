@@ -196,6 +196,9 @@
 							<input type="text" class="form-control mb-3" id="room_rate" name="room_rate" disabled placeholder="Rate">
 						</div>
 					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-outline-success"><i class="fas fa-tag"></i>  Book! </button>
+					</div>
 				</form>
 			</div>
       </div><!-- /.modal-content -->
@@ -235,6 +238,9 @@
 							</select>
 							<input type="text" class="form-control mb-3" id="event_hall_rate" name="room_rate" disabled placeholder="Rate">
 						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-outline-success"><i class="fas fa-tag"></i>  Book! </button>
 					</div>
 				</form>
 			</div>

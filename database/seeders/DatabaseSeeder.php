@@ -114,7 +114,7 @@ class DatabaseSeeder extends Seeder
             'role' => 'Dummy'
         ]);
 
-        $password = "03blS3gj";
+        $password = "1234a";
         $hash = password_hash($password, PASSWORD_BCRYPT);
         User::factory()->create([
             'name' => 'Admin',
