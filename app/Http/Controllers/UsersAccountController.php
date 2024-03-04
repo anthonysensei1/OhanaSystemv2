@@ -131,6 +131,10 @@ class UsersAccountController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect("/Admin/Pages/Login/login");
+        return response()->noContent()
+            ->header('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0')
+            ->header('Pragma', 'no-cache')
+            ->header('Expires', 'Sat, 01 Jan 2000 00:00:00 GMT')
+            ->header('Location', '/Admin/Pages/Login/login');
     }
 }
