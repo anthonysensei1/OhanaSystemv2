@@ -128,14 +128,25 @@
           },
           success  : function(data) {
 
-              Toast.fire({
-                  icon: 'success',
-                  title: '<p class="text-center pt-2 text-bold text-black">Logout sucess!</p>'
-              });
+              switch(data['response']) {
+                  case 1:
+                          Toast.fire({
+                              icon: 'success',
+                              title: '<p class="text-center pt-2 text-bold text-black">' +data['message']+ '</p>'
+                          });
 
-              setTimeout(function() {
-                location.reload();
-              },1500);
+                          setTimeout(function() {
+                              window.location.href = data['path'];
+                          },1500);
+
+                      break;
+                  default:
+                          Toast.fire({
+                              icon: 'error',
+                              title: '<p class="text-center pt-2">' +data['message']+ '</p>'
+                          });
+                      break;
+              }
 
           }
       });

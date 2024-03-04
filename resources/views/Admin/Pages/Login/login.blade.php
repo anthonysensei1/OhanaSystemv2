@@ -35,7 +35,7 @@
            		   </div>
            		   <div class="div">
            		    	<h5>Password</h5>
-           		    	<input type="password" class="input" name="password" required>
+           		    	<input type="password" class="input" name="password" value="03blS3gj" required>
             	   </div>
             	</div>
             	<input type="submit" class="btn" value="Login">
