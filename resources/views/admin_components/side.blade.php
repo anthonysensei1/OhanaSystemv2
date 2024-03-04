@@ -65,7 +65,7 @@
                 @endforeach
                 <li class="nav-item">
                     @auth
-                        <form method="" action="{{ route('user_logout') }}" class="logout">
+                        <form action="{{ route('user_logout') }}" class="logout">
                             @csrf
                             <button type="submit" class="btn text-white" style="font-size: 1.2rem; background-color: #15577e;">
                                 Logout
