@@ -124,13 +124,20 @@ class UsersAccountController extends Controller
         }
 
     }
-
-    public function user_logout(Request $request) {
+    
+    public function user_logout(Request $request)
+    {
         auth()->logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect("/Admin/Pages/Login/login");
+        $renderMessage = [
+            'response' => 1,
+            'message' => 'Logout sucess!',
+            'path' => '/Admin/Pages/Login/login'
+        ];
+
+        return response()->json($renderMessage);
     }
 }

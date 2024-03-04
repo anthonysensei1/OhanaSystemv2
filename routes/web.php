@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\PreventCaching;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\RoomsController;
 use App\Http\Controllers\RoomTypeController;
@@ -25,7 +26,7 @@ Route::get('/Admin/Pages/Login/login', [App\Http\Controllers\UsersAccountControl
 Route::post('/Admin/Pages/Login/login/user_login', [UsersAccountController::class, 'user_login'])->name('user_login');
 
 
-Route::middleware('auth')->group(function () {
+Route::group(['middleware' => ['web', 'auth', PreventCaching::class]], function () {
 
     Route::post('/Admin/Pages/Login/login/user_logout', [UsersAccountController::class, 'user_logout'])->name('user_logout');
 
