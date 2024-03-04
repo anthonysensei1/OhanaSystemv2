@@ -124,17 +124,20 @@ class UsersAccountController extends Controller
         }
 
     }
-
-    public function user_logout(Request $request) {
+    
+    public function user_logout(Request $request)
+    {
         auth()->logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return response()->noContent()
-            ->header('Cache-Control', 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0, max-age=0')
-            ->header('Pragma', 'no-cache')
-            ->header('Expires', 'Sat, 01 Jan 2000 00:00:00 GMT')
-            ->header('Location', '/Admin/Pages/Login/login');
+        $renderMessage = [
+            'response' => 1,
+            'message' => 'Logout sucess!',
+            'path' => '/Admin/Pages/Login/login'
+        ];
+
+        return response()->json($renderMessage);
     }
 }
