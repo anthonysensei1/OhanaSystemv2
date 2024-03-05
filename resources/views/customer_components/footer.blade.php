@@ -9,6 +9,10 @@
 		background: rgba(0, 0, 0, .8);
         backdrop-filter: blur(25px);
 		color: #fff;
-        border-top:1px  solid red;
+        border-top:3px  solid #fff;
+    }
+
+    .main-footer a{
+        color:cyan;
     }
 </style>

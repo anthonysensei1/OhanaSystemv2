@@ -98,6 +98,10 @@ Route::group(['middleware' => ['web', 'auth', PreventCaching::class]], function 
 });
 
 //Customer Side
+//Login Route
+Route::get('/Customer/Pages/Login/sign_in',[App\Http\Controllers\CustomerLoginController::class,'index'])->name('/Customer/Pages/Login/sign_in');
+
+
 //Home Route
 Route::get('/Customer/Pages/Home/home',[App\Http\Controllers\HomeController::class,'index'])->name('/Customer/Pages/Home/home');
 
