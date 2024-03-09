@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\AssignPermissionAndRole;
 use App\Models\Permission;
 use App\Models\Role;
+use App\Models\SuperUser;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -116,18 +117,29 @@ class DatabaseSeeder extends Seeder
 
         $password = "1234a";
         $hash = password_hash($password, PASSWORD_BCRYPT);
+
         User::factory()->create([
-            'name' => 'Admin',
+            'user_info_id' => '1',
             'username' => 'Admin',
             'password' => $hash,
-            'roles_id' => '1'
+            'roles_id' => '1',
+            'user_type' => '1',
         ]);
 
         User::factory()->create([
-            'name' => 'Dummy',
+            'user_info_id' => '2',
             'username' => 'Dummy',
             'password' => $hash,
-            'roles_id' => '2'
+            'roles_id' => '2',
+            'user_type' => '1',
+        ]);
+
+        SuperUser::factory()->create([
+            'name' => 'Admin',
+        ]);
+
+        SuperUser::factory()->create([
+            'name' => 'Dummy',
         ]);
 
         AssignPermissionAndRole::factory()->create([

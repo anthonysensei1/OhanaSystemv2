@@ -6,9 +6,11 @@ use App\Http\Controllers\RolesController;
 use App\Http\Controllers\RoomsController;
 use App\Http\Controllers\RoomTypeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Middleware\CustomerAuthenticate;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\FunctionHallController;
 use App\Http\Controllers\UsersAccountController;
+use App\Http\Controllers\CustomerLoginController;
 use App\Http\Controllers\AssignRolesPermissionsController;
 
 /*
@@ -26,7 +28,7 @@ Route::get('/Admin/Pages/Login/login', [App\Http\Controllers\UsersAccountControl
 Route::post('/Admin/Pages/Login/login/user_login', [UsersAccountController::class, 'user_login'])->name('user_login');
 
 
-Route::group(['middleware' => ['web', 'auth', PreventCaching::class]], function () {
+Route::group(['middleware' => ['web', 'auth', 'super_user']], function () {
 
     Route::post('/Admin/Pages/Login/login/user_logout', [UsersAccountController::class, 'user_logout'])->name('user_logout');
 
@@ -100,20 +102,26 @@ Route::group(['middleware' => ['web', 'auth', PreventCaching::class]], function 
 //Customer Side
 //Login Route
 Route::get('/Customer/Pages/Login/sign_in',[App\Http\Controllers\CustomerLoginController::class,'index'])->name('/Customer/Pages/Login/sign_in');
+Route::post('/Customer/Pages/Login/sign_in/store',[CustomerLoginController::class,'store'])->name('customer_store');
+Route::post('/Customer/Pages/Login/sign_in/customer_login',[CustomerLoginController::class,'customer_login'])->name('customer_login');
 
 
-//Home Route
-Route::get('/Customer/Pages/Home/home',[App\Http\Controllers\HomeController::class,'index'])->name('/Customer/Pages/Home/home');
+Route::group(['middleware' => ['web', 'auth', 'ordinary_user']], function () {
 
+    Route::post('/Customer/Pages/Login/sign_in/customer_logout', [CustomerLoginController::class, 'customer_logout'])->name('customer_logout');
 
-//Book Route
-Route::get('/Customer/Pages/Book/book',[App\Http\Controllers\BookController::class,'index'])->name('/Customer/Pages/Book/book');
+    //Home Route
+    Route::get('/Customer/Pages/Home/home',[App\Http\Controllers\HomeController::class,'index'])->name('/Customer/Pages/Home/home');
 
+    //Book Route
+    Route::get('/Customer/Pages/Book/book',[App\Http\Controllers\BookController::class,'index'])->name('/Customer/Pages/Book/book');
 
-//Calendar Route
-Route::get('/Customer/Pages/Calendar/guest_calendar',[App\Http\Controllers\GuestCalendarController::class,'index'])->name('/Customer/Pages/Calendar/guest_calendar');
+    //Calendar Route
+    Route::get('/Customer/Pages/Calendar/guest_calendar',[App\Http\Controllers\GuestCalendarController::class,'index'])->name('/Customer/Pages/Calendar/guest_calendar');
 
+    //About Route
+    Route::get('/Customer/Pages/About/about',[App\Http\Controllers\AboutController::class,'index'])->name('/Customer/Pages/About/about');
 
-//About Route
-Route::get('/Customer/Pages/About/about',[App\Http\Controllers\AboutController::class,'index'])->name('/Customer/Pages/About/about');
+});
+
 
