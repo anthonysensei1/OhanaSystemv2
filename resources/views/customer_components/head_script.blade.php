@@ -34,7 +34,7 @@ rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3
 <link rel="shortcut icon" href="{{asset ('/images/ohana.png') }}">
 
 
-<style type="text/css">
+<style scoped>
   body {
     background-image:url('/images/ohanabg.png');
     background-repeat: no-repeat;
@@ -147,7 +147,6 @@ rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3
 <script src="{{asset('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
 <!-- fullCalendar 2.2.5 -->
 <script src="{{asset('plugins/fullcalendar/main.js')}}"></script>
-<script src="{{asset('plugins/moment/moment.min.js')}}"></script>
 <!-- bs-custom-file-input -->
 <script src="{{asset('plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
 <!-- Select2 -->
@@ -183,8 +182,3 @@ integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxV
     });
   });
 </script>
-
-
-
-
-<!-- ')}} -->
