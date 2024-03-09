@@ -220,10 +220,10 @@
 				<form action="#" method="post">
 					<div class="row">
 						<div class="col">
-							<input type="text" class="form-control mb-3" id="event_hall_fullname" name="event_hall_fullname" disabled placeholder="Full Name">
-							<input type="text" class="form-control mb-3" id="event_hall_address" name="event_hall_address" disabled placeholder="Address">
-							<input type="text" class="form-control mb-3" id="event_hall_contact_number" name="event_hall_contact_number" disabled placeholder="Contact Number">
-							<input type="text" class="form-control mb-3" id="event_hall_address" name="event_hall_address" disabled placeholder="Address">
+							<input type="text" class="form-control mb-3" id="event_hall_fullname" name="event_hall_fullname" autocomplete disabled placeholder="Full Name">
+							<input type="text" class="form-control mb-3" id="event_hall_address" name="event_hall_address" autocomplete disabled placeholder="Address">
+							<input type="text" class="form-control mb-3" id="event_hall_contact_number" name="event_hall_contact_number" autocomplete disabled placeholder="Contact Number">
+							<input type="text" class="form-control mb-3" id="event_hall_address" name="event_hall_address" autocomplete disabled placeholder="Address">
 							<div class="input-group mb-3">
 								<div class="input-group-prepend">
 									<span class="input-group-text">
@@ -238,7 +238,7 @@
 								<option value="cash">Cash</option>
 								<option value="gcash">Gcash</option>
 							</select>
-							<input type="text" class="form-control mb-3" id="event_hall_rate" name="room_rate" disabled placeholder="Rate">
+							<input type="text" class="form-control mb-3" id="event_hall_rate" name="event_hall_rate" disabled placeholder="Rate">
 						</div>
 					</div>
 					<div class="modal-footer">

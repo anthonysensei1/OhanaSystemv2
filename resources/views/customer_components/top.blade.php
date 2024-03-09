@@ -21,7 +21,7 @@
             <div class="btn btn-group dropdown-toggle profile-image ml-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img src="{{ asset('/images/ohana.png') }}" class="rounded-circle" style="width: 40px; height: 40px;">
                 <div class="dropdown-menu">
-                    <a class="dropdown-item my_acc" href="#" data-toggle="modal" data-target="#my_account">My Account</a>
+                    <a class="btn dropdown-item click_my_account" href="#" id="click_my_account">My Account</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>
@@ -31,7 +31,7 @@
 </nav>
 
 <!-- PopUp MyAccount -->
-<div class="modal fade" id="my_account" aria-hidden="true" data-backdrop="static">
+<div class="modal fade " id="my_account" aria-hidden="true" data-backdrop="static" style="z-index: 1050;">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -42,19 +42,19 @@
             <div class="modal-body">
                 <form action="#">
                     <div class="labels">Firstname</div>
-                        <input type="text" class="form-control" name="firstname" placeholder="Firstname" autofocus required autocomplete="given-name">
+                        <input type="text" class="form-control" name="my_firstname" placeholder="Firstname" autofocus required autocomplete="given-name">
                     <div class="labels">Lastname</div>
-                        <input type="text" class="form-control" name="lastname" placeholder="Lastname" required autocomplete="family-name">
+                        <input type="text" class="form-control" name="my_lastname" placeholder="Lastname" required autocomplete="family-name">
                     <div class="labels">Address</div>
-                        <input type="text" class="form-control" name="address" placeholder="Address" required autocomplete="address-line1">
+                        <input type="text" class="form-control" name="my_address" placeholder="Address" required autocomplete="address-line1">
                     <div class="labels">Contact Number</div>
-                        <input type="tel" class="form-control" name="c_number" placeholder="Contact Number" required autocomplete="tel">
+                        <input type="tel" class="form-control" name="my_c_number" placeholder="Contact Number" required autocomplete="tel">
                     <div class="labels">Username</div>
-                        <input type="text" class="form-control" name="username" placeholder="Username" required autocomplete="username">
+                        <input type="text" class="form-control" name="my_username" placeholder="Username" required autocomplete="username">
                     <div class="labels">Password</div>
-                        <input type="password" class="form-control" name="password" placeholder="Password" required autocomplete="current-password">
+                        <input type="password" class="form-control" name="my_password" placeholder="Password" required autocomplete="current-password">
                     <div class="labels">Confirm-Password</div>
-                        <input type="password" class="form-control" name="c_password" placeholder="Confirm Password" required autocomplete="new-password">
+                        <input type="password" class="form-control" name="my_c_password" placeholder="Confirm Password" required autocomplete="new-password">
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-md btn-outline-primary">Update</button>
                     </div>
@@ -195,3 +195,15 @@
 
     }
 </style>
+
+
+<script>
+  $('.click_my_account').click(function(){
+    $('#my_account').modal('show');
+});
+
+$('.close').click(function(){
+    $('#my_account').modal('hide');
+});
+
+</script>

@@ -50,7 +50,7 @@
                                     </p>
                                 </div>
                                 <div class="p2">
-                                    <label class="exclusive_offer">*Exclusive Offer*</label>
+                                    <div class="exclusive_offer">*Exclusive Offer*</div>
                                     <ul class="ul">
                                         <li>
                                             Stay includes breakfast for 2
