@@ -10,19 +10,84 @@
             </div>
             </div>
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-        </button>
+        </button> -->
         <div class="custome">
             <a href="{{route('/Customer/Pages/Home/home')}}" class="nav-link" id="home">HOME</a>
             <a href="{{route('/Customer/Pages/Book/book')}}" class="nav-link" id="book_now">BOOK NOW</a>
             <a href="{{route('/Customer/Pages/Calendar/guest_calendar')}}" class="nav-link" id="cal">CALENDAR</a>
             <a href="{{route('/Customer/Pages/About/about')}}" class="nav-link" id="about">ABOUT</a>
+            <div class="btn btn-group dropdown-toggle profile-image ml-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="{{ asset('/images/ohana.png') }}" class="rounded-circle" style="width: 40px; height: 40px;">
+                <div class="dropdown-menu">
+                    <a class="dropdown-item my_acc" href="#" data-toggle="modal" data-target="#my_account">My Account</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
         </div>
     </div>
 </nav>
 
+<!-- PopUp MyAccount -->
+<div class="modal fade" id="my_account" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#">
+                    <div class="labels">Firstname</div>
+                        <input type="text" class="form-control" name="firstname" placeholder="Firstname" autofocus required autocomplete="given-name">
+                    <div class="labels">Lastname</div>
+                        <input type="text" class="form-control" name="lastname" placeholder="Lastname" required autocomplete="family-name">
+                    <div class="labels">Address</div>
+                        <input type="text" class="form-control" name="address" placeholder="Address" required autocomplete="address-line1">
+                    <div class="labels">Contact Number</div>
+                        <input type="tel" class="form-control" name="c_number" placeholder="Contact Number" required autocomplete="tel">
+                    <div class="labels">Username</div>
+                        <input type="text" class="form-control" name="username" placeholder="Username" required autocomplete="username">
+                    <div class="labels">Password</div>
+                        <input type="password" class="form-control" name="password" placeholder="Password" required autocomplete="current-password">
+                    <div class="labels">Confirm-Password</div>
+                        <input type="password" class="form-control" name="c_password" placeholder="Confirm Password" required autocomplete="new-password">
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-md btn-outline-primary">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End -->
+
 <style scoped>
+    .dropdown-menu .dropdown-item{
+        color: #000;
+    }
+    .dropdown-menu .dropdown-item{
+        border-radius: 0 !important;
+        color: #000;
+        text-align:center;
+    }
+    
+    .dropdown-menu .dropdown-item:hover{
+        border-radius: 0 !important;
+        background-color: #a50f15;
+        color: #fff;
+        font-weight: bolder;
+    }
+
+
+    .btn.dropdown-toggle::after {
+        display: none !important;
+    }
+
+
     .nav-link{
         color:white;
         font-weight:600;
@@ -48,6 +113,8 @@
     
     .custome{
         display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .custome a{
@@ -59,6 +126,10 @@
     .custome a:hover {
         background-color: #a50f15;
         color: #fff;
+    }
+
+    .no-icon::before {
+        display: none !important;
     }
 
 
@@ -118,9 +189,9 @@
         }
 
         .navbar-nav1  .nav-item .nav-link {
-        color: #fff !important;
-        font-weight: bold;
-    }
+            color: #fff !important;
+            font-weight: bold;
+        }
 
     }
 </style>

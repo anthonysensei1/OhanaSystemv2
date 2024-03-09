@@ -31,9 +31,16 @@ rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
 <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link rel="shortcut icon" href="{{asset ('/images/ohana.png') }}">
 
 
 <style type="text/css">
+  body {
+    background-image:url('/images/ohanabg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+}
   .navbar-nav .nav-item .nav-link {
       color: #333 !important; /* Set the text color to dark */
       font-weight: bold; /* Set the font weight to bold */
@@ -156,7 +163,6 @@ rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
 integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
 
 
 
