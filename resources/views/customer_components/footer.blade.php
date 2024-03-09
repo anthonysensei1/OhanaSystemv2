@@ -1,18 +1,28 @@
 <footer class="main-footer">
     <center>
-        <strong>Copyright &copy; <?php echo date('Y')?> <a href="#">Ohana Resort Booking System</a>.</strong>
+        <strong>Copyright &copy; 2024 
+            <a href="#">
+                <span class="footer_single_letter">O</span>hana 
+                <span class="footer_single_letter">R</span>esort Booking System</a>.
+        </strong>
     </center>
 </footer>
 
-<style>
+<style scoped>
     .main-footer{
 		background: rgba(0, 0, 0, .8);
-        backdrop-filter: blur(25px);
+        backdrop-filter: blur(30px);
 		color: #fff;
         border-top:3px  solid #fff;
     }
 
     .main-footer a{
-        color:cyan;
+        color:#fff;
+        font-weight: bolder;
+    }
+
+    .footer_single_letter {
+        font-size: 25px;
+        color: #a50f15;
     }
 </style>

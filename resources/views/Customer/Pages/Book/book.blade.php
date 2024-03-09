@@ -186,12 +186,13 @@
 											<i class="far fa-calendar-alt"></i>
 										</span>
 									</div>
-									<input type="text" class="form-control" id="reservation">
+									<input type="text" class="form-control" id="reservation2">
 							</div>
+							<!-- If 0 = Cash is selected there must be another input field for amount, and if 1 = Gcash is selected, there must be another input field for amount and reference number appear below this portion -->
 							<select class="form-control mb-3 text-center">
 									<option value="Select Type" selected disabled>- Payment Method -</option>
-									<option value="cash">Cash</option>
-									<option value="gcash">Gcash</option>
+									<option value="0">Cash</option>
+									<option value="1">Gcash</option>
 							</select>
 							<input type="text" class="form-control mb-3" id="room_rate" name="room_rate" disabled placeholder="Rate">
 						</div>
@@ -224,17 +225,18 @@
 							<input type="text" class="form-control mb-3" id="event_hall_contact_number" name="event_hall_contact_number" disabled placeholder="Contact Number">
 							<input type="text" class="form-control mb-3" id="event_hall_address" name="event_hall_address" disabled placeholder="Address">
 							<div class="input-group mb-3">
-									<div class="input-group-prepend">
-										<span class="input-group-text">
-											<i class="far fa-calendar-alt"></i>
-										</span>
-									</div>
-									<input type="text" class="form-control" id="reservation">
+								<div class="input-group-prepend">
+									<span class="input-group-text">
+										<i class="far fa-calendar-alt"></i>
+									</span>
+								</div>
+								<input type="text" class="form-control" id="reservation1">
 							</div>
+							<!-- If 0 = Cash is selected there must be another input field for amount, and if 1 = Gcash is selected, there must be another input field for amount and reference number appear below this portion -->
 							<select class="form-control mb-3 text-center">
-									<option value="Select Type" selected disabled>- Payment Method -</option>
-									<option value="cash">Cash</option>
-									<option value="gcash">Gcash</option>
+								<option value="Select Type" selected disabled>- Payment Method -</option>
+								<option value="cash">Cash</option>
+								<option value="gcash">Gcash</option>
 							</select>
 							<input type="text" class="form-control mb-3" id="event_hall_rate" name="room_rate" disabled placeholder="Rate">
 						</div>
@@ -253,11 +255,18 @@
 	$('#book_now').addClass('c_active');
 </script>
 
-<script>
+<script scoped>
   $(function () {
     //Date range picker
-    $('#reservation').daterangepicker()
+    $('#reservation1').daterangepicker()
   })
 </script>
 
+
+<script scoped>
+  $(function () {
+    //Date range picker
+    $('#reservation2').daterangepicker()
+  })
+</script>
 @endsection

@@ -13,7 +13,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="custome" style="color:white; display:flex; " >
+        <div class="custome">
             <a href="{{route('/Customer/Pages/Home/home')}}" class="nav-link" id="home">HOME</a>
             <a href="{{route('/Customer/Pages/Book/book')}}" class="nav-link" id="book_now">BOOK NOW</a>
             <a href="{{route('/Customer/Pages/Calendar/guest_calendar')}}" class="nav-link" id="cal">CALENDAR</a>
@@ -37,21 +37,30 @@
     }
 
     .c_active{
-        border: 1px solid red;
-        border-radius: 3px;
-        
+        border-radius: 50px;
+        background-color: #a50f15;
     }
 
     .navbar-nav1  .nav-item .nav-link {
         color: #fff !important;
         font-weight: bold;
     }
-
-    .tops:hover{
-        border: 1px solid red;
-        border-radius: 3px;
-        transition: 1s;
+    
+    .custome{
+        display: flex;
     }
+
+    .custome a{
+        transition: .2s;
+        border-radius: 50px;
+        color: #fff;
+    }
+
+    .custome a:hover {
+        background-color: #a50f15;
+        color: #fff;
+    }
+
 
     .container_fluid_767{
         display: flex;
@@ -59,6 +68,7 @@
         justify-content: space-around;
         align-items: center;
         width: 100%;
+        font-size: 15px;
     }
 
     .container_fluid_767 ul li a {
@@ -70,9 +80,8 @@
     }
 
     .single_letter {
-        font-size: xxx-large;
-        font-style: italic;
-        color: red;
+        font-size: 45px;
+        color: #a50f15;
     }
 
     .ohana_text{

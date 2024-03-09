@@ -12,27 +12,72 @@
 			Begins in simple booking"
 		</div>
     </div>
+
+    <!-- Login -->
     <div class="sign_in_up">
-        <form action="">
+        <form action="#">
             <h1>Login</h1>
             <div class="input-box">
-                <input type="text" placeholder="Username" required>
-                <i class='bx bxs-user'></i>
+                <input type="text" placeholder="Username" name="s_username" id="s_username" required autofocus>
+                <i class='bx bxs-user icons'></i>
             </div>
             <div class="input-box">
-                <input type="password" placeholder="Password" required>
-                <i class='bx bxs-lock-alt' ></i>
+                <input type="password" placeholder="Password" name="s_password" id="s_password" required>
+                <i class='bx bxs-lock-alt icons' ></i>
             </div>
             <button type="submit" class="btn">Login</button>
             <div class="register-link">
-                <p>Dont have an account? <a href="#">Register</a></p>
+                <p>Dont have an account? <a href="#" data-toggle="modal" data-target="#popup_reg">Register</a></p>
             </div>
         </form>
     </div>
+    <!-- End -->
+
+    <!-- PopUp Register -->
+    <div class="modal fade" id="popup_reg" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                <form action="#">
+                    <div class="labels">Firstname</div>
+                        <input type="text" class="form-control" name="firstname" placeholder="Firstname" autofocus required autocomplete="given-name">
+                    <div class="labels">Lastname</div>
+                        <input type="text" class="form-control" name="lastname" placeholder="Lastname" required autocomplete="family-name">
+                    <div class="labels">Address</div>
+                        <input type="text" class="form-control" name="address" placeholder="Address" required autocomplete="address-line1">
+                    <div class="labels">Contact Number</div>
+                        <input type="tel" class="form-control" name="c_number" placeholder="Contact Number" required autocomplete="tel">
+                    <div class="labels">Username</div>
+                        <input type="text" class="form-control" name="username" placeholder="Username" required autocomplete="username">
+                    <div class="labels">Password</div>
+                        <input type="password" class="form-control" name="password" placeholder="Password" required autocomplete="current-password">
+                    <div class="labels">Confirm-Password</div>
+                        <input type="password" class="form-control" name="c_password" placeholder="Confirm Password" required autocomplete="new-password">
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-md btn-outline-success">Submit</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End -->
+
 </div>
 
 
 <style scoped>
+.labels{
+    color: #000;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 5px 0;
+}
 *{
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
@@ -99,11 +144,9 @@
   font-size: 14.5px;
   text-align: center;
   margin: 20px 0 15px;
- 
-
 }
 .register-link p a{
-  color: cyan;
+    color:#a50f15;
   text-decoration: none;
   font-weight: 600;
 }
@@ -119,15 +162,12 @@ body {
 }
 
 .content-wrapper {
-    background: rgba(0, 0, 0, .5);
+    background: rgba(0, 0, 0, .4);
     color: #fff;
     font-size: 2rem;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-}
-
-.content{
 }
 
 .words{
@@ -145,7 +185,10 @@ body {
 .words:nth-child(3){
     font-size:5rem;
     margin-left: 110px;
-    color: red;
+    background-color: #a50f15;
+    text-align: center;
+    border-radius: 5px;
+    width: 1100px;
 }
 
 @media screen and (max-width: 1740px){
@@ -171,7 +214,8 @@ body {
     font-size:30px;
     margin-left: 0px;
     text-align:center;
-    color: red;
+    color: #fff;
+    background-color: #a50f15;
 }
 
 
@@ -192,10 +236,5 @@ body {
     }
 }
 
-
-
-
-
-    
 </style>
 @endsection
