@@ -27,6 +27,12 @@
                 </div>
             </div>
         </div>
+        @auth
+            <form action="{{ route('customer_logout') }}" class="logout">
+                @csrf
+                <button class="btn btn-light" type="submit" href="#"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </form>
+        @endauth
     </div>
 </nav>
 

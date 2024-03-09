@@ -15,8 +15,10 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name(),
+            'user_info_id' => $this->faker->numberBetween(1,1),
+            'username' => $this->faker->name(),
             'password' => '12345', // password
+            'user_type' => $this->faker->numberBetween(1,1),
         ];
     }
 }

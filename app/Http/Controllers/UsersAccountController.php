@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UsersAccountController extends Controller
@@ -92,7 +93,11 @@ class UsersAccountController extends Controller
     public function user_login(Request $request)
     {
         
-        $userCredentials = User::where('username', $request->username)->first();
+        $userCredentials = User::select('users.id', 'super_users.name', 'users.username', 'users.password')
+                                ->join('super_users', 'users.user_info_id', '=', 'super_users.id')
+                                ->where('users.user_type', 1)
+                                ->where('users.username', $request->username)
+                                ->first();
 
         if ($userCredentials && Hash::check($request->password, $userCredentials->password)) {
 
