@@ -173,7 +173,7 @@ class CustomerLoginController extends Controller
 
                 $renderMessage = [
                     'response' => 1,
-                    'message' => 'Login successful! Hi ' . $userCredentials->name,
+                    'message' => 'Login successful! Hi ' . $userCredentials->ordinary_users,
                     'path' => '/Customer/Pages/Home/home'
                 ];
 

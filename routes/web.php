@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\PreventCaching;
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\RoomsController;
 use App\Http\Controllers\RoomTypeController;
@@ -101,6 +102,7 @@ Route::group(['middleware' => ['web', 'auth', 'super_user']], function () {
 
 //Customer Side
 //Login Route
+Route::get('/',[App\Http\Controllers\CustomerLoginController::class,'index']);
 Route::get('/Customer/Pages/Login/sign_in',[App\Http\Controllers\CustomerLoginController::class,'index'])->name('/Customer/Pages/Login/sign_in');
 Route::post('/Customer/Pages/Login/sign_in/store',[CustomerLoginController::class,'store'])->name('customer_store');
 Route::post('/Customer/Pages/Login/sign_in/customer_login',[CustomerLoginController::class,'customer_login'])->name('customer_login');
@@ -115,6 +117,7 @@ Route::group(['middleware' => ['web', 'auth', 'ordinary_user']], function () {
 
     //Book Route
     Route::get('/Customer/Pages/Book/book',[App\Http\Controllers\BookController::class,'index'])->name('/Customer/Pages/Book/book');
+    Route::post('/Customer/Pages/Book/book/store',[BookController::class,'store'])->name('book_store');
 
     //Calendar Route
     Route::get('/Customer/Pages/Calendar/guest_calendar',[App\Http\Controllers\GuestCalendarController::class,'index'])->name('/Customer/Pages/Calendar/guest_calendar');

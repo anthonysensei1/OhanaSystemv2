@@ -16,16 +16,16 @@
 								<div class="col-sm-12">
 										<div class="small-box">
 											<div style="display: flex; justify-content: center;">
-												<img class="d-flex justify-content-center mt-5" src="{{asset('dist/img/AdminLTELogo.png')}}"><!-- This should not be in circular form-->
+												<img class="d-flex justify-content-center mt-5" src="{{ isset($function_hall['function_hall_image']) ? asset('functional_hall_images/' . $function_hall['function_hall_image']) : asset('dist/img/AdminLTELogo.png')}}"><!-- This should not be in circular form-->
 											</div>
-											<h5 class="text-center p-3">(Description)</h5>
-											<h4><label class="m-2">RATE: P5000.00</label></h4>
+											<h5 class="text-center p-3">{{ $function_hall['function_hall_description'] }}</h5>
+											<h4><label class="m-2">( Per Day ) RATE: P{{ $function_hall['function_hall_rate'] }}</label></h4>
 										</div>                      
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-sm-12 d-flex justify-content-end">
-										<button class="btn btn-md btn-outline-success" data-toggle="modal" data-target="#event_hall_d">
+										<button class="btn btn-md btn-outline-success" data-toggle="modal" data-target="#book_now_d" onclick="edit({{ $function_hall['function_hall_rate'] }}, {{ $function_hall['id'] }}, 'hall')">
 											<i class="fas fa-tag"></i> 
 											Book Now!
 										</button>
@@ -40,123 +40,36 @@
 
 			<!-- Dislay Room in this Section -->
 			<div class="row">
-				<div class="col-lg-3">
-					<div class="card m-4">
-						<div class="card-header bg-gradient-info">
-							<h4 class="text-center text-bold">Room #</h4>
-						</div>
-						<div class="card-body">
-							<div class="row">
-								<div class="col-sm-12">
-										<div class="small-box">
-											<div style="display: flex; justify-content: center;">
-												<img class="d-flex justify-content-center mt-5" src="{{asset('dist/img/AdminLTELogo.png')}}"><!-- This should not be in circular form-->
-											</div>
-											<h5 class="text-center p-3">(Description)</h5>
-											<h4><label class="m-2">RATE: P350.00</label></h4>
-										</div>                      
-								</div>
+				@foreach ($rooms as $room)
+					<div class="col-lg-3">
+						<div class="card m-4">
+							<div class="card-header bg-gradient-info">
+								<h4 class="text-center text-bold">Room {{ $room['room_no'] }}</h4>
 							</div>
-							<div class="row">
-								<div class="col-sm-12 d-flex justify-content-end">
-										<button class="btn btn-md btn-outline-success" data-toggle="modal" data-target="#book_now_d">
-											<i class="fas fa-tag"></i> 
-											Book Now!
-										</button>
+							<div class="card-body">
+								<div class="row">
+									<div class="col-sm-12">
+											<div class="small-box">
+												<div style="display: flex; justify-content: center;">
+													<img class="d-flex justify-content-center mt-5" src="{{ asset('images/' . $room['room_image']) }}"><!-- This should not be in circular form-->
+												</div>
+												<h5 class="text-center p-3">{{ $room['room_name'] }}</h5>
+												<h4><label class="m-2">( Per Night ) RATE: {{ $room['room_rate'] }}</label></h4>
+											</div>                      
+									</div>
 								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-lg-3">
-					<div class="card m-4">
-						<div class="card-header bg-gradient-info">
-							<h4 class="text-center text-bold">Room #</h4>
-						</div>
-						<div class="card-body">
-							<div class="row">
-								<div class="col-sm-12">
-										<div class="small-box">
-											<div style="display: flex; justify-content: center;">
-												<img class="d-flex justify-content-center mt-5" src="{{asset('dist/img/AdminLTELogo.png')}}"><!-- This should not be in circular form-->
-											</div>
-											<h5 class="text-center p-3">(Description)</h5>
-											<h4><label class="m-2">RATE: P350.00</label></h4>
-										</div>                      
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-12 d-flex justify-content-end">
-										<button class="btn btn-md btn-outline-success">
-											<i class="fas fa-tag"></i> 
-											Book Now!
-										</button>
+								<div class="row">
+									<div class="col-sm-12 d-flex justify-content-end">
+											<button class="btn btn-md btn-outline-success" data-toggle="modal" data-target="#book_now_d" onclick="edit({{ $room['room_rate'] }}, {{ $room['id'] }}, 'room')">
+												<i class="fas fa-tag"></i> 
+												Book Now!
+											</button>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-
-
-				<div class="col-lg-3">
-					<div class="card m-4">
-						<div class="card-header bg-gradient-info">
-							<h4 class="text-center text-bold">Room #</h4>
-						</div>
-						<div class="card-body">
-							<div class="row">
-								<div class="col-sm-12">
-										<div class="small-box">
-											<div style="display: flex; justify-content: center;">
-												<img class="d-flex justify-content-center mt-5" src="{{asset('dist/img/AdminLTELogo.png')}}"><!-- This should not be in circular form-->
-											</div>
-											<h5 class="text-center p-3">(Description)</h5>
-											<h4><label class="m-2">RATE: P350.00</label></h4>
-										</div>                      
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-12 d-flex justify-content-end">
-										<button class="btn btn-md btn-outline-success">
-											<i class="fas fa-tag"></i> 
-											Book Now!
-										</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-
-				<div class="col-lg-3">
-					<div class="card m-4">
-						<div class="card-header bg-gradient-info">
-							<h4 class="text-center text-bold">Room #</h4>
-						</div>
-						<div class="card-body">
-							<div class="row">
-								<div class="col-sm-12">
-										<div class="small-box">
-											<div style="display: flex; justify-content: center;">
-												<img class="d-flex justify-content-center mt-5" src="{{asset('dist/img/AdminLTELogo.png')}}"><!-- This should not be in circular form-->
-											</div>
-											<h5 class="text-center p-3">(Description)</h5>
-											<h4><label class="m-2">RATE: P350.00</label></h4>
-										</div>                      
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-sm-12 d-flex justify-content-end">
-										<button class="btn btn-md btn-outline-success">
-											<i class="fas fa-tag"></i> 
-											Book Now!
-										</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				@endforeach
 			</div>
 			<!-- Dislay Room in this Section -->
 
@@ -173,28 +86,33 @@
 				<h4 class="modal-title text-center"> <i class="fas fa-tag"></i> BOOK NOW!</h4>
 			</div>
          <div class="modal-body">
-				<form action="#" method="post">
+				<form action="{{ route('book_store') }}" class="formPost">
 					<div class="row">
 						<div class="col">
-							<input type="text" class="form-control mb-3" id="room_fullname" name="room_fullname" disabled placeholder="Full Name">
-							<input type="text" class="form-control mb-3" id="room_address" name="room_address" disabled placeholder="Address">
-							<input type="text" class="form-control mb-3" id="room_contact_number" name="room_contact_number" disabled placeholder="Contact Number">
-							<input type="text" class="form-control mb-3" id="room_address" name="room_address" disabled placeholder="Address">
+							<input type="text" class="form-control mb-3" id="auth_id" name="auth_id" value="{{ $current_user['id'] }}" readonly hidden>
+							<input type="text" class="form-control mb-3" id="b_id" name="b_id" readonly hidden>
+							<input type="text" class="form-control mb-3" id="b_from" name="b_from" readonly hidden>
+							<input type="text" class="form-control mb-3" id="room_fullname" name="room_fullname" readonly required placeholder="Full Name" value="{{ $current_user['ordinary_user_fullname'] }}">
+							<input type="text" class="form-control mb-3" id="room_address" name="room_address" readonly required placeholder="Address" value="{{ $current_user['address'] }}">
+							<input type="text" class="form-control mb-3" id="room_contact_number" name="room_contact_number" readonly required placeholder="Contact Number" value="{{ $current_user['c_number'] }}">
 							<div class="input-group mb-3">
 									<div class="input-group-prepend">
 										<span class="input-group-text">
 											<i class="far fa-calendar-alt"></i>
 										</span>
 									</div>
-									<input type="text" class="form-control" id="reservation2">
+									<input type="text" class="form-control" name="reservation" id="reservation" required>
 							</div>
 							<!-- If 0 = Cash is selected there must be another input field for amount, and if 1 = Gcash is selected, there must be another input field for amount and reference number appear below this portion -->
-							<select class="form-control mb-3 text-center">
-									<option value="Select Type" selected disabled>- Payment Method -</option>
+							<select class="form-control mb-3 text-center" name="payment_method" id="payment_method" required>
+									<option value="" selected disabled>- Payment Method -</option>
 									<option value="0">Cash</option>
 									<option value="1">Gcash</option>
 							</select>
-							<input type="text" class="form-control mb-3" id="room_rate" name="room_rate" disabled placeholder="Rate">
+							<div id="div_payment">
+
+							</div>
+							<input type="text" class="form-control mb-3" id="room_rate" name="room_rate" readonly placeholder="Rate" required>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -208,65 +126,38 @@
 <!-- End of BookNow Dialog -->
 
 
-<!-- BookNow Event Hall Dialog -->
-<div class="modal fade" id="event_hall_d">
-   <div class="modal-dialog modal-dialog-info modal-dialog-centered">
-      <div class="modal-content">
-			<div class="modal-header bg-gradient-success">
-			
-				<h4 class="modal-title text-center"> <i class="fas fa-tag"></i> BOOK NOW!</h4>
-			</div>
-         <div class="modal-body">
-				<form action="#" method="post">
-					<div class="row">
-						<div class="col">
-							<input type="text" class="form-control mb-3" id="event_hall_fullname" name="event_hall_fullname" autocomplete disabled placeholder="Full Name">
-							<input type="text" class="form-control mb-3" id="event_hall_address" name="event_hall_address" autocomplete disabled placeholder="Address">
-							<input type="text" class="form-control mb-3" id="event_hall_contact_number" name="event_hall_contact_number" autocomplete disabled placeholder="Contact Number">
-							<input type="text" class="form-control mb-3" id="event_hall_address" name="event_hall_address" autocomplete disabled placeholder="Address">
-							<div class="input-group mb-3">
-								<div class="input-group-prepend">
-									<span class="input-group-text">
-										<i class="far fa-calendar-alt"></i>
-									</span>
-								</div>
-								<input type="text" class="form-control" id="reservation1">
-							</div>
-							<!-- If 0 = Cash is selected there must be another input field for amount, and if 1 = Gcash is selected, there must be another input field for amount and reference number appear below this portion -->
-							<select class="form-control mb-3 text-center">
-								<option value="Select Type" selected disabled>- Payment Method -</option>
-								<option value="cash">Cash</option>
-								<option value="gcash">Gcash</option>
-							</select>
-							<input type="text" class="form-control mb-3" id="event_hall_rate" name="event_hall_rate" disabled placeholder="Rate">
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-outline-success"><i class="fas fa-tag"></i>  Book! </button>
-					</div>
-				</form>
-			</div>
-      </div><!-- /.modal-content -->
-   </div> <!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<!-- End of BookNow Event Hall Dialog -->
-
 <script type="text/javascript">
 	$('#book_now').addClass('c_active');
+	
+	function edit(rate, id, b_from) {
+		$('#room_rate').val(rate);
+		$('#b_id').val(id);
+		$('#b_from').val(b_from);
+	}
+
+	$('#payment_method').change(() => {
+		if ($('#payment_method').val() < 1) {
+			let div_payment = '<input type="number" class="form-control mb-3" id="payment" name="payment" placeholder="Payment" required>';
+         	$('#div_payment').html(div_payment);
+		} else {
+			let div_payment = '<input type="text" class="form-control mb-3" id="reference_num" name="reference_num" placeholder="Reference Number" required><input type="number" class="form-control mb-3" id="payment" name="payment" placeholder="Payment" required>';
+         	$('#div_payment').html(div_payment);
+		}
+	});
+
+	$('#book_now_d').on('hidden.bs.modal', function(event) {
+		$("#payment").val('');
+		$("#reference_num").val('');
+		$("#book_now_d select").val('');
+		$('#div_payment').html('');
+    });
+
 </script>
 
 <script scoped>
   $(function () {
     //Date range picker
-    $('#reservation1').daterangepicker()
-  })
-</script>
-
-
-<script scoped>
-  $(function () {
-    //Date range picker
-    $('#reservation2').daterangepicker()
+    $('#reservation').daterangepicker()
   })
 </script>
 @endsection
