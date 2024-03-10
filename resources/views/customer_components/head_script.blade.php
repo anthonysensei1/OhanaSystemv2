@@ -104,6 +104,18 @@ rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3
   .display a{
     text-decoration: none;
   }
+
+  /* For Chrome, Safari, and Opera */
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+  }
+
+  /* For Firefox */
+  input[type=number] {
+      -moz-appearance: textfield;
+  }
 </style>
 
 
