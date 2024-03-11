@@ -37,16 +37,7 @@
         var eventObject = {
           title: $.trim($(this).text()) // use the element's text as the event title
         }
-
-        // store the Event Object in the DOM element so we can get to it later
         $(this).data('eventObject', eventObject)
-
-        // make the event draggable using jQuery UI
-      //   $(this).draggable({
-      //     zIndex        : 1070,
-      //     revert        : true, // will cause the event to go back to its
-      //     revertDuration: 0  //  original position after the drag
-      //   })
 
       })
     }
@@ -63,25 +54,9 @@
 
     var Calendar = FullCalendar.Calendar;
    //  var Draggable = FullCalendar.Draggable;
-
     var containerEl = document.getElementById('external-events');
     var checkbox = document.getElementById('drop-remove');
     var calendarEl = document.getElementById('calendar');
-
-    // initialize the external events
-    // -----------------------------------------------------------------
-
-   //  new Draggable(containerEl, {
-   //    itemSelector: '.external-event',
-   //    eventData: function(eventEl) {
-   //      return {
-   //        title: eventEl.innerText,
-   //        backgroundColor: window.getComputedStyle( eventEl ,null).getPropertyValue('background-color'),
-   //        borderColor: window.getComputedStyle( eventEl ,null).getPropertyValue('background-color'),
-   //        textColor: window.getComputedStyle( eventEl ,null).getPropertyValue('color'),
-   //      };
-   //    }
-   //  });
 
     var calendar = new Calendar(calendarEl, {
       headerToolbar: {
@@ -92,103 +67,50 @@
       themeSystem: 'bootstrap',
       //Random default events
       events: [
-        {
-          title          : 'All Day Event',
-          start          : new Date(y, m, 1),
-          backgroundColor: '#f56954', //red
-          borderColor    : '#f56954', //red
-          allDay         : true
-        },
-        {
-          title          : 'Long Event',
-          start          : new Date(y, m, d - 5),
-          end            : new Date(y, m, d - 2),
-          backgroundColor: '#f39c12', //yellow
-          borderColor    : '#f39c12' //yellow
-        },
-        {
-          title          : 'Meeting',
-          start          : new Date(y, m, d, 10, 30),
-          allDay         : false,
-          backgroundColor: '#0073b7', //Blue
-          borderColor    : '#0073b7' //Blue
-        },
-        {
-          title          : 'Lunch',
-          start          : new Date(y, m, d, 12, 0),
-          end            : new Date(y, m, d, 14, 0),
-          allDay         : false,
-          backgroundColor: '#00c0ef', //Info (aqua)
-          borderColor    : '#00c0ef' //Info (aqua)
-        },
-        {
-          title          : 'Birthday Party',
-          start          : new Date(y, m, d + 1, 19, 0),
-          end            : new Date(y, m, d + 1, 22, 30),
-          allDay         : false,
-          backgroundColor: '#00a65a', //Success (green)
-          borderColor    : '#00a65a' //Success (green)
-        },
-        {
-          title          : 'Click for Google',
-          start          : new Date(y, m, 28),
-          end            : new Date(y, m, 29),
-          url            : 'https://www.google.com/',
-          backgroundColor: '#3c8dbc', //Primary (light-blue)
-          borderColor    : '#3c8dbc' //Primary (light-blue)
-        }
+        @if (count($bookings) > 0)
+            @foreach ($bookings as $booking)
+              @php
+                $book_title = '';
+                $color = '';
+                switch ($booking->book_from) {
+                  case "hall":
+                    $book_title = $booking->function_hall_description . " ( ";
+                    $book_title .= $booking->book_start_date . " - ";
+                    $book_title .= $booking->book_end_date . " ) ";
+                    break;
+                  case "room":
+                    $book_title .= $booking->room_name. " ";
+                    $book_title .= $booking->room_no. " ";
+                    $book_title .= $booking->room_type . " ( ";
+                    $book_title .= $booking->book_start_date . " - ";
+                    $book_title .= $booking->book_end_date . " ) ";
+                    break;
+                }
+                switch ($booking->status) {
+                  case 1:
+                      $color = '#c7dd0e';
+                    break;
+                  case 0:
+                      $color = '#00a65a';
+                    break;
+                }
+                $booking->book_start_date = explode('-',$booking->book_start_date);
+                $booking->book_end_date = explode('-',$booking->book_end_date);
+              @endphp
+                {
+                  title          : '{{ $book_title }}',
+                  start          : new Date('{{ $booking->book_start_date["0"] }}', '{{ $booking->book_start_date["1"] - 1  }}', '{{ $booking->book_start_date["2"] }}'),
+                  end            : new Date('{{ $booking->book_end_date["0"] }}', '{{ $booking->book_end_date["1"] - 1  }}', '{{ $booking->book_end_date["2"] + 1}}'),
+                  backgroundColor: '{{ $color }}', //red
+                  borderColor    : '{{ $color }}', //red
+                  allDay         : true
+                },
+            @endforeach
+        @endif
       ],
-      // editable  : true,
-      // droppable : true, // this allows things to be dropped onto the calendar !!!
-      // drop      : function(info) {
-      //   // is the "remove after drop" checkbox checked?
-      //   if (checkbox.checked) {
-      //     // if so, remove the element from the "Draggable Events" list
-      //     info.draggedEl.parentNode.removeChild(info.draggedEl);
-      //   }
-      // }
     });
 
     calendar.render();
-    // $('#calendar').fullCalendar()
-
-    /* ADDING EVENTS */
-    var currColor = '#3c8dbc' //Red by default
-    // Color chooser button
-    $('#color-chooser > li > a').click(function (e) {
-      e.preventDefault()
-      // Save color
-      currColor = $(this).css('color')
-      // Add color effect to button
-      $('#add-new-event').css({
-        'background-color': currColor,
-        'border-color'    : currColor
-      })
-    })
-    $('#add-new-event').click(function (e) {
-      e.preventDefault()
-      // Get value and make sure it is not null
-      var val = $('#new-event').val()
-      if (val.length == 0) {
-        return
-      }
-
-      // Create events
-      var event = $('<div />')
-      event.css({
-        'background-color': currColor,
-        'border-color'    : currColor,
-        'color'           : '#fff'
-      }).addClass('external-event')
-      event.text(val)
-      $('#external-events').prepend(event)
-
-      // Add draggable funtionality
-      // ini_events(event)
-
-      // Remove event from text input
-      $('#new-event').val('')
-    })
   })
 </script>
 @endsection
