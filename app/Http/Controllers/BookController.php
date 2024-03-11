@@ -106,7 +106,7 @@ class BookController extends Controller
                     })
                     ->where('room_or_hall_id', '=', $request->b_id)
                     ->where('book_from', '=', $request->b_from)
-                    ->where('status', '=', '1')
+                    // ->where('status', '=', '1')
                     ->first();
                     
         if (!empty($book)) {
