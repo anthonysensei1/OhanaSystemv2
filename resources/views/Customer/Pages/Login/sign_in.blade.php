@@ -1,78 +1,33 @@
-@extends('layouts.app_customer')
-@section('content')
-<div class="content-wrapper">
-    <div class="content">
-        <div class="words">
-			Steps into serenity:
-		</div>
-		<div class="words">
-			"Where every stay
-		</div>
-		<div class="words">
-			Begins in simple booking"
-		</div>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Ohana Resort Online Booking</title>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
+    <link rel="shortcut icon" href="{{asset ('/images/ohana.png') }}">
 
-    <!-- Login -->
-    <div class="sign_in_up">
-        <form action="#">
-            <h1>Login</h1>
-            <div class="input-box">
-                <input type="text" placeholder="Username" name="s_username" id="s_username" required autofocus>
-                <i class='bx bxs-user icons'></i>
-            </div>
-            <div class="input-box">
-                <input type="password" placeholder="Password" name="s_password" id="s_password" required>
-                <i class='bx bxs-lock-alt icons' ></i>
-            </div>
-            <button type="submit" class="btn">Login</button>
-            <div class="register-link">
-                <p>Dont have an account? <a href="#" data-toggle="modal" data-target="#popup_reg">Register</a></p>
-            </div>
-        </form>
-    </div>
-    <!-- End -->
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="{{asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
+    <!-- Toastr -->
+    <link rel="stylesheet" href="{{asset('plugins/toastr/toastr.min.css')}}">
 
-    <!-- PopUp Register -->
-    <div class="modal fade" id="popup_reg" aria-hidden="true" data-backdrop="static">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="#">
-                        <div class="labels">Firstname</div>
-                            <input type="text" class="form-control" name="firstname" placeholder="Firstname" autofocus required autocomplete="given-name">
-                        <div class="labels">Lastname</div>
-                            <input type="text" class="form-control" name="lastname" placeholder="Lastname" required autocomplete="family-name">
-                        <div class="labels">Address</div>
-                            <input type="text" class="form-control" name="address" placeholder="Address" required autocomplete="address-line1">
-                        <div class="labels">Contact Number</div>
-                            <input type="tel" class="form-control" name="c_number" placeholder="Contact Number" required autocomplete="tel">
-                        <div class="labels">Username</div>
-                            <input type="text" class="form-control" name="username" placeholder="Username" required autocomplete="username">
-                        <div class="labels">Password</div>
-                            <input type="password" class="form-control" name="password" placeholder="Password" required autocomplete="current-password">
-                        <div class="labels">Confirm-Password</div>
-                            <input type="password" class="form-control" name="c_password" placeholder="Confirm Password" required autocomplete="new-password">
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-md btn-outline-success">Submit</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End -->
-</div>
-
-<style scoped>
+    <style scoped>
     *{
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        background-image:url('/images/ohanabg.png')!important;
+        background-repeat: no-repeat!important;
+        background-size: cover!important;
     }
     .main-footer a{
         text-decoration: none;
@@ -282,6 +237,187 @@
             }
 
         }
-    </style>
 
-@endsection
+    /* For Chrome, Safari, and Opera */
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* For Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+    </style>
+</head>
+
+<body class="hold-transition layout-top-nav">
+	<div class="wrapper">
+	<!-- Navbar -->
+	<nav class="main-header navbar navbar-expand-md navbar_cust">
+        <div class="container_fluid_767">
+            <a href="#" class="navbar-brand text-white">
+                <div class="brand-text ohana_text">  
+                    <div>
+                        <span class="single_letter">O</span>HANA 
+                    </div>
+                <div>
+                    <span class="single_letter">R</span>ESORT
+                </div>
+                </div>
+            </a>
+        </div>
+    </nav>
+<div class="content-wrapper">
+    <div class="content">
+        <div class="words">
+			Steps into serenity:
+		</div>
+		<div class="words">
+			"Where every stay
+		</div>
+		<div class="words">
+			Begins in simple booking"
+		</div>
+    </div>
+
+    <!-- Login -->
+    <div class="sign_in_up">
+        <form action="{{ route('customer_login') }}" class="formPost">
+            @csrf
+            <h1>Login</h1>
+            <input type="text" name="input_from" id="input_from" value="2" readonly hidden>
+            <div class="input-box">
+                <input type="text" placeholder="Username" name="username" id="s_username" required autofocus>
+                <i class='bx bxs-user icons'></i>
+            </div>
+            <div class="input-box">
+                <input type="password" placeholder="Password" name="password" id="s_password" required>
+                <i class='bx bxs-lock-alt icons' ></i>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <div class="register-link">
+                <p>Dont have an account? <a href="#" data-toggle="modal" data-target="#popup_reg">Register</a></p>
+            </div>
+        </form>
+    </div>
+    <!-- End -->
+
+    <!-- PopUp Register -->
+    <div class="modal fade" id="popup_reg" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('customer_store') }}" class="formPost">
+                        <div class="labels">Firstname</div>
+                            <input type="text" class="form-control" name="firstname" placeholder="Firstname" autofocus required autocomplete="given-name">
+                        <div class="labels">Lastname</div>
+                            <input type="text" class="form-control" name="lastname" placeholder="Lastname" required autocomplete="family-name">
+                        <div class="labels">Address</div>
+                            <input type="text" class="form-control" name="address" placeholder="Address" required autocomplete="address-line1">
+                        <div class="labels">Contact Number</div>
+                            <input type="number" class="form-control" name="c_number" placeholder="Contact Number" required autocomplete="tel">
+                        <div class="labels">Username</div>
+                            <input type="text" class="form-control" name="username" placeholder="Username" required autocomplete="username">
+                        <div class="labels">Password</div>
+                            <input type="password" class="form-control" name="password" placeholder="Password" required autocomplete="current-password">
+                        <div class="labels">Confirm-Password</div>
+                            <input type="password" class="form-control" name="c_password" placeholder="Confirm Password" required autocomplete="new-password">
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-md btn-outline-success">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End -->
+
+</div>
+	<!-- /.content-wrapper -->
+	</div>
+	<footer class="main-footer">
+        <center>
+            <strong>Copyright &copy; 2024 
+                <a href="#">
+                    <span class="footer_single_letter">O</span>hana 
+                    <span class="footer_single_letter">R</span>esort Booking System</a>.
+            </strong>
+        </center>
+    </footer>
+	<!-- ./wrapper -->
+</body>
+</html>
+
+
+<!-- jQuery -->
+<script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- AdminLTE App -->
+<script src="{{asset('dist/js/adminlte.js')}}"></script>
+<!-- SweetAlert2 -->
+<script src="{{asset('plugins/sweetalert2/sweetalert2.min.js')}}"></script>
+<!-- Toastr -->
+<script src="{{asset('plugins/toastr/toastr.min.js')}}"></script>
+
+
+<script>
+	
+    $('.formPost').on('submit',function(e) {
+        e.preventDefault();
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 1500
+        });
+        
+        $.ajax({
+            type     : "POST",
+            cache    : false,
+            url      : $(this).attr('action'),
+            data     : $(this).serialize(),
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success  : function(data) {
+
+                switch(data['response']) {
+                    case 1:
+                            Toast.fire({
+                                icon: 'success',
+                                title: '<p class="text-center pt-2 text-bold text-black">' +data['message']+ '</p>'
+                            });
+
+                            setTimeout(function() {
+                                window.location.href = data['path'];
+                            },1500);
+
+                        break;
+                    default:
+                            Toast.fire({
+                                icon: 'error',
+                                title: '<p class="text-center pt-2">' +data['message']+ '</p>'
+                            });
+                        break;
+                }
+
+            }
+        });
+
+    });
+</script>
