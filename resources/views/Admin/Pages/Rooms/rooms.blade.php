@@ -21,17 +21,15 @@
                      </button>
                   </div>
                   <div class="card-body">
-                     <div class="row">
+                     <div class="divide_box">
                         @foreach ($rooms as $room)
-                           <div class="room-item col-lg-3" data-roomtype="{{ $room['room_type_id'] }}">
-                              <div class="small-box bg-info">
+                           <div class="room-item" data-roomtype="{{ $room['room_type_id'] }}">
                                  <h5 class="text-center p-3">ROOM {{ $room['room_no'] }}</h5>
                                  <div style="display: flex; justify-content: center;">
-                                    <img class="d-flex justify-content-center w-100 h-100" src="{{ asset('images/' . $room['room_image']) }}" >
+                                    <img class="img_fix_size" src="{{ asset('images/' . $room['room_image']) }}" >
                                  </div>
-                                 <h5 class="text-center p-3">{{ $room['room_name'] }}</h5>
+                                 <h5 class="text-center p-3">{{ $room['room_type'] }}</h5>
                                  <label class="m-2">RATE: {{ $room['room_rate'] }}</label>
-                              </div>
                            </div>
                         @endforeach
                      </div>
@@ -59,7 +57,7 @@
                            <label for="exampleInputFile">Upload Image :</label>
                            <div class="input-group">
                               <div class="custom-file">
-                                 <input type="file" class="custom-file-input" id="exampleInputFile" required>
+                                 <input type="file" class="custom-file-input" id="exampleInputFile">
                                  <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                               </div>
                               <div class="input-group-append">
@@ -183,5 +181,35 @@ $(function () {
   bsCustomFileInput.init();
 });
 </script>
+
+<style scoped>
+   .divide_box{
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      flex-direction: row;
+      align-content: center;
+   }
+
+   .room-item{
+      margin: 5px;
+      background: linear-gradient(45deg, white, whitesmoke,grey);
+      border: 2px solid #000;
+      backdrop-filter: blur(10px);
+      border-radius: 5px;
+
+   }
+
+
+   .img_fix_size{
+      width: 300px;
+      height: 280px;
+      padding: 5px;
+      display: block;
+      object-fit: cover;
+   }
+</style>
 
 @endsection

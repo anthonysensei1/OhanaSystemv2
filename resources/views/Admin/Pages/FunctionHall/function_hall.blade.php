@@ -2,36 +2,28 @@
 @section('content')
 <div class="content-wrapper">
    <!-- Main content -->
-   <section class="content pt-3">
-      <div class="container-fluid">
-         <div class="row">
-            <div class="col-lg-12">
-               <div class="card">
-                  <div class="card-body">
-                     <div class="small-lg bg-gradient-secondary">
-                        <h1 class="text-center p-3">FUNCTION HALL</h1>
-                        <div style="display: flex; justify-content: center;">
-                           <img class="d-flex justify-content-center" src="{{ isset($function_halls[0]['function_hall_image']) ? asset('functional_hall_images/' . $function_halls[0]['function_hall_image']) : asset('dist/img/photo2.png')}}">
-                        </div>
-                        <h2 class="text-center p-3">{{ $function_halls[0]['function_hall_description'] ?? 'Description'; }}</h2>
-                        <h3 class="m-2">RATE: {{ $function_halls[0]['function_hall_rate'] ?? ''; }}</h3>
-                     </div>
-                     <div class="d-flex justify-content-end mt-3">
-                        @if (count($function_halls) < 1)
-                           <button class="btn btn-success btn-md mr-2" data-toggle="modal" data-target="#create_function_hall">
-                              <i class="fas fa-plus"></i> Add
-                           </button>
-                        @endif
-                        <button class="btn btn-info btn-md" data-toggle="modal" data-target="#update_function_hall">
-                              <i class="fas fa-pen"></i> Update
-                        </button>
-                     </div>
-                  </div>
-               </div>
+   <div class="divide_box">
+      <div class="card-body">
+         <div class="room-item">
+            <h2 class="text-center">FUNCTION HALL</h2>
+            <div style="display: flex; justify-content: center;">
+               <img class="img_fix_size" src="{{ isset($function_halls[0]['function_hall_image']) ? asset('functional_hall_images/' . $function_halls[0]['function_hall_image']) : asset('dist/img/default.png')}}">
             </div>
+            <h2 class="text-center p-3">{{ $function_halls[0]['function_hall_description'] ?? '(Description)'; }}</h2>
+            <h3 class="m-2">RATE: {{ $function_halls[0]['function_hall_rate'] ?? ''; }}</h3>
          </div>
-      </div><!-- /.container-fluid -->
-   </section>
+         <div class="d-flex justify-content-end">
+            @if (count($function_halls) < 1)
+               <button class="btn btn-success btn-md mr-2" data-toggle="modal" data-target="#create_function_hall">
+                  <i class="fas fa-plus"></i> Add
+               </button>
+            @endif
+            <button class="btn btn-info btn-md" data-toggle="modal" data-target="#update_function_hall">
+                  <i class="fas fa-pen"></i> Update
+            </button>
+         </div>
+      </div>
+   </div>
    <!-- /.content -->
 </div>
 
@@ -50,7 +42,7 @@
                         <label for="exampleInputFile">Upload Image :</label>
                         <div class="input-group">
                            <div class="custom-file">
-                              <input type="file" class="custom-file-input exampleInputFile" id="exampleInputFile" required>
+                              <input type="file" class="custom-file-input exampleInputFile" id="exampleInputFile">
                               <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                            </div>
                            <div class="input-group-append">
@@ -98,7 +90,7 @@
                         <label for="exampleInputFile">Upload Image :</label>
                         <div class="input-group">
                            <div class="custom-file">
-                              <input type="file" class="custom-file-input exampleInputFile" id="exampleInputFile" required>
+                              <input type="file" class="custom-file-input exampleInputFile" id="exampleInputFile">
                               <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                            </div>
                            <div class="input-group-append">
@@ -106,12 +98,12 @@
                            </div>
                         </div>
                      </div>
-                     <input type="text" class="form-control function_hall_image" name="u_function_hall_image" id="function_hall_image" readonly hidden>
-                     <input type="text" class="form-control" name="u_id" id="u_id" value="{{ $function_halls[0]['id'] ?? ""; }}" readonly hidden>
+                     <input type="text" class="form-control function_hall_image" name="u_function_hall_image" id="function_hall_image"  readonly hidden>
+                     <input type="text" class="form-control" name="u_id" id="u_id" value="{{ $function_halls[0]['id'] ?? ''; }}" readonly hidden>
                      <label for="u_function_hall_description">Description :</label>
-                     <input type="text" class="form-control" name="u_function_hall_description" id="u_function_hall_description" value="{{ $function_halls[0]['function_hall_description'] ?? ""; }}" required>
+                     <input type="text" class="form-control" name="u_function_hall_description" id="u_function_hall_description" value="{{ $function_halls[0]['function_hall_description'] ?? ''; }}" required>
                      <label for="u_function_hall_rate">Rate :</label>
-                     <input type="number" class="form-control" name="u_function_hall_rate" id="u_function_hall_rate" value="{{ $function_halls[0]['function_hall_rate'] ?? ""; }}" required>
+                     <input type="number" class="form-control" name="u_function_hall_rate" id="u_function_hall_rate" value="{{ $function_halls[0]['function_hall_rate'] ?? ''; }}" required>
                   </div>
                </div>
          </div>
@@ -202,4 +194,34 @@ $(function () {
   bsCustomFileInput.init();
 });
 </script>
+
+
+<style scoped>
+   .divide_box{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      flex-direction: row;
+      align-content: center;
+   }
+
+   .room-item{
+      margin: 5px;
+      background: linear-gradient(45deg, white, whitesmoke,grey);
+      border: 2px solid #000;
+      backdrop-filter: blur(10px);
+      border-radius: 5px;
+
+   }
+
+   .img_fix_size{
+      width: 900px;
+      height: 600px;
+      padding: 20px;
+      display: block;
+      object-fit: cover;
+      border: 2px solid #000;
+      background: linear-gradient(-90deg, white, whitesmoke,grey);
+   }
+</style>
 @endsection

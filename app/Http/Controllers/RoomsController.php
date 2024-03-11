@@ -18,9 +18,10 @@ class RoomsController extends Controller
         $renderData = [
             'room_types' => RoomType::all(),
             'rooms' => Rooms::join('room_types', 'rooms.room_type_id', '=', 'room_types.id')
-            ->select('rooms.*', 'room_types.room_rate')
+            ->select('rooms.*','room_types.room_type' , 'room_types.room_rate')
             ->get(),
         ];
+        // dd($renderData);
 
         return view('/Admin/Pages/Rooms/rooms', $renderData);
     }
