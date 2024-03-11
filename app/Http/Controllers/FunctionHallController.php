@@ -120,18 +120,18 @@ class FunctionHallController extends Controller
      */
     public function update(Request $request)
     {
-        if ($request->u_function_hall_description || $request->u_function_hall_rate != '') {
+        if ($request->u_function_hall_image == '') {
             $formData = [
                 'function_hall_description' => $request->u_function_hall_description,
                 'function_hall_rate' => $request->u_function_hall_rate,
             ];
             
         } else {
-            $formData = [];
-        }
-        
-        if ($request->u_function_hall_image) {
-            $formData['function_hall_image'] = $request->u_function_hall_image;
+            $formData = [
+                'function_hall_image'=> $request->u_function_hall_image,
+                'function_hall_description' => $request->u_function_hall_description,
+                'function_hall_rate' => $request->u_function_hall_rate,
+            ];
         }
         
         FunctionHall::where('id', '=', $request->u_id)->update($formData);
