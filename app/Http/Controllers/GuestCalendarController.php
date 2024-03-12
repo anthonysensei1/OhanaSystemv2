@@ -24,7 +24,7 @@ class GuestCalendarController extends Controller
                         ->leftJoin('function_halls', 'bookings.room_or_hall_id', '=', 'function_halls.id')
                         ->get()
         ];
-        // dd($renderData);
+        
         return view('/Customer/Pages/Calendar/guest_calendar', $renderData);
     }
 

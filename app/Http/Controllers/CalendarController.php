@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CalendarController extends Controller
 {
@@ -13,7 +14,17 @@ class CalendarController extends Controller
      */
     public function index()
     {
-        return view('/Admin/Pages/Calendar/calendar');
+        $renderData = [
+            'bookings' => DB::table('bookings')
+                        ->select('bookings.id', 'bookings.auth_user_id', 'bookings.book_from', 'bookings.book_start_date', 'bookings.book_end_date',
+                            'bookings.payment_method', 'bookings.reference_num', 'bookings.payment', 'bookings.status', 'rooms.room_no', 'rooms.room_name',
+                            'rooms.room_type_id', 'room_types.room_type', 'room_types.room_rate', 'function_halls.function_hall_description', 'function_halls.function_hall_rate')
+                        ->leftJoin('rooms', 'bookings.room_or_hall_id', '=', 'rooms.id')
+                        ->leftJoin('room_types', 'rooms.room_type_id', '=', 'room_types.id')
+                        ->leftJoin('function_halls', 'bookings.room_or_hall_id', '=', 'function_halls.id')
+                        ->get()
+        ];
+        return view('/Admin/Pages/Calendar/calendar', $renderData);
     }
 
     /**

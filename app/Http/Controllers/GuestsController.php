@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GuestsController extends Controller
 {
@@ -13,7 +14,14 @@ class GuestsController extends Controller
      */
     public function index()
     {
-        return view('/Admin/Pages/Guests/guests');
+        $renderData = [
+            'users' => DB::table('users')
+                ->leftJoin('ordinary_users', 'users.user_info_id', '=', 'ordinary_users.id')
+                ->whereNull('users.roles_id')
+                ->get()
+        ];
+        
+        return view('/Admin/Pages/Guests/guests', $renderData);
     }
 
     /**
