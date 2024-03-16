@@ -24,11 +24,13 @@
                            </tr>
                         </thead>
                         <tbody>
-                           <tr>
-                              <td>JUAN DELA CRUZ</td>
-                              <td>juandelacruz</td>
-                              <td>Admin</td>
-                           </tr>
+                           @foreach ($users as $user)
+                              <tr>
+                                 <td>{{ $user->name }}</td>
+                                 <td>{{ $user->username }}</td>
+                                 <td>{{ $user->role_name }}</td>
+                              </tr>
+                           @endforeach
                         </tbody>
                      </table>
                   </div>
@@ -47,12 +49,24 @@
          <div class="modal-header bg-gradient-success">
             <h4 class="modal-title"> Add New Staff </h4>
          </div>
-         <form action="#" class="formPost">
+         <form action="{{ route('user_account_store') }}" class="formPost">
             <div class="modal-body">
                <div class="row">
                   <div class="col-lg-12">
-                     <label for="new_user_name">Fullname :</label>
-                     <input type="text" class="form-control" name="new_user_name" id="new_user_name" required>
+                     <label for="fullname">Fullname :</label>
+                     <input type="text" class="form-control" name="fullname" id="fullname" required>
+                  </div>
+                  <div class="col-lg-12">
+                     <label for="username">Username :</label>
+                     <input type="text" class="form-control" name="username" id="username" required>
+                  </div>
+                  <div class="col-lg-12">
+                     <label for="password">Password :</label>
+                     <input type="password" class="form-control" name="password" id="password" required>
+                  </div>
+                  <div class="col-lg-12">
+                     <label for="cpassword">Confirm password :</label>
+                     <input type="password" class="form-control" name="cpassword" id="cpassword" required>
                   </div>
                </div>
             </div>
@@ -61,7 +75,9 @@
                   <div class="col-lg-12">
                      <select class="form-control" name="user_role" id="user_role" required>
                         <option value="" selected disabled>- Select Type -</option>
-                        <option value=""> Staff </option>
+                        @foreach ($roles as $role)
+                           <option value="{{ $role['id'] }}">{{ $role['role'] }}</option>
+                        @endforeach
                      </select>
                   </div>
                </div>

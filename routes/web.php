@@ -83,6 +83,7 @@ Route::group(['middleware' => ['web', 'auth', 'super_user']], function () {
 
     //UsersAccount Route
     Route::get('/Admin/Pages/UsersAccount/users_account',[App\Http\Controllers\UsersAccountController::class,'index'])->name('/Admin/Pages/UsersAccount/users_account');
+    Route::post('/Admin/Pages/UsersAccount/users_account/store',[UsersAccountController::class,'store'])->name('user_account_store');
 
     //Permissions Route
     Route::get('/Admin/Pages/Roles_and_Permissions/permissions',[App\Http\Controllers\PermissionsController::class,'index'])->name('/Admin/Pages/Roles_and_Permissions/permissions');

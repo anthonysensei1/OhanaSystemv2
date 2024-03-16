@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
+use App\Models\SuperUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +18,17 @@ class UsersAccountController extends Controller
      */
     public function index()
     {
-        return view('/Admin/Pages/UsersAccount/users_account');
+        $renderData = [
+            'roles' => Role::all(),
+            'users' => DB::table('users')
+                    ->select('users.*', 'users.id AS user_id', 'super_users.*', 'roles.role AS role_name')
+                    ->leftJoin('super_users', 'users.user_info_id', '=', 'super_users.id')
+                    ->leftJoin('roles', 'users.roles_id', '=', 'roles.id')
+                    ->whereNotNull('users.roles_id')
+                    ->get()
+        ];
+
+        return view('/Admin/Pages/UsersAccount/users_account', $renderData);
     }
 
     /**
@@ -37,7 +49,42 @@ class UsersAccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->password != $request->cpassword) {
+
+            $renderMessage = [
+                'response' => 0,
+                'message' => 'Password and confirm password is not the same!',
+                'path' => '/Admin/Pages/UsersAccount/users_account'
+            ];
+
+            return response()->json($renderMessage);
+        }
+        
+        $formData = [
+            'name' => $request->fullname,
+        ];
+
+        SuperUser::create($formData);
+        
+        $request->password = password_hash($request->password, PASSWORD_BCRYPT);
+        $super_user = SuperUser::latest()->first();
+        $formData = [
+            'user_info_id' => $super_user->id,
+            'username' => $request->username,
+            'password' => $request->password,
+            'roles_id' => $request->user_role,
+            'user_type' => 1
+        ];
+
+        User::create($formData);
+
+        $renderMessage = [
+            'response' => 1,
+            'message' => 'Adding super user sucess',
+            'path' => '/Admin/Pages/UsersAccount/users_account'
+        ];
+
+        return response()->json($renderMessage);
     }
 
     /**
