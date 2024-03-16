@@ -32,17 +32,12 @@
                                  <td>{{ $user->address }}</td>
                                  <td>{{ $user->c_number }}</td>
                                  <td class="text-center">
-                                    <button type="button" class="btn btn-info btn-md">
-                                       <i class="fas fa-pen"></i>
-                                       edit
-                                    </button>
                                     <button type="button" class="btn btn-danger btn-md" data-toggle="modal" data-target="#delete_guest">
-                                       <i class="fas fa-trash"></i>
-                                       delete
+                                       <i class="icon fas fa-ban"></i>
+                                       disable
                                     </button>
                                  </td>
                               </tr>
-                              $count++;
                            @endforeach
                         </tbody>
                      </table>
