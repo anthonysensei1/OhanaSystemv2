@@ -9,10 +9,12 @@
                <div class="card">
                   <div class="card-header d-flex">
                      <h4>List of Cancelled Bookings</h4>
-                     <select class="form-control text-center ml-2" style="max-width: 300px">
+                     <select class="form-control text-center ml-2" style="max-width: 300px" id="roomTypeSelect">
                         <option value="Select Type" selected disabled>- Select Room Type -</option>
-                        <option value="ordinary">Ordinary</option>
-                        <option value="private">Private</option>
+                        <option value="all">Show all rooms</option>
+                        @foreach ($room_types as $room_type)
+                           <option class="_room_type_values" value="{{ $room_type['id'] }}">{{ $room_type['room_type'] }}</option>
+                        @endforeach
                      </select>
                   </div>
                   <div class="card-body">
@@ -30,24 +32,48 @@
                            </tr>
                         </thead>
                         <tbody>
-                           <tr>
-                              <td>1</td>
-                              <td>
-                                 <h6>Fullname: Juan Dela Cruz</h6>
-                                 <h6>Address: Poblacion, Trinidad, Bohol</h6>
-                                 <h6>Contact No.: 09999999999</h6>
-                              </td>
-                              <td>Room 1 (Ordinary)</td>
-                              <td>10:00am | February 11,2024</td>
-                              <td>10:00pm | February 12,2024</td>
-                              <td>Gcash (1004 181 700551) </td>
-                              <td>P2,500</td>
-                              <td class="text-center">
-                                 <button type="button" class="btn btn-danger btn-sm" disabled>
-                                    Cancelled
-                                 </button>
-                              </td>
-                           </tr>
+                           @php
+                               $counter = 1;
+                           @endphp
+                           @foreach ($bookings as $booking)
+                           @php
+                              $datetime = new DateTime($booking->created_at);
+                              $datetime->setTimezone(new DateTimeZone('Asia/Manila'));
+                              $formattedDateTime = $datetime->format('Y-m-d h:i:s A');
+                              $booking_time = explode(" ", $formattedDateTime);
+
+                              $date = new DateTime($booking->book_start_date);
+                              $book_start_date = $date->format('F j, Y');
+
+                              $date = new DateTime($booking->book_end_date);
+                              $book_end_date = $date->format('F j, Y');
+                           @endphp
+                              <tr class="room-item" data-roomtype="{{ $booking['room_type_id'] }}">
+                                 <td>{{ $counter }}</td>
+                                 <td>
+                                    <h6>Fullname: {{ $booking->first_name . " " . $booking->last_name }}</h6>
+                                    <h6>Address: {{ $booking->address }}</h6>
+                                    <h6>Contact No.: {{ $booking->c_number }}</h6>
+                                 </td>
+                                 @if ($booking->book_from == 'room')
+                                    <td>{{ $booking->room_name . " " . $booking->room_no . " ( " . $booking->room_type  . " )" }}</td>
+                                 @else
+                                    <td>{{ $booking->function_hall_description}}</td>
+                                 @endif
+                                 <td>{{ $booking_time[1] . " | " . $book_start_date }}</td>
+                                 <td>{{ $booking_time[1] . " | " . $book_end_date }}</td>
+                                 <td>{{ $booking->payment_method < 1 ? 'CASH' : 'GCASH ( ' . $booking->reference_num . ' ) '; }} </td>
+                                 <td>P{{ number_format($booking->payment) }}</td>
+                                 <td class="text-center">
+                                    <button type="button" class="btn btn-danger btn-sm" disabled>
+                                       Cancelled
+                                    </button>
+                                 </td>
+                              </tr>
+                              @php
+                                 $counter++;
+                              @endphp
+                         @endforeach
                         </tbody>
                      </table>
                   </div>
@@ -62,5 +88,16 @@
 <script type="text/javascript">
    $('#open_manage_bookings').addClass('menu-open');
    $('#cancel').addClass('activeCancel');
+
+   $('#roomTypeSelect').change(function () {
+      const selectedRoomType = $(this).val();
+
+      if (selectedRoomType === 'all') {
+            $('.room-item').show();
+      } else {
+            $('.room-item').hide();
+            $('.room-item[data-roomtype="' + selectedRoomType + '"]').show();
+      }
+   });
 </script>
 @endsection

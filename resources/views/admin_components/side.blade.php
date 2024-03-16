@@ -14,6 +14,7 @@
                 <li class="nav-header">PAGES</li>
                 <?php
                     $permissions = app()->call(Route::getRoutes()->getByName('get_all_permission')->getAction()['controller']);
+                    $getbadges = app()->call(Route::getRoutes()->getByName('get_badges_bookings')->getAction()['controller']);
                 ?>
                 @foreach ($permissions as $permission)
                     @if (empty($permission['sub_permission']))
@@ -31,7 +32,7 @@
                                 <i class="nav-icon fas {{ $permission['icon'] }}"></i>
                                 <p>
                                     @if ($permission['permission'] == 'MANAGE BOOKINGS')
-                                        <span class="badge badge-warning right">2</span>
+                                        <span class="badge badge-warning right">{{ $getbadges }}</span>
                                     @endif
                                     {{ $permission['permission'] }}
                                     <i class="fas fa-angle-left right"></i>
@@ -50,7 +51,7 @@
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>{{ $sub_permission }}</p>
                                         @if ($sub_permission == 'Pending Bookings')
-                                            <span class="badge badge-light right">2</span>
+                                            <span class="badge badge-light right">{{ $getbadges }}</span>
                                         @endif
                                     </a>
                                     </li>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bookings;
+use App\Models\RoomType;
 use Illuminate\Http\Request;
 
 class ConfirmedBookingsController extends Controller
@@ -13,7 +15,42 @@ class ConfirmedBookingsController extends Controller
      */
     public function index()
     {
-        return view('/Admin/Pages/Bookings/confirmed_bookings');
+        $renderData = [
+            'bookings' => Bookings::select(
+                        'bookings.id',
+                        'bookings.book_from',
+                        'bookings.book_start_date',
+                        'bookings.book_end_date',
+                        'bookings.payment_method',
+                        'bookings.reference_num',
+                        'bookings.payment',
+                        'bookings.status',
+                        'bookings.created_at',
+                        'rooms.room_image',
+                        'rooms.room_no',
+                        'rooms.room_name',
+                        'function_halls.function_hall_image',
+                        'function_halls.function_hall_description',
+                        'function_halls.function_hall_rate',
+                        'room_types.id AS room_type_id',
+                        'room_types.room_type',
+                        'room_types.room_rate',
+                        'ordinary_users.first_name',
+                        'ordinary_users.last_name',
+                        'ordinary_users.address',
+                        'ordinary_users.c_number'
+                    )
+                    ->join('users', 'bookings.auth_user_id', '=', 'users.id')
+                    ->join('ordinary_users', 'users.user_info_id', '=', 'ordinary_users.id')
+                    ->leftJoin('rooms', 'bookings.room_or_hall_id', '=', 'rooms.id')
+                    ->leftJoin('function_halls', 'bookings.room_or_hall_id', '=', 'function_halls.id')
+                    ->leftJoin('room_types', 'rooms.room_type_id', '=', 'room_types.id')
+                    ->where('bookings.status', '=', '2')
+                    ->get(),
+                    'room_types' => RoomType::all(),
+            ];
+
+        return view('/Admin/Pages/Bookings/confirmed_bookings', $renderData);
     }
 
     /**

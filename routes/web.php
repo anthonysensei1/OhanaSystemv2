@@ -12,6 +12,7 @@ use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\FunctionHallController;
 use App\Http\Controllers\UsersAccountController;
 use App\Http\Controllers\CustomerLoginController;
+use App\Http\Controllers\PendingBookingsController;
 use App\Http\Controllers\AssignRolesPermissionsController;
 
 /*
@@ -40,6 +41,9 @@ Route::group(['middleware' => ['web', 'auth', 'super_user']], function () {
 
     //Bookings | Pending Route
     Route::get('/Admin/Pages/Bookings/pending_bookings',[App\Http\Controllers\PendingBookingsController::class,'index'])->name('/Admin/Pages/Bookings/pending_bookings');
+    Route::post('/Admin/Pages/Bookings/pending_bookings/update', [PendingBookingsController::class, 'update'])->name('pending_booking_update');
+    Route::post('/Admin/Pages/Bookings/pending_bookings/destroy', [PendingBookingsController::class, 'destroy'])->name('pending_booking_destroy');
+    Route::post('/Admin/Pages/Bookings/pending_bookings/getBadgesBookings', [PendingBookingsController::class, 'getBadgesBookings'])->name('get_badges_bookings');
 
     //Bookings | Confirmed Route
     Route::get('/Admin/Pages/Bookings/confirmed_bookings',[App\Http\Controllers\ConfirmedBookingsController::class,'index'])->name('/Admin/Pages/Bookings/confirmed_bookings');

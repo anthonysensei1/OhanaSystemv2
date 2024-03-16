@@ -38,6 +38,9 @@
                                     </button>
                                  </td>
                               </tr>
+                              @php
+                                   $counter++;
+                              @endphp
                            @endforeach
                         </tbody>
                      </table>
