@@ -19,6 +19,7 @@ class UserFactory extends Factory
             'username' => $this->faker->name(),
             'password' => '12345', // password
             'user_type' => $this->faker->numberBetween(1,1),
+            'status' => $this->faker->numberBetween(1,1),
         ];
     }
 }
