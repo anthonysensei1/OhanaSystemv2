@@ -163,6 +163,7 @@ class CustomerLoginController extends Controller
                                 ->join('ordinary_users', 'users.user_info_id', '=', 'ordinary_users.id')
                                 ->where('users.user_type', 2)
                                 ->where('users.username', $request->username)
+                                ->where('users.status', '=', 1)
                                 ->first();
 
         if ($userCredentials && Hash::check($request->password, $userCredentials->password)) {

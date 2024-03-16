@@ -5,6 +5,7 @@ use App\Http\Middleware\PreventCaching;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\RoomsController;
+use App\Http\Controllers\GuestsController;
 use App\Http\Controllers\RoomTypeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Middleware\CustomerAuthenticate;
@@ -54,6 +55,7 @@ Route::group(['middleware' => ['web', 'auth', 'super_user']], function () {
 
     // Guests Route
     Route::get('/Admin/Pages/Guests/guests', [App\Http\Controllers\GuestsController::class, 'index'])->name('/Admin/Pages/Guests/guests');
+    Route::post('/Admin/Pages/Guests/guests/destroy', [GuestsController::class, 'destroy'])->name('guests_destroy');
 
 
     // Calendar Route

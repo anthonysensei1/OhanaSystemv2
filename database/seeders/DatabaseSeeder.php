@@ -124,6 +124,7 @@ class DatabaseSeeder extends Seeder
             'password' => $hash,
             'roles_id' => '1',
             'user_type' => '1',
+            'status' => '1',
         ]);
 
         User::factory()->create([
@@ -132,6 +133,7 @@ class DatabaseSeeder extends Seeder
             'password' => $hash,
             'roles_id' => '2',
             'user_type' => '1',
+            'status' => '1',
         ]);
 
         SuperUser::factory()->create([

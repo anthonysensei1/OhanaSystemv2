@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,9 +17,10 @@ class GuestsController extends Controller
     {
         $renderData = [
             'users' => DB::table('users')
-                ->leftJoin('ordinary_users', 'users.user_info_id', '=', 'ordinary_users.id')
-                ->whereNull('users.roles_id')
-                ->get()
+                    ->select('users.*', 'users.id AS user_id', 'ordinary_users.*')
+                    ->leftJoin('ordinary_users', 'users.user_info_id', '=', 'ordinary_users.id')
+                    ->whereNull('users.roles_id')
+                    ->get()
         ];
         
         return view('/Admin/Pages/Guests/guests', $renderData);
@@ -85,8 +87,29 @@ class GuestsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        switch ($request->status) {
+            case 0:
+                $request->status = 1;
+                break;
+            case 1:
+                $request->status = 0;
+                break;
+        }
+
+        $formData = [
+            'status' => $request->status
+        ];
+
+        User::where('id', '=', $request->id)->update($formData);
+
+        $renderMessage = [
+            'response' => 1,
+            'message' => 'Update user success!',
+            'path' => '/Admin/Pages/Guests/guests'
+        ];
+
+        return response()->json($renderMessage);
     }
 }
