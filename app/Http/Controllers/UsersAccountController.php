@@ -59,6 +59,18 @@ class UsersAccountController extends Controller
 
             return response()->json($renderMessage);
         }
+
+        $userCredentials = User::where('username', $request->username)->first();
+
+        if ($userCredentials) {
+            $renderMessage = [
+                'response' => 0,
+                'message' => 'Username is invalid!',
+                'path' => '/Admin/Pages/UsersAccount/users_account'
+            ];
+
+            return response()->json($renderMessage); 
+        }
         
         $formData = [
             'name' => $request->fullname,
