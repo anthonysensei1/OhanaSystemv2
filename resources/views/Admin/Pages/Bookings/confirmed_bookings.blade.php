@@ -48,7 +48,7 @@
                               $date = new DateTime($booking->book_end_date);
                               $book_end_date = $date->format('F j, Y');
                            @endphp
-                              <tr class="room-item" data-roomtype="{{ $booking->book_from == 'room' ? $booking['room_type_id'] : "" }}">
+                              <tr class="room-item" data-roomtype="{{ $booking['room_type_id'] }}">
                                  <td>{{ $counter }}</td>
                                  <td>
                                     <h6>Fullname: {{ $booking->first_name . " " . $booking->last_name }}</h6>
