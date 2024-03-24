@@ -16,10 +16,10 @@
 								<div class="col-sm-12">
 									<div class="small-box">
 										<div style="display: flex; justify-content: center;">
-											<img class="d-flex justify-content-center mt-5" src="{{ isset($function_hall['function_hall_image']) ? asset('functional_hall_images/' . $function_hall['function_hall_image']) : asset('dist/img/AdminLTELogo.png')}}"><!-- This should not be in circular form-->
+											<img class="img_fix_size_f" src="{{ isset($function_hall['function_hall_image']) ? asset('functional_hall_images/' . $function_hall['function_hall_image']) : asset('dist/img/default.png')}}"><!-- This should not be in circular form-->
 										</div>
 										<h5 class="text-center p-3">{{ $function_hall['function_hall_description'] ?? ''}}</h5>
-										<h4><label class="m-2">( Per Day ) RATE: P{{ $function_hall['function_hall_rate'] ?? ''}}</label></h4>
+										<div><h4 class="m-2">( Per Day ) RATE: P{{ $function_hall['function_hall_rate'] ?? ''}}</h4></div>
 									</div>                      
 								</div>
 							</div>
@@ -181,6 +181,13 @@
       padding: 5px;
       display: block;
       object-fit: cover;
+   }
+
+   .img_fix_size_f{
+		width: 100%;
+      height: 500px;
+      padding: 10px;
+      object-fit: contain;
    }
 
    .card-header-color{

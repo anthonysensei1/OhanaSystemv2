@@ -18,21 +18,38 @@
             <a href="{{route('/Customer/Pages/Book/book')}}" class="nav-link" id="book_now">BOOK NOW</a>
             <a href="{{route('/Customer/Pages/Calendar/guest_calendar')}}" class="nav-link" id="cal">CALENDAR</a>
             <a href="{{route('/Customer/Pages/About/about')}}" class="nav-link" id="about">ABOUT</a>
-            <div class="btn btn-group dropdown-toggle profile-image ml-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="nav-item dropdown  btn btn-group profile-image ml-2">
+                <a data-toggle="dropdown" href="#">
+                    <img src="{{ asset('/images/ohana.png') }}" class="rounded-circle" style="width: 40px; height: 40px;">
+                </a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <a class="btn dropdown-item click_my_account" href="#" id="click_my_account">My Account</a>
+                <div class="dropdown-divider"></div>
+                @auth
+                <!-- <a href="#" class="dropdown-item"> -->
+                    <form action="{{ route('customer_logout') }}" class="logout dropdown-item log_out">
+                        @csrf
+                        <button class="btn btn-light btn_out" type="submit" href="#"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                    </form>
+                <!-- </a> -->
+                @endauth
+                </div>
+            </div>
+            <!-- <div class="btn btn-group dropdown-toggle profile-image ml-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img src="{{ asset('/images/ohana.png') }}" class="rounded-circle" style="width: 40px; height: 40px;">
                 <div class="dropdown-menu">
                     <a class="btn dropdown-item click_my_account" href="#" id="click_my_account">My Account</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>
-            </div>
+            </div> -->
         </div>
-        @auth
+        <!-- @auth
             <form action="{{ route('customer_logout') }}" class="logout">
                 @csrf
                 <button class="btn btn-light" type="submit" href="#"><i class="fas fa-sign-out-alt"></i> Logout</button>
             </form>
-        @endauth
+        @endauth -->
     </div>
 </nav>
 
@@ -130,6 +147,16 @@
     }
 
     .custome a:hover {
+        background-color: #a50f15;
+        color: #fff;
+    }
+
+    .log_out:hover{
+        background-color: #fff!important;
+        color: #fff;
+    }
+
+    .btn_out:hover{
         background-color: #a50f15;
         color: #fff;
     }

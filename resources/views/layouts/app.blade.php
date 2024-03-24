@@ -9,7 +9,7 @@
   @include ('admin_components.head_script')
 
 </head>
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-footer-fixed layout-navbar-fixed">
 <div class="wrapper">
   <!-- Navbar -->
   @include('admin_components.top')

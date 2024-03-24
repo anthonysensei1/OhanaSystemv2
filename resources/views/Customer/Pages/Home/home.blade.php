@@ -41,6 +41,7 @@
 	align-items: center;
     flex-wrap: wrap;
     justify-content: center;
+    width: 100%;
 }
 
 .content-wrapper {
@@ -53,7 +54,7 @@
 }
 
 .words{
-	width: 940px;
+	width: 947px;
     font-weight: bolder;
 	padding: 0 30px;
 }

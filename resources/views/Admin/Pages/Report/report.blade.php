@@ -5,22 +5,9 @@
    <section class="content pt-3">
       <div class="container-fluid">
          <div class="row">
-            <div class="col-lg-6">
-               <div class="small-box bg-gradient-secondary text-center mx-auto p-4">
+            <div class="col-lg-12">
+               <div class="small-box bg-gradient-secondary text-center mx-auto p-3">
                   <h2 class="mb-4">INCOME REPORT</h2>
-                  <button type="button" class="btn btn-info btn-lg" id="income_report">
-                     <i class="fas fa-eye"></i>
-                     View Details
-                  </button>
-               </div>
-            </div>
-            <div class="col-lg-6">
-               <div class="small-box bg-gradient-secondary text-center mx-auto p-4">
-                  <h2 class="mb-4">TOTAL BOOKINGS REPORT</h2>
-                  <button type="button" class="btn btn-info btn-lg" id="total_bookings_report">
-                     <i class="fas fa-eye"></i>
-                     View Details
-                  </button>
                </div>
             </div>
          </div>

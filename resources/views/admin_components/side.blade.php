@@ -1,8 +1,8 @@
 <aside class="main-sidebar sidebar-light-primary elevation-4">
 <!-- Brand Logo -->
     <a href="#" class="brand-link">
-        <img src="{{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Ohana Resort</span>
+        <img src="{{ asset('/images/ohana.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-dark">Ohana Resort</span>
     </a>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -64,17 +64,6 @@
                         </li>
                     @endif
                 @endforeach
-                <li class="nav-item">
-                    @auth
-                        <form action="{{ route('user_logout') }}" class="logout">
-                            @csrf
-                            <button type="submit" class="btn text-white" style="font-size: 1.2rem; background-color: #15577e;">
-                                Logout
-                                <i class="fa fa-door-open"></i>
-                            </button>
-                        </form>
-                    @endauth
-                </li>
             </ul>
         </nav>
     <!-- /.sidebar-menu -->

@@ -29,6 +29,7 @@
 <link rel="stylesheet" href="{{asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
 <!-- Toastr -->
 <link rel="stylesheet" href="{{asset('plugins/toastr/toastr.min.css')}}">
+<link rel="shortcut icon" href="{{asset ('/images/ohana.png') }}">
 
 <style type="text/css">
   #calendar {
@@ -148,7 +149,8 @@
 <!-- Toastr -->
 <script src="{{asset('plugins/toastr/toastr.min.js')}}"></script>
 
-
+<!-- OPTIONAL SCRIPTS -->
+<script src="{{asset('plugins/chart.js/Chart.min.js')}}"></script>
 
 <!-- Page specific script -->
 <script>
@@ -167,6 +169,55 @@
       "responsive": true,
     });
   });
+
+  $(function () {
+  'use strict'
+
+  var ticksStyle = {
+    fontColor: '#495057',
+    fontStyle: 'bold'
+  }
+
+  var mode = 'index'
+  var intersect = true
+
+  var $salesChart = $('#sales-chart')
+  // eslint-disable-next-line no-unused-vars
+  var salesChart = new Chart($salesChart, {
+    type: 'bar',
+    data: {
+      labels: ['JAN','FEB','MARCH','APRIL','JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+      datasets: [
+        {
+          backgroundColor: '#007bff',
+          borderColor: '#007bff',
+          data: [1000, 2000, 3000, 2500, 2700, 2500, 3000, 2500, 2700, 2500, 5000]
+        },
+        {
+          backgroundColor: '#ced4da',
+          borderColor: '#ced4da',
+          data: [700, 1700, 2700, 2000, 1800, 1500, 2000, 3000, 2500, 2700, 2500]
+        }
+      ]
+    },
+    options: {
+      maintainAspectRatio: false,
+      tooltips: {
+        mode: mode,
+        intersect: intersect
+      },
+      hover: {
+        mode: mode,
+        intersect: intersect
+      },
+      legend: {
+        display: false
+      }
+    }
+  })
+})
 </script>
+
+
 
 <!-- ')}} -->
