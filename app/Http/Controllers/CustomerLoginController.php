@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class CustomerLoginController extends Controller
 {
@@ -139,9 +140,75 @@ class CustomerLoginController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+
+        if($request->password != $request->c_password) {
+
+            $renderMessage = [
+                'response' => 0,
+                'message' => 'Password and confirm password is not the same!',
+                'path' => $request->url,
+            ];
+
+            return response()->json($renderMessage);
+
+        }
+
+        if($request->c_number[0] != '0' || $request->c_number[1] != '9' || strlen($request->c_number) != 11) {
+
+            $renderMessage = [
+                'response' => 0,
+                'message' => 'Invalid phone number!',
+                'path' => $request->url,
+            ];
+
+            return response()->json($renderMessage);
+
+        }
+
+        $userCredentials = User::where('username', $request->username)
+                                ->where('id', '!=', $request->id)
+                                ->first();
+
+        if ($userCredentials) {
+            $renderMessage = [
+                'response' => 0,
+                'message' => 'Username is invalid!',
+                'path' => $request->url
+            ];
+
+            return response()->json($renderMessage); 
+        }
+
+        $request->password = password_hash($request->password, PASSWORD_BCRYPT);
+
+
+        // -- OrdinaryUser table --
+        $formData = [
+            'first_name' => $request->firstname,
+            'last_name' => $request->lastname,
+            'address' => $request->address,
+            'c_number' => $request->c_number,
+        ];
+
+        OrdinaryUser::where('id', '=', $request->ordinary_id)->update($formData);
+        
+        $formData = [
+            'username' => $request->username,
+            'password' => $request->password,
+        ];
+
+        User::where('id', '=', $request->id)->update($formData);
+        // -- User table --
+
+        $renderMessage = [
+            'response' => 1,
+            'message' => 'Update success!',
+            'path' => $request->url
+        ];
+
+        return response()->json($renderMessage);
     }
 
     /**
@@ -158,7 +225,8 @@ class CustomerLoginController extends Controller
     public function customer_login(Request $request)
     {
         
-        $userCredentials = User::select('users.id', 'users.username', 'users.password', 'users.user_type',
+        $userCredentials = User::select('users.id', 'users.username', 'users.password', 'users.user_type', 'ordinary_users.first_name'
+                                , 'ordinary_users.last_name', 'ordinary_users.address', 'ordinary_users.c_number', 'ordinary_users.id AS ordinary_id',
                                 DB::raw('CONCAT(ordinary_users.first_name, " ", ordinary_users.last_name) AS ordinary_users'))
                                 ->join('ordinary_users', 'users.user_info_id', '=', 'ordinary_users.id')
                                 ->where('users.user_type', 2)
@@ -171,6 +239,16 @@ class CustomerLoginController extends Controller
             if (auth()->attempt(['username' => $request->username, 'password' => $request->password])) {
                 
                 $request->session()->regenerate();
+
+                $arr_sessions = [
+                    'first_name' => $userCredentials->first_name,
+                    'last_name' => $userCredentials->last_name,
+                    'address' => $userCredentials->address,
+                    'c_number' => $userCredentials->c_number,
+                    'ordinary_id' => $userCredentials->ordinary_id,
+                ];
+
+                Session::put($arr_sessions);
 
                 $renderMessage = [
                     'response' => 1,
