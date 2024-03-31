@@ -75,9 +75,19 @@
                     <div class="labels">Username</div>
                         <input type="text" class="form-control" name="my_username" placeholder="Username" required autocomplete="username">
                     <div class="labels">Password</div>
+                    <div class="input-group">
                         <input type="password" class="form-control" name="my_password" placeholder="Password" required autocomplete="current-password">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary" type="button">Edit</button>
+                        </div>
+                    </div>
                     <div class="labels">Confirm-Password</div>
+                    <div class="input-group">
                         <input type="password" class="form-control" name="my_c_password" placeholder="Confirm Password" required autocomplete="new-password">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary" type="button">Edit</button>
+                        </div>
+                    </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-md btn-outline-primary">Update</button>
                     </div>
