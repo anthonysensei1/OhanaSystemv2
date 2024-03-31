@@ -5,19 +5,19 @@
    <section class="content">
       <div class="container-fluid div_box">
          <div class="boxes">
-            <div class="boxes_text">TOTAL GUESTS</div>
+            <div class="boxes_text">TOTAL GUESTS <br> {{ $guest }}</div>
          </div>
          <div class="boxes">
-            <div class="boxes_text">TOTAL USERS</div>
+            <div class="boxes_text">TOTAL USERS <br> {{ $user }}</div>
          </div>
          <div class="boxes">
-            <div class="boxes_text">PENDING BOOKINGS</div>
+            <div class="boxes_text">PENDING BOOKINGS <br> {{ $pending }}</div>
          </div>
          <div class="boxes">
-            <div class="boxes_text">CONFIRMED BOOKINGS</div>
+            <div class="boxes_text">CONFIRMED BOOKINGS <br> {{ $confirm }}</div>
          </div>
          <div class="boxes">
-            <div class="boxes_text">CANCELLED BOOKINGS</div>
+            <div class="boxes_text">CANCELLED BOOKINGS <br> {{ $cancel }}</div>
          </div>
       </div><!-- /.container-fluid -->
       <div class="graph">
@@ -30,7 +30,7 @@
             <div class="card-body">
                <div class="d-flex">
                <p class="d-flex flex-column">
-                  <span class="text-bold text-lg">P18,230.00</span>
+                  <span class="text-bold text-lg">P {{ number_format($bookings_total) }}</span>
                   <span>Total Bookings Over Time</span>
                </p>
                </div>
@@ -55,6 +55,62 @@
    </section>
    <!-- /.content -->
 </div>
+
+
+
+<script>
+
+   $(function () {
+      'use strict'
+
+      const arrLastYear = {!! json_encode($arr_last_year) !!};
+      const arrCurrentYear = {!! json_encode($arr_current_year) !!};
+
+      var ticksStyle = {
+      fontColor: '#495057',
+      fontStyle: 'bold'
+      }
+
+      var mode = 'index'
+      var intersect = true
+
+      var $salesChart = $('#sales-chart')
+      // eslint-disable-next-line no-unused-vars
+      var salesChart = new Chart($salesChart, {
+      type: 'bar',
+      data: {
+         labels: ['JAN','FEB','MARCH','APRIL','JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+         datasets: [
+            {
+            backgroundColor: '#007bff',
+            borderColor: '#007bff',
+            data: arrCurrentYear
+            },
+            {
+            backgroundColor: '#ced4da',
+            borderColor: '#ced4da',
+            data: arrLastYear
+            }
+         ]
+      },
+      options: {
+         maintainAspectRatio: false,
+         tooltips: {
+            mode: mode,
+            intersect: intersect
+         },
+         hover: {
+            mode: mode,
+            intersect: intersect
+         },
+         legend: {
+            display: false
+         }
+      }
+      })
+   })
+</script>
+
 @endsection
 
 <style scoped>
