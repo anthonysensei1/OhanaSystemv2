@@ -116,6 +116,8 @@ Route::post('/Customer/Pages/Login/sign_in/customer_login',[CustomerLoginControl
 
 
 Route::group(['middleware' => ['web', 'auth', 'ordinary_user']], function () {
+    
+    Route::post('/Customer/Pages/Login/sign_in/update',[CustomerLoginController::class,'update'])->name('customer_update');
 
     Route::post('/Customer/Pages/Login/sign_in/customer_logout', [CustomerLoginController::class, 'customer_logout'])->name('customer_logout');
 

@@ -14,9 +14,9 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right">
             @auth
-                <form action="{{ route('user_logout') }}" class="dropdown-item">
+                <form action="{{ route('user_logout') }}" class="formPost">
                     @csrf
-                    <button class="btn btn-light btn_out" type="submit" href="#"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                    <button class="btn btn-light btn_out" type="submit"><i class="fas fa-sign-out-alt"></i> Logout </button>
                 </form>
             @endauth
             </div>

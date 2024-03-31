@@ -63,31 +63,24 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="#">
+                <form action="{{ route('customer_update') }}" class="formPost">
+                    <input type="text" class="form-control" name="url" value="{{ url()->current() }}" readonly hidden>
+                    <input type="text" class="form-control" name="id" value="{{ auth()->user()->id }}" readonly hidden>
+                    <input type="text" class="form-control" name="ordinary_id" value="{{ session('ordinary_id') }}" readonly hidden>
                     <div class="labels">Firstname</div>
-                        <input type="text" class="form-control" name="my_firstname" placeholder="Firstname" autofocus required autocomplete="given-name">
+                        <input type="text" class="form-control" name="firstname" placeholder="Firstname" autofocus required value="{{ session('first_name') }}" autocomplete="given-name">
                     <div class="labels">Lastname</div>
-                        <input type="text" class="form-control" name="my_lastname" placeholder="Lastname" required autocomplete="family-name">
+                        <input type="text" class="form-control" name="lastname" placeholder="Lastname" required value="{{ session('last_name') }}" autocomplete="family-name">
                     <div class="labels">Address</div>
-                        <input type="text" class="form-control" name="my_address" placeholder="Address" required autocomplete="address-line1">
+                        <input type="text" class="form-control" name="address" placeholder="Address" required value="{{ session('address') }}" autocomplete="address-line1">
                     <div class="labels">Contact Number</div>
-                        <input type="tel" class="form-control" name="my_c_number" placeholder="Contact Number" required autocomplete="tel">
+                        <input type="number" class="form-control" name="c_number" placeholder="Contact Number" required value="{{ session('c_number') }}" autocomplete="tel">
                     <div class="labels">Username</div>
-                        <input type="text" class="form-control" name="my_username" placeholder="Username" required autocomplete="username">
+                        <input type="text" class="form-control" name="username" placeholder="Username" required value="{{ auth()->user()->username }}" autocomplete="username">
                     <div class="labels">Password</div>
-                    <div class="input-group">
-                        <input type="password" class="form-control" name="my_password" placeholder="Password" required autocomplete="current-password">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-primary" type="button">Edit</button>
-                        </div>
-                    </div>
+                        <input type="password" class="form-control" name="password" placeholder="Password" required value="{{ auth()->user()->password }}" autocomplete="current-password">
                     <div class="labels">Confirm-Password</div>
-                    <div class="input-group">
-                        <input type="password" class="form-control" name="my_c_password" placeholder="Confirm Password" required autocomplete="new-password">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-primary" type="button">Edit</button>
-                        </div>
-                    </div>
+                        <input type="password" class="form-control" name="c_password" placeholder="Confirm Password" required value="{{ auth()->user()->password }}" autocomplete="new-password">
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-md btn-outline-primary">Update</button>
                     </div>
