@@ -29,7 +29,7 @@
                         </div>
                         <div class="col-md-12 mt-2">
                            <div class="input-group justify-content-end">
-                                 <input type="text" class="form-control" placeholder="Search...">
+                                 <input type="text" class="form-control" placeholder="Search..." id="searchInput">
                                  <div class="input-group-append">
                                     <span class="input-group-text">
                                        <i class="fas fa-search"></i>
@@ -41,7 +41,7 @@
 
                   </div>
                   <div class="card-body">
-                     <table class="table table-bordered table-striped">
+                     <table class="table table-bordered table-striped" id="bookingTable">
                         <thead>
                            <tr>
                               <th>Month</th>
@@ -49,10 +49,15 @@
                            </tr>
                         </thead>
                         <tbody>
-                           <tr>
-                              <td>February,2024</td>
-                              <td>P15,000</td>
-                           </tr>
+                           @foreach ($bookings as $booking)
+                              @php
+                                  $date = new DateTime($booking->book_end_date);
+                              @endphp
+                              <tr>
+                                 <td>{{ $date->format('F, Y'); }}</td>
+                                 <td>P {{ number_format($booking->total) }}</td>
+                              </tr>
+                           @endforeach
                         </tbody>
                      </table>
                      <label class="mt-2" for="total_income">Total Income: </label>
@@ -69,9 +74,56 @@
 </script>
 
 <script>
-  $(function () {
-    //Date range picker
-    $('#reservation').daterangepicker()
-  })
+   $(document).ready(function() {
+      $('#reservation').daterangepicker({
+         startDate: moment().startOf('month'),
+         endDate: moment().endOf('month'),
+         locale: {
+               format: 'MMMM, YYYY'
+         }
+      }, function(start, end, label) {
+         var startMonth = start.month();
+         var startYear = start.year();
+         var endMonth = end.month();
+         var endYear = end.year();
+
+         filterTable(startMonth, startYear, endMonth, endYear);
+      });
+
+      function filterTable(startMonth, startYear, endMonth, endYear) {
+         var tableRows = $('#bookingTable tbody tr');
+         tableRows.hide().filter(function() {
+               var rowDate = moment($(this).find('td:first').text(), 'MMMM, YYYY');
+               var rowMonth = rowDate.month();
+               var rowYear = rowDate.year();
+
+               return (rowYear > startYear || (rowYear === startYear && rowMonth >= startMonth)) &&
+                  (rowYear < endYear || (rowYear === endYear && rowMonth <= endMonth));
+         }).show();
+      }
+   });
+
+  document.getElementById('searchInput').addEventListener('input', function() {
+        var input = this.value.trim().toLowerCase();
+        var table = document.getElementById('bookingTable');
+        var rows = table.getElementsByTagName('tr');
+
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName('td');
+            
+            if (cells.length > 0) {
+                var dateCell = cells[0]; 
+                var dateParts = dateCell.innerText.split(', ');
+                var month = dateParts[0];
+                var year = dateParts[1];
+
+                if ((month.toLowerCase().indexOf(input) > -1 || year.toLowerCase().indexOf(input) > -1)) {
+                    rows[i].style.display = '';
+                } else {
+                    rows[i].style.display = 'none';
+                }
+            }
+        }
+    });
 </script>
 @endsection
