@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bookings;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
@@ -13,7 +15,13 @@ class ReportController extends Controller
      */
     public function index()
     {
-        return view('/Admin/Pages/Report/report');
+        $renderData = [
+            'bookings' => Bookings::select('book_end_date', DB::raw('SUM(payment) as total'))
+                        ->groupBy('book_end_date')
+                        ->get(),
+        ];
+
+        return view('/Admin/Pages/Report/report', $renderData);
     }
 
     /**
