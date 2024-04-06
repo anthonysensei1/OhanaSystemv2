@@ -5,19 +5,24 @@
    <section class="content">
       <div class="container-fluid div_box">
          <div class="boxes">
-            <div class="boxes_text">TOTAL GUESTS <br> {{ $guest }}</div>
+            <div class="boxes_text">TOTAL GUESTS</div>
+            <div class="counts">( {{ $guest }} )</div>
          </div>
          <div class="boxes">
-            <div class="boxes_text">TOTAL USERS <br> {{ $user }}</div>
+            <div class="boxes_text">TOTAL USERS</div>
+            <div class="counts">( {{ $user }} )</div>
          </div>
          <div class="boxes">
-            <div class="boxes_text">PENDING BOOKINGS <br> {{ $pending }}</div>
+            <div class="boxes_text">PENDING BOOKINGS</div>
+            <div class="counts">( {{ $pending }} )</div>
          </div>
          <div class="boxes">
-            <div class="boxes_text">CONFIRMED BOOKINGS <br> {{ $confirm }}</div>
+            <div class="boxes_text">CONFIRMED BOOKINGS</div>
+            <div class="counts">( {{ $confirm }} )</div>
          </div>
          <div class="boxes">
-            <div class="boxes_text">CANCELLED BOOKINGS <br> {{ $cancel }}</div>
+            <div class="boxes_text">CANCELLED BOOKINGS</div>
+            <div class="counts">( {{ $cancel }} )</div>
          </div>
       </div><!-- /.container-fluid -->
       <div class="graph">
@@ -140,6 +145,12 @@
       transform: scale(1.1);
    }
    .boxes_text{
+      font-size: 30px;
+      font-weight: 900;
+      color: #fff;
+   }
+
+   .counts{
       font-size: 20px;
       font-weight: 900;
       color: #fff;
