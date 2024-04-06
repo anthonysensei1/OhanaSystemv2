@@ -1,6 +1,6 @@
 @extends('layouts.app_customer')
 @section('content')
-<div class="content-wrapper">
+<div class="home_wrapper">
     <div class="content">
         <div class="words">
 			<p>Steps into serenity:</p>
@@ -29,7 +29,7 @@
 }
 .logo .ohana img{
 	background: rgba(0, 0, 0, .4);
-	backdrop-filter: blur(5px);
+	/* backdrop-filter: blur(5px); */
 	width: 100%;
 	height: auto;
     background-repeat: no-repeat;
@@ -41,11 +41,13 @@
 	align-items: center;
     flex-wrap: wrap;
     justify-content: center;
-    width: 100%;
+    width: 200%;
 }
 
-.content-wrapper {
-    background: rgba(0, 0, 0, .4);
+.home_wrapper {
+    background-image:url('/images/ohanabg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
     color: #fff;
     font-size: 2rem;
     display: flex;
@@ -54,32 +56,24 @@
 }
 
 .words{
-	width: 947px;
-    font-weight: bolder;
-	padding: 0 30px;
-}
+        font-weight: bolder;
+    }
 
-.words:nth-child(1){
-    font-size:5rem;
-}
-.words:nth-child(2){
-    font-size:5rem;
-}
-.words:nth-child(3){
-    font-size:4rem;
-	text-align:center;
-	border-radius: 5px;
-	background-color: #a50f15;
-}
+    .words:nth-child(1){
+        font-size:5rem;
+    }
+    .words:nth-child(2){
+        font-size:5rem;
+    }
+    .words:nth-child(3){
+        font-size:3rem;
+        background-color: #a50f15;
+        text-align: center;
+        border-radius: 5px;
+        /* width: 1100px; */
+    }
 
 @media screen and (max-width: 1740px){
-
-    .content-wrapper{
-        flex-direction: column;
-    }
-    .sign_in_up{
-        width: 40%;
-    }
 
     .words:nth-child(1){
     font-size: 50px;
@@ -87,16 +81,26 @@
     text-align:center;
 }
 .words:nth-child(2){
-    font-size:30px;
+    font-size:50px;
     margin-left: 0px;
     text-align:center;
 }
 .words:nth-child(3){
-    font-size:30px;
+    font-size:50px;
     margin-left: 0px;
     text-align:center;
     color: #fff;
     background-color: #a50f15;
+}
+
+@media screen and (max-width: 1470px){
+    .home_wrapper{
+        display: flex;
+        justify-content: center;
+        flex-direction: row-reverse;
+        flex-wrap: wrap;
+        align-content: flex-end;
+    }
 }
 
 
@@ -107,13 +111,6 @@
     }
     .navar_customized{
         display:none;
-    }
-}
-
-
-@media screen and (max-width: 520px){
-    .sign_in_up{
-        width: 350px;
     }
 }
 </style>

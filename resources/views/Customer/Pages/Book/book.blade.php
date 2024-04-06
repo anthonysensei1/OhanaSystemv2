@@ -8,7 +8,7 @@
 				<div class="col-lg-2"></div>
 				<div class="col-lg-8">
 					<div class="card m-4">
-						<div class="card-header bg-gradient-info">
+						<div class="card-header card-header-color">
 							<h4 class="text-center text-bold">EVENT HALL</h4>
 						</div>
 						<div class="card-body">
@@ -25,7 +25,7 @@
 							</div>
 							<div class="row">
 								<div class="col-sm-12 d-flex justify-content-end">
-									<button class="btn btn-md btn-outline-success" data-toggle="modal" data-target="#book_now_d" onclick="edit({{ $function_hall['function_hall_rate'] ?? '' }}, {{ $function_hall['id'] ?? '' }}, 'hall')">
+									<button class="btn btn-md card-header-color" data-toggle="modal" data-target="#book_now_d" onclick="edit({{ $function_hall['function_hall_rate'] ?? '' }}, {{ $function_hall['id'] ?? '' }}, 'hall')">
 										<i class="fas fa-tag"></i> 
 										Book Now!
 									</button>
@@ -56,7 +56,7 @@
 							</div>                      
 							<div class="row">
 								<div class="col-sm-12 d-flex justify-content-end">
-									<button class="btn btn-md btn-outline-success" data-toggle="modal" data-target="#book_now_d" onclick="edit({{ $room['room_rate'] }}, {{ $room['id'] }}, 'room')">
+									<button class="btn btn-md card-header-color" data-toggle="modal" data-target="#book_now_d" onclick="edit({{ $room['room_rate'] }}, {{ $room['id'] }}, 'room')">
 										<i class="fas fa-tag"></i> 
 										Book Now!
 									</button>
@@ -112,7 +112,7 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-outline-success"><i class="fas fa-tag"></i>  Book! </button>
+						<button type="submit" class="btn card-header-color"><i class="fas fa-tag"></i>  Book! </button>
 					</div>
 				</form>
 			</div>

@@ -15,13 +15,13 @@
                         </div>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="{{asset ('../images/1.png') }}" class="d-block w-100" >
+                                <img src="{{asset ('../images/1.png') }}" class="d-block w-100">
                             </div>
                             <div class="carousel-item">
-                                <img src="{{asset ('/images/3.png') }}" class="d-block w-100" >
+                                <img src="{{asset ('/images/3.png') }}" class="d-block w-100">
                             </div>
                             <div class="carousel-item">
-                                <img src="{{asset ('/images/5.png') }}" class="d-block w-100" >
+                                <img src="{{asset ('/images/5.png') }}" class="d-block w-100">
                             </div>
                             <div class="carousel-item">
                                 <img src="{{asset ('/images/6.png') }}" class="d-block w-100">
@@ -121,23 +121,24 @@
 </script>
 
 <style>
-    .custom-carousel{
-        border: 2px solid #000;
-        padding: 0;
-        background: lightgrey;
-        transition: none;
+    .carousel-inner img{
+        height: 830px;
+    }
+    .carousel-indicators button{
+        background-color: #fff!important;
     }
 
     .head_desc{
         display: flex;
         justify-content: center;
         align-items: center;
-        background: #59cfff;
+        background: #a50f15;
         margin: 0 auto;
         padding: 0;
         border-radius: 5px;
-        border:1px solid #000;
+        border:2px solid #000;
         width: 100%;
+        color: #fff;
     }
     .desc_contact_row{
         width: 102%;
@@ -152,15 +153,23 @@
     }
 
     .desc_cont{
-        border:1px solid #000;
+        border:2px solid #000;
         border-radius: 2px;
         padding: .2rem;
         margin-top: 10px;
+        background-color: #fff;
     }
     .desc_cont .p1 p{
         text-align: justify;
         margin: .8rem;
         font-size: 1.1rem;  
+    }
+
+    .contact_cont{
+        border:2px solid #000;
+        border-radius: 2px;
+        margin-top: 10px;
+        background-color: #fff;
     }
 
     .exclusive_offer{

@@ -10,46 +10,34 @@
             </div>
             </div>
         </a>
-        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-        </button> -->
-        <div class="custome">
-            <a href="{{route('/Customer/Pages/Home/home')}}" class="nav-link" id="home">HOME</a>
-            <a href="{{route('/Customer/Pages/Book/book')}}" class="nav-link" id="book_now">BOOK NOW</a>
-            <a href="{{route('/Customer/Pages/Calendar/guest_calendar')}}" class="nav-link" id="cal">CALENDAR</a>
-            <a href="{{route('/Customer/Pages/About/about')}}" class="nav-link" id="about">ABOUT</a>
-            <div class="nav-item dropdown  btn btn-group profile-image ml-2">
-                <a data-toggle="dropdown" href="#">
-                    <img src="{{ asset('/images/ohana.png') }}" class="rounded-circle" style="width: 40px; height: 40px;">
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <a class="btn dropdown-item click_my_account" href="#" id="click_my_account">My Account</a>
-                <div class="dropdown-divider"></div>
-                @auth
-                <!-- <a href="#" class="dropdown-item"> -->
-                    <form action="{{ route('customer_logout') }}" class="logout dropdown-item log_out">
-                        @csrf
-                        <button class="btn btn-light btn_out" type="submit" href="#"><i class="fas fa-sign-out-alt"></i> Logout</button>
-                    </form>
-                <!-- </a> -->
-                @endauth
-                </div>
-            </div>
-            <!-- <div class="btn btn-group dropdown-toggle profile-image ml-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src="{{ asset('/images/ohana.png') }}" class="rounded-circle" style="width: 40px; height: 40px;">
-                <div class="dropdown-menu">
-                    <a class="btn dropdown-item click_my_account" href="#" id="click_my_account">My Account</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                </div>
-            </div> -->
+            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse order-3 custome" id="navbarCollapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a href="{{route('/Customer/Pages/Home/home')}}" class="nav-link" id="home">HOME</a></li>
+                <li class="nav-item"><a href="{{route('/Customer/Pages/Book/book')}}" class="nav-link" id="book_now">BOOK NOW</a></li>
+                <li class="nav-item"><a href="{{route('/Customer/Pages/Calendar/guest_calendar')}}" class="nav-link" id="cal">CALENDAR</a></li>
+                <li class="nav-item"><a href="{{route('/Customer/Pages/About/about')}}" class="nav-link" id="about">ABOUT</a></li>
+                <li class="nav-item dropdown  btn btn-group-lo profile-image ml-2">
+                    <a data-toggle="dropdown" href="#">
+                        <img src="{{ asset('/images/ohana.png') }}" class="rounded-circle" style="width: 40px; height: 40px;">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <a class="btn dropdown-item click_my_account" href="#" id="click_my_account">My Account</a>
+                        <div class="dropdown-divider"></div>
+                        @auth
+                            <form action="{{ route('customer_logout') }}" class="logout dropdown-item log_out">
+                                @csrf
+                                <button class="btn btn-light btn_out" type="submit" href="#"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                            </form>
+                        @endauth
+                    </div>
+                </li>
+            </ul>
         </div>
-        <!-- @auth
-            <form action="{{ route('customer_logout') }}" class="logout">
-                @csrf
-                <button class="btn btn-light" type="submit" href="#"><i class="fas fa-sign-out-alt"></i> Logout</button>
-            </form>
-        @endauth -->
     </div>
 </nav>
 
@@ -130,9 +118,10 @@
     .c_active{
         border-radius: 50px;
         background-color: #a50f15;
+        color: #fff;
     }
 
-    .navbar-nav1  .nav-item .nav-link {
+    .navbar-nav  .nav-item .nav-link {
         color: #fff !important;
         font-weight: bold;
     }
@@ -209,6 +198,17 @@
 
     }
     @media screen and (max-width:767px){
+        .btn-group-lo{
+            position: relative;
+            vertical-align: middle;
+        }
+        
+        .navbar-collapse {
+            display: none !important;
+        }
+        .navbar-collapse.show {
+            display: block !important;
+        }
         
         .container_fluid_767 .navbar-nav{
             display: flex;
@@ -218,22 +218,58 @@
         }
 
         .c_active{
-            background: #90EE90!important;
+            background: #a50f15!important;
             border-radius: 5px;
             width: 100%;
-            color: #000!important;
         }
 
-        .navbar-nav1  .nav-item .nav-link {
+        .navbar-nav  .nav-item .nav-link {
             color: #fff !important;
             font-weight: bold;
         }
 
+
+        /* Style for the hamburger icon */
+        .navbar-toggler-icon {
+            width: 30px; /* Adjust the size as needed */
+            height: 3px; /* Adjust the size as needed */
+            background-color: #fff; /* Set the color to white */
+            display: block;
+            transition: background-color 0.3s;
+            margin: 5px 0px 5px 0px;
+        }
+
+        /* Style for the hamburger icon when toggled */
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+            background-color: #fff; /* Set the color to white when toggled */
+        }
+
+        /* Style for the hamburger icon when focused */
+        .navbar-toggler:focus .navbar-toggler-icon {
+            outline: none; /* Remove the outline when focused */
+        }
+
     }
+    
+@media screen and (max-width: 424px){
+    .ohana_text {
+        font-size: 6vw;
+        font-weight: bolder;
+        letter-spacing: 8px;
+        color: #fff;
+        display: flex;
+    }
+
+    .single_letter{
+        font-size: 8vw;
+    }
+}
+
+    
 </style>
 
 
-<script>
+<script scoped>
   $('.click_my_account').click(function(){
     $('#my_account').modal('show');
 });

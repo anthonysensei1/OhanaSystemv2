@@ -10,7 +10,7 @@
 
 <style scoped>
     .main-footer{
-		background: rgba(0, 0, 0, .8);
+        background: rgba(0, 0, 0, .9);
         backdrop-filter: blur(30px);
 		color: #fff;
         border-top:3px  solid #fff;

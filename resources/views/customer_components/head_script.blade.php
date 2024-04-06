@@ -39,21 +39,27 @@ rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3
 <link rel="stylesheet" href="{{asset('plugins/toastr/toastr.min.css')}}">
 
 
-<style scoped>
-  body {
+<style>
+  /* body {
     background-image:url('/images/ohanabg.png');
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
+} */
+
+.content-wrapper {
+    background-image:url('/images/ohanabg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
   .navbar-nav .nav-item .nav-link {
-      color: #333 !important; /* Set the text color to dark */
-      font-weight: bold; /* Set the font weight to bold */
+      color: #333 !important;
+      font-weight: bold;
   }
 
   #calendar {
     width: 100%;
-    margin: 0 auto; /* Center the calendar horizontally */
+    margin: 0 auto;
   }
 
   .hrColor{
@@ -105,14 +111,13 @@ rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3
     text-decoration: none;
   }
 
-  /* For Chrome, Safari, and Opera */
+
   input[type=number]::-webkit-inner-spin-button,
   input[type=number]::-webkit-outer-spin-button {
       -webkit-appearance: none;
       margin: 0;
   }
 
-  /* For Firefox */
   input[type=number] {
       -moz-appearance: textfield;
   }
