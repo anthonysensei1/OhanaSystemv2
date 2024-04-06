@@ -143,7 +143,7 @@
         background-color: #a50f15;
         text-align: center;
         border-radius: 5px;
-        width: 1100px;
+        /* width: 1100px; */
     }
 
     .main-footer{
