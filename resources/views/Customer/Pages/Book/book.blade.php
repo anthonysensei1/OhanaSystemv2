@@ -55,7 +55,7 @@
 									<img class="img_fix_size" src="{{ asset('images/' . $room['room_image']) }}"><!-- This should not be in circular form-->
 								</div>
 								<h5 class="text-center p-3">{{ $room['room_name'] }}</h5>
-								<h4><label class="m-2">RATE: {{ $room['room_rate'] }}/night</label></h4>
+								<h4 class="m-2">RATE: {{ $room['room_rate'] }}/night</h4>
 							</div>                      
 							<div class="row">
 								<div class="col-sm-12 d-flex justify-content-end">

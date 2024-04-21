@@ -66,9 +66,19 @@
                     <div class="labels">Username</div>
                         <input type="text" class="form-control" name="username" placeholder="Username" required value="{{ auth()->user()->username }}" autocomplete="username">
                     <div class="labels">Password</div>
-                        <input type="password" class="form-control" name="password" placeholder="Password" required value="{{ auth()->user()->password }}" autocomplete="current-password">
+                    <div class="input-group input-group-md">
+                        <input type="password" class="form-control" name="password" placeholder="Password" required value="{{ auth()->user()->password }}" autocomplete="current-password" disabled id="passwordField">
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-info" id="up_pass" onclick="togglePasswordField()"> <i class="fas fa-edit"></i> </button>
+                        </span>
+                    </div>
                     <div class="labels">Confirm-Password</div>
-                        <input type="password" class="form-control" name="c_password" placeholder="Confirm Password" required value="{{ auth()->user()->password }}" autocomplete="new-password">
+                    <div class="input-group input-group-md">
+                        <input type="password" class="form-control" name="c_password" placeholder="Confirm Password" required value="{{ auth()->user()->password }}" autocomplete="new-password" disabled id="cPasswordField">
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-info" id="up_cpass" onclick="toggleConfirmPasswordField()"> <i class="fas fa-edit"></i> </button>
+                        </span>
+                    </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-md btn-outline-primary">Update</button>
                     </div>
@@ -270,12 +280,21 @@
 
 
 <script scoped>
-  $('.click_my_account').click(function(){
-    $('#my_account').modal('show');
-});
+    $('.click_my_account').click(function(){
+        $('#my_account').modal('show');
+    });
 
-$('.close').click(function(){
-    $('#my_account').modal('hide');
-});
+    $('.close').click(function(){
+        $('#my_account').modal('hide');
+    });
 
+    function togglePasswordField() {
+    var passwordField = document.getElementById("passwordField");
+    passwordField.disabled = !passwordField.disabled;
+}
+
+function toggleConfirmPasswordField() {
+    var cPasswordField = document.getElementById("cPasswordField");
+    cPasswordField.disabled = !cPasswordField.disabled;
+}
 </script>

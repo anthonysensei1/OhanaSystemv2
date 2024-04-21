@@ -238,6 +238,12 @@
 
         }
 
+        @media screen and (max-width:365px){
+            .ohana_text{
+                font-size: 18px;
+            }
+        }
+
     /* For Chrome, Safari, and Opera */
     input[type=number]::-webkit-inner-spin-button,
     input[type=number]::-webkit-outer-spin-button {
@@ -344,7 +350,7 @@
                     <h1>Login</h1>
                     <input type="text" name="input_from" id="input_from" value="2" readonly hidden>
                     <div class="input-box">
-                        <input type="text" placeholder="Username" name="username" id="s_username" required autofocus>
+                        <input type="text" placeholder="Username" name="username" id="s_username" required autofocus autocomplete="username">
                         <i class='bx bxs-user icons'></i>
                     </div>
                     <div class="input-box">
@@ -387,10 +393,9 @@
                                 <div class="modal-footer mod_bot">
                                     <div class="tac">
                                         <input type="checkbox" id="myCheckbox" name="myCheckbox" value="1" onchange="toggleSubmit()">
-                                        <label for="myCheckbox">
+                                        <label for="myCheckbox"></label>
                                             I agree to the 
                                             <a href="#" class="tac_pop" id="termsLink" data-toggle="modal" data-target="#termsandconditions">terms and conditions</a>.
-                                        </label>
                                     </div>
                                     <div class="reg_sub">
                                         <button type="submit" id="submitButton" class="btn btn-md btn-outline-success" disabled>Submit</button>

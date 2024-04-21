@@ -71,27 +71,30 @@
             @foreach ($bookings as $booking)
               @php
                 $book_title = '';
-                $color = '';
+                $backgroundColor = '';
+                $textColor = '';
                 switch ($booking->book_from) {
                   case "hall":
-                    $book_title = $booking->function_hall_description . " ( ";
-                    $book_title .= $booking->book_start_date . " - ";
-                    $book_title .= $booking->book_end_date . " ) ";
+                    $book_title = $booking->function_hall_description;
                     break;
                   case "room":
+                    $book_title .= "Room " . $booking->room_no. " - ";
                     $book_title .= $booking->room_name. " ";
-                    $book_title .= $booking->room_no. " ";
-                    $book_title .= $booking->room_type . " ( ";
-                    $book_title .= $booking->book_start_date . " - ";
-                    $book_title .= $booking->book_end_date . " ) ";
+                    $book_title .= "(" .$booking->room_type. ")" ;
                     break;
                 }
                 switch ($booking->status) {
-                  case 1:
-                      $color = '#c7dd0e';
-                    break;
                   case 0:
-                      $color = '#00a65a';
+                      $backgroundColor = '#a60700';
+                      $textColor = '#fff';
+                    break;
+                  case 1:
+                      $backgroundColor = '#ffff00';
+                      $textColor = '#000';
+                    break;
+                  case 2:
+                      $backgroundColor = '#007405';
+                      $textColor = '#fff';
                     break;
                 }
                 $booking->book_start_date = explode('-',$booking->book_start_date);
@@ -101,8 +104,9 @@
                   title          : '{{ $book_title }}',
                   start          : new Date('{{ $booking->book_start_date["0"] }}', '{{ $booking->book_start_date["1"] - 1  }}', '{{ $booking->book_start_date["2"] }}'),
                   end            : new Date('{{ $booking->book_end_date["0"] }}', '{{ $booking->book_end_date["1"] - 1  }}', '{{ $booking->book_end_date["2"] + 1}}'),
-                  backgroundColor: '{{ $color }}', //red
-                  borderColor    : '{{ $color }}', //red
+                  backgroundColor: '{{ $backgroundColor }}',
+                  textColor      : '{{ $textColor}}',
+                  borderColor    : '{{ $backgroundColor }}',
                   allDay         : true
                 },
             @endforeach
