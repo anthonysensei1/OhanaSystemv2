@@ -55,17 +55,17 @@
                                  @endif
                                  <td>{{ $booking_time[1] . " | " . $book_start_date }}</td>
                                  <td>{{ $booking_time[1] . " | " . $book_end_date }}</td>
-                                 <td>{{ $booking->payment_method < 1 ? 'CASH' : 'GCASH ( ' . $booking->reference_num . ' ) '; }} </td>
+                                 <td>{{ $booking->payment_method < 1 ? 'CASH' : 'GCASH ( ' . $booking->reference_num . ' ) '}} </td>
                                  <td>P{{ number_format($booking->payment) }}</td>
                                  @if ($booking->status == 1)
                                  <td class="text-center">
-                                    <form action="{{ route('pending_booking_update') }}" class="formPost">
+                                    <form action="{{route('pending_booking_update') }}" class="formPost">
                                        <input class="form-control" type="text" name="id" value="{{ $booking->id }}" readonly hidden>
                                        <button type="submit" class="btn btn-success btn-sm">
                                           Confirm <!-- Once it confirmed, the label of button change into Confirmed and it will become disabled and it will disappear in Pending Bookings Function -->
                                        </button>
                                     </form>
-                                    <form action="{{ route('pending_booking_destroy') }}" class="formPost">
+                                    <form action="{{route('pending_booking_destroy') }}" class="formPost">
                                        <input class="form-control" type="text" name="id" value="{{ $booking->id }}" readonly hidden>
                                        <button type="submit" class="btn btn-danger btn-sm">
                                           Cancel <!-- Once it cancelled, it will disappear in Pending Bookings Function -->

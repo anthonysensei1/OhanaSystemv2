@@ -54,7 +54,7 @@
                                   $date = new DateTime($booking->book_end_date);
                               @endphp
                               <tr>
-                                 <td>{{ $date->format('F, Y'); }}</td>
+                                 <td>{{ $date->format('F, Y')}}</td>
                                  <td>P {{ number_format($booking->total) }}</td>
                               </tr>
                            @endforeach

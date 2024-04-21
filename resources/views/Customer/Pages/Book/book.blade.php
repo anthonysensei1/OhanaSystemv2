@@ -3,40 +3,43 @@
 <div class="content-wrapper">
 	<div class="content">
 		<div class="container-fluid">
-			<!-- Event Hall Section -->
-			<div class="row">
-				<div class="col-lg-2"></div>
-				<div class="col-lg-8">
-					<div class="card m-4">
-						<div class="card-header card-header-color">
-							<h4 class="text-center text-bold">EVENT HALL</h4>
-						</div>
-						<div class="card-body">
-							<div class="row">
-								<div class="col-sm-12">
-									<div class="small-box">
-										<div style="display: flex; justify-content: center;">
-											<img class="img_fix_size_f" src="{{ isset($function_hall['function_hall_image']) ? asset('functional_hall_images/' . $function_hall['function_hall_image']) : asset('dist/img/default.png')}}"><!-- This should not be in circular form-->
-										</div>
-										<h5 class="text-center p-3">{{ $function_hall['function_hall_description'] ?? ''}}</h5>
-										<div><h4 class="m-2">( Per Day ) RATE: P{{ $function_hall['function_hall_rate'] ?? ''}}</h4></div>
-									</div>                      
-								</div>
+			@if (!empty($function_hall))
+				<!-- Event Hall Section -->
+				<div class="row">
+					<div class="col-lg-2"></div>
+					<div class="col-lg-8">
+						<div class="card m-4">
+							<div class="card-header card-header-color">
+								<h4 class="text-center text-bold">EVENT HALL</h4>
 							</div>
-							<div class="row">
-								<div class="col-sm-12 d-flex justify-content-end">
-									<button class="btn btn-md card-header-color" data-toggle="modal" data-target="#book_now_d" onclick="edit({{ $function_hall['function_hall_rate'] ?? '' }}, {{ $function_hall['id'] ?? '' }}, 'hall')">
-										<i class="fas fa-tag"></i> 
-										Book Now!
-									</button>
+							<div class="card-body">
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="small-box">
+											<div style="display: flex; justify-content: center;">
+												<img class="img_fix_size_f" src="{{ isset($function_hall['function_hall_image']) ? asset('functional_hall_images/' . $function_hall['function_hall_image']) : asset('dist/img/default.png')}}">
+											</div>
+											<h5 class="text-center p-3">{{ $function_hall['function_hall_description'] ?? ''}}</h5>
+											<div><h4 class="m-2">( Per Day ) RATE: P{{ $function_hall['function_hall_rate'] ?? ''}}</h4></div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12 d-flex justify-content-end">
+										<button class="btn btn-md card-header-color" data-toggle="modal" data-target="#book_now_d" onclick="edit({{ $function_hall['function_hall_rate'] ?? '' }}, {{ $function_hall['id'] ?? '' }}, 'hall')">
+											<i class="fas fa-tag"></i> 
+											Book Now!
+										</button>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="col-lg-2"></div>
 				</div>
-			</div>
-			<!-- End Event Hall Section -->
+				<!-- End Event Hall Section -->
+			@endif
+
 
 			<!-- Dislay Room in this Section -->
 			<div class="row">
@@ -77,7 +80,7 @@
 <div class="modal fade" id="book_now_d">
    <div class="modal-dialog modal-dialog-info modal-dialog-centered">
       <div class="modal-content">
-			<div class="modal-header bg-gradient-success">
+			<div class="modal-header card-header-color">
 			
 				<h4 class="modal-title text-center"> <i class="fas fa-tag"></i> BOOK NOW!</h4>
 			</div>
@@ -136,7 +139,7 @@
 			let div_payment = '<input type="number" class="form-control mb-3" id="payment" name="payment" placeholder="Payment" required>';
          	$('#div_payment').html(div_payment);
 		} else {
-			let div_payment = '<input type="text" class="form-control mb-3" id="reference_num" name="reference_num" placeholder="Reference Number" required><input type="number" class="form-control mb-3" id="payment" name="payment" placeholder="Payment" required>';
+			let div_payment = '<img src="{{asset('/images/qrcode.jpg')}}" class="rqcode_image mb-2"><img><input type="text" class="form-control mb-3" id="reference_num" name="reference_num" placeholder="Reference Number" required><input type="number" class="form-control mb-3" id="payment" name="payment" placeholder="Payment" required>';
          	$('#div_payment').html(div_payment);
 		}
 	});
@@ -158,6 +161,10 @@
 </script>
 
 <style scoped>
+	.rqcode_image{
+		width:450px;
+		height: 450px;
+	}
    .divide_box{
       width: 100%;
       height: auto;

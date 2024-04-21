@@ -62,7 +62,7 @@
                                  @endif
                                  <td>{{ $booking_time[1] . " | " . $book_start_date }}</td>
                                  <td>{{ $booking_time[1] . " | " . $book_end_date }}</td>
-                                 <td>{{ $booking->payment_method < 1 ? 'CASH' : 'GCASH ( ' . $booking->reference_num . ' ) '; }} </td>
+                                 <td>{{ $booking->payment_method < 1 ? 'CASH' : 'GCASH ( ' . $booking->reference_num . ' ) '}} </td>
                                  <td>P{{ number_format($booking->payment) }}</td>
                                  <td class="text-center">
                                     <button type="button" class="btn btn-danger btn-sm" disabled>

@@ -56,16 +56,21 @@
                                     <h6>Contact No.: {{ $booking->c_number }}</h6>
                                  </td>
                                  @if ($booking->book_from == 'room')
-                                    <td>{{ $booking->room_name . " " . $booking->room_no . " ( " . $booking->room_type  . " )" }}</td>
+                                    <td>{{ "Room " . $booking->room_no . " - " . $booking->room_name . " ( " . $booking->room_type  . " )" }}</td>
                                  @else
                                     <td>{{ $booking->function_hall_description}}</td>
                                  @endif
                                  <td>{{ $booking_time[1] . " | " . $book_start_date }}</td>
                                  <td>{{ $booking_time[1] . " | " . $book_end_date }}</td>
-                                 <td>{{ $booking->payment_method < 1 ? 'CASH' : 'GCASH ( ' . $booking->reference_num . ' ) '; }} </td>
+                                 <td>{{ $booking->payment_method < 1 ? 'CASH' : 'GCASH ( ' . $booking->reference_num . ' ) '}} </td>
                                  <td>P{{ number_format($booking->payment) }}</td>
                                  <td class="text-center">
+                                    <button type="button" class="btn btn-success btn-sm">
+                                       <i class="fas fa-envelope"></i>
+                                       Send SMS
+                                    </button>
                                     <button type="button" class="btn btn-success btn-sm" disabled>
+                                    <i class="fas fa-check"></i>
                                        Confirmed
                                     </button>
                                  </td>

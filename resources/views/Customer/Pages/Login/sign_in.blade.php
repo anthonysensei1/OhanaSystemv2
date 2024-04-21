@@ -249,98 +249,266 @@
     input[type=number] {
         -moz-appearance: textfield;
     }
+
+    .tac{
+        color: #000;
+        font-size: 15px;
+    }
+
+    .tac_pop:hover{
+        text-decoration: underline;
+    }
+
+    .mod_bot{
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+    }
+
+    .tac input[type="checkbox"] {
+        transform: scale(1.5);
+        margin-right: 10px;
+    }
+
+    .tac input[type="checkbox"]:hover {
+        cursor:pointer;
+    }
+
+    .termscond{
+        display: flex;
+        color: #000;
+        font-size: 15px;
+        flex-direction: column;
+    }
+
+    .nums{
+        font-weight: 900;
+    }
+
+    .desc{
+        font-style: italic;
+        margin-left: 10px;
+    }
+
+    .byohana{
+        color: #000;
+        font-size: 15px;
+    }
+
+    .title{
+        font-size: 20px;
+        font-weight: 900;
+    }
+
+    .card-header-color{
+        background-color: #a50f15;
+	    color: #fff;
+    }
     </style>
 </head>
 
 <body class="hold-transition layout-top-nav">
 	<div class="wrapper">
-	<!-- Navbar -->
-	<nav class="main-header navbar navbar-expand-md navbar_cust">
-        <div class="container_fluid_767">
-            <a href="#" class="navbar-brand text-white">
-                <div class="brand-text ohana_text">  
-                    <div>
-                        <span class="single_letter">O</span>HANA 
-                    </div>
-                <div>
-                    <span class="single_letter">R</span>ESORT
-                </div>
-                </div>
-            </a>
-        </div>
-    </nav>
-<div class="content-wrapper">
-    <div class="content">
-        <div class="words">
-			Steps into serenity:
-		</div>
-		<div class="words">
-			"Where every stay
-		</div>
-		<div class="words">
-			Begins in simple booking"
-		</div>
-    </div>
-
-    <!-- Login -->
-    <div class="sign_in_up">
-        <form action="{{ route('customer_login') }}" class="formPost">
-            @csrf
-            <h1>Login</h1>
-            <input type="text" name="input_from" id="input_from" value="2" readonly hidden>
-            <div class="input-box">
-                <input type="text" placeholder="Username" name="username" id="s_username" required autofocus>
-                <i class='bx bxs-user icons'></i>
-            </div>
-            <div class="input-box">
-                <input type="password" placeholder="Password" name="password" id="s_password" required>
-                <i class='bx bxs-lock-alt icons' ></i>
-            </div>
-            <button type="submit" class="btn">Login</button>
-            <div class="register-link">
-                <p>Dont have an account? <a href="#" data-toggle="modal" data-target="#popup_reg">Register</a></p>
-            </div>
-        </form>
-    </div>
-    <!-- End -->
-
-    <!-- PopUp Register -->
-    <div class="modal fade" id="popup_reg" aria-hidden="true" data-backdrop="static">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ route('customer_store') }}" class="formPost">
-                        <div class="labels">Firstname</div>
-                            <input type="text" class="form-control" name="firstname" placeholder="Firstname" autofocus required autocomplete="given-name">
-                        <div class="labels">Lastname</div>
-                            <input type="text" class="form-control" name="lastname" placeholder="Lastname" required autocomplete="family-name">
-                        <div class="labels">Address</div>
-                            <input type="text" class="form-control" name="address" placeholder="Address" required autocomplete="address-line1">
-                        <div class="labels">Contact Number</div>
-                            <input type="number" class="form-control" name="c_number" placeholder="Contact Number" required autocomplete="tel">
-                        <div class="labels">Username</div>
-                            <input type="text" class="form-control" name="username" placeholder="Username" required autocomplete="username">
-                        <div class="labels">Password</div>
-                            <input type="password" class="form-control" name="password" placeholder="Password" required autocomplete="current-password">
-                        <div class="labels">Confirm-Password</div>
-                            <input type="password" class="form-control" name="c_password" placeholder="Confirm Password" required autocomplete="new-password">
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-md btn-outline-success">Submit</button>
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand-md navbar_cust">
+            <div class="container_fluid_767">
+                <a href="#" class="navbar-brand text-white">
+                    <div class="brand-text ohana_text">  
+                        <div>
+                            <span class="single_letter">O</span>HANA 
                         </div>
-                    </form>
+                    <div>
+                        <span class="single_letter">R</span>ESORT
+                    </div>
+                    </div>
+                </a>
+            </div>
+        </nav>
+        <div class="content-wrapper">
+            <div class="content">
+                <div class="words">
+                    Steps into serenity:
+                </div>
+                <div class="words">
+                    "Where every stay
+                </div>
+                <div class="words">
+                    Begins in simple booking"
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- End -->
 
-</div>
-	<!-- /.content-wrapper -->
+            <!-- Login -->
+            <div class="sign_in_up">
+                <form action="{{ route('customer_login') }}" class="formPost">
+                    @csrf
+                    <h1>Login</h1>
+                    <input type="text" name="input_from" id="input_from" value="2" readonly hidden>
+                    <div class="input-box">
+                        <input type="text" placeholder="Username" name="username" id="s_username" required autofocus>
+                        <i class='bx bxs-user icons'></i>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" placeholder="Password" name="password" id="s_password" required>
+                        <i class='bx bxs-lock-alt icons' ></i>
+                    </div>
+                    <button type="submit" class="btn">Login</button>
+                    <div class="register-link">
+                        <p>Dont have an account? <a href="#" data-toggle="modal" data-target="#popup_reg">Register</a></p>
+                    </div>
+                </form>
+            </div>
+            <!-- End -->
+
+            <!-- PopUp Register -->
+            <div class="modal fade" id="popup_reg" aria-hidden="true" data-backdrop="static">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('customer_store') }}" class="formPost">
+                                <div class="labels">Firstname</div>
+                                    <input type="text" class="form-control" name="firstname" placeholder="Firstname" autofocus required autocomplete="given-name">
+                                <div class="labels">Lastname</div>
+                                    <input type="text" class="form-control" name="lastname" placeholder="Lastname" required autocomplete="family-name">
+                                <div class="labels">Address</div>
+                                    <input type="text" class="form-control" name="address" placeholder="Address" required autocomplete="address-line1">
+                                <div class="labels">Contact Number</div>
+                                    <input type="number" class="form-control" name="c_number" placeholder="Contact Number" required autocomplete="tel">
+                                <div class="labels">Username</div>
+                                    <input type="text" class="form-control" name="username" placeholder="Username" required autocomplete="username">
+                                <div class="labels">Password</div>
+                                    <input type="password" class="form-control" name="password" placeholder="Password" required autocomplete="current-password">
+                                <div class="labels">Confirm-Password</div>
+                                    <input type="password" class="form-control" name="c_password" placeholder="Confirm Password" required autocomplete="new-password">
+                                <div class="modal-footer mod_bot">
+                                    <div class="tac">
+                                        <input type="checkbox" id="myCheckbox" name="myCheckbox" value="1" onchange="toggleSubmit()">
+                                        <label for="myCheckbox">
+                                            I agree to the 
+                                            <a href="#" class="tac_pop" id="termsLink" data-toggle="modal" data-target="#termsandconditions">terms and conditions</a>.
+                                        </label>
+                                    </div>
+                                    <div class="reg_sub">
+                                        <button type="submit" id="submitButton" class="btn btn-md btn-outline-success" disabled>Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End -->
+
+
+            <!-- Show Terms and Conditions -->
+            <div class="modal fade" id="termsandconditions" data-backdrop="static">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header card-header-color">
+                            <h4 class="modal-title title">Ohana Resort Booking System - Terms and Conditions</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="termscond">
+                                <div class="nums">1. Room Types and Rates</div>
+                                <div class="desc">
+                                    - Small Room: ₱2,500 per night, accommodates up to 3 guests.
+                                </div>
+                                <div class="desc">
+                                    - Large Room: ₱3,000 per night, accommodates up to 4 guests.
+                                </div>
+
+                                <div class="nums">2. Check-in and Check-out</div>
+                                <div class="desc">
+                                    - Check-in time is 2:00 PM, and check-out time is 12:00 PM.
+                                </div>
+                                <div class="desc">
+                                    - Early check-in or late check-out may be available, subject to additional charges.
+                                </div>
+
+                                <div class="nums">3. Function Hall</div>
+                                <div class="desc">
+                                    - Function hall available for events, accommodating up to 40 guests for 5 hours.
+                                </div>
+                                <div class="desc">
+                                    - Function hall rental fee: ₱5,000.
+                                </div>
+
+                                <div class="nums">4. Booking and Res</div>
+                                <div class="desc">
+                                    - Users must specify room number, room type and duration of function hall rental during booking.
+                                </div>
+                                <div class="desc">
+                                    - Bookings are subject to availability and confirmation by Ohana Resort.
+                                </div>
+
+                                <div class="nums">5. Payment</div>
+                                <div class="desc">
+                                    - Payments are required to secure both room bookings and function hall bookings.
+                                </div>
+                                <div class="desc">
+                                    - Payments can be made online through GCash Reference Number and Pay Cash based.
+                                </div>
+                                <div class="desc">
+                                    - For online payments, users must provide the GCash reference number to confirm the transaction.
+                                </div>
+                                <div class="desc">
+                                    - Cash payments can be made in person at the resort.
+                                </div>
+                                <div class="desc">
+                                    - Guests must settle payments directly with the front desk during check-in.
+                                </div>
+
+                                <div class="nums">6. Cancellation Policy</div>
+                                <div class="desc">
+                                    - Cancellation is prohibited; once a reservation is made, it is considered final.
+                                </div>
+                                <div class="desc">
+                                    - Function hall bookings are also non-refundable.
+                                </div>
+
+                                <div class="nums">7. Guest Responsibilities</div>
+                                <div class="desc">
+                                    - Guests are responsible for the proper use of the function hall and adherence to resort policies.
+                                </div>
+                                <div class="desc">
+                                    - Damages to resort property, including function hall equipment, may result in additional charges.
+                                </div>
+
+                                <div class="nums">8. Privacy and Data Security</div>
+                                <div class="desc">
+                                    - Ohana Resort respects user privacy for both room bookings and function hall bookings.
+                                </div>
+
+                                <div class="nums">9. Amenities and Services</div>
+                                <div class="desc">
+                                    - Ohana Resort, being a smaller establishment, provides personalized services to ensure a cozy and intimate experience.
+                                </div>
+
+                                <div class="nums">10. Disclaimer of Liability</div>
+                                <div class="desc">
+                                    - Ohana Resort is not responsible for accidents, injuries, or loss of personal property during the stay or event.
+                                </div>
+
+                                <div class="byohana mt-3">
+                                    By using the Ohana Resort Booking System, users agree to abide by these terms and conditions. Ohana Resort may update these terms periodically, and users are encouraged to review them regularly.
+                                </div>
+
+                            </div>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div> <!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            <!-- End of Show Terms and Conditions -->
+
+        </div>
+            <!-- /.content-wrapper -->
 	</div>
 	<footer class="main-footer">
         <center>
@@ -420,4 +588,23 @@
         });
 
     });
+
+
+    function toggleSubmit() {
+        var checkbox = document.getElementById('myCheckbox');
+        var submitButton = document.getElementById('submitButton');
+        
+        if (checkbox.checked) {
+            submitButton.disabled = false;
+        } else {
+            submitButton.disabled = true;
+        }
+    }
+
+    document.getElementById("termsLink").addEventListener("click", function(event) {
+        event.preventDefault(); // Prevent the default behavior of the link
+        $('#popup_reg').modal('hide'); // Close the registration modal
+        $('#termsandconditions').modal('show'); // Show the terms and conditions modal
+    });
+
 </script>

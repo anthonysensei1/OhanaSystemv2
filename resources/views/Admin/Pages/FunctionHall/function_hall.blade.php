@@ -9,8 +9,8 @@
             <div style="display: flex; justify-content: center;">
                <img class="img_fix_size" src="{{ isset($function_halls[0]['function_hall_image']) ? asset('functional_hall_images/' . $function_halls[0]['function_hall_image']) : asset('dist/img/default.png')}}">
             </div>
-            <h2 class="text-center p-3">{{ $function_halls[0]['function_hall_description'] ?? '(Description)'; }}</h2>
-            <h3 class="m-2">RATE: {{ $function_halls[0]['function_hall_rate'] ?? ''; }}</h3>
+            <h2 class="text-center p-3">{{ $function_halls[0]['function_hall_description'] ?? '(Description)'}}</h2>
+            <h3 class="m-2">RATE: {{ $function_halls[0]['function_hall_rate'] ?? '' }}</h3>
          </div>
          <div class="d-flex justify-content-end">
             @if (count($function_halls) < 1)
@@ -99,11 +99,11 @@
                         </div>
                      </div>
                      <input type="text" class="form-control function_hall_image" name="u_function_hall_image" id="function_hall_image"  readonly hidden>
-                     <input type="text" class="form-control" name="u_id" id="u_id" value="{{ $function_halls[0]['id'] ?? ''; }}" readonly hidden>
+                     <input type="text" class="form-control" name="u_id" id="u_id" value="{{ $function_halls[0]['id'] ?? ''}}" readonly hidden>
                      <label for="u_function_hall_description">Description :</label>
-                     <input type="text" class="form-control" name="u_function_hall_description" id="u_function_hall_description" value="{{ $function_halls[0]['function_hall_description'] ?? ''; }}" required>
+                     <input type="text" class="form-control" name="u_function_hall_description" id="u_function_hall_description" value="{{ $function_halls[0]['function_hall_description'] ?? ''}}" required>
                      <label for="u_function_hall_rate">Rate :</label>
-                     <input type="number" class="form-control" name="u_function_hall_rate" id="u_function_hall_rate" value="{{ $function_halls[0]['function_hall_rate'] ?? ''; }}" required>
+                     <input type="number" class="form-control" name="u_function_hall_rate" id="u_function_hall_rate" value="{{ $function_halls[0]['function_hall_rate'] ?? ''}}" required>
                   </div>
                </div>
          </div>

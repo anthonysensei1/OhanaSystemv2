@@ -68,7 +68,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Permission::factory()->create([
-            'icon' => 'fa-users', 
+            'icon' => 'note-icon-picture', 
             'permission_id' => 'function_hall',
             'permission' => 'FUNCTION HALL', 
             'sub_permission_id' => '',
@@ -98,7 +98,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Permission::factory()->create([
-            'icon' => 'fa-users', 
+            'icon' => 'ion-stats-bars', 
             'permission_id' => 'report',
             'permission' => 'REPORT', 
             'sub_permission_id' => '',
