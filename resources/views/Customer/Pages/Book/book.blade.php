@@ -88,7 +88,7 @@
 				<form action="{{ route('book_store') }}" class="formPost">
 					<div class="row">
 						<div class="col">
-							<input type="text" class="form-control mb-3" id="auth_id" name="auth_id" value="{{ $current_user['id'] }}" readonly hidden>
+							<input type="text" class="form-control mb-3" id="auth_id" name="auth_id" value="{{ auth()->user()->id }}" readonly hidden>
 							<input type="text" class="form-control mb-3" id="b_id" name="b_id" readonly hidden>
 							<input type="text" class="form-control mb-3" id="b_from" name="b_from" readonly hidden>
 							<input type="text" class="form-control mb-3" id="room_fullname" name="room_fullname" readonly required placeholder="Full Name" value="{{ $current_user['ordinary_user_fullname'] }}">
