@@ -181,9 +181,6 @@ class CustomerLoginController extends Controller
             return response()->json($renderMessage); 
         }
 
-        $request->password = password_hash($request->password, PASSWORD_BCRYPT);
-
-
         // -- OrdinaryUser table --
         $formData = [
             'first_name' => $request->firstname,
@@ -193,11 +190,18 @@ class CustomerLoginController extends Controller
         ];
 
         OrdinaryUser::where('id', '=', $request->ordinary_id)->update($formData);
-        
-        $formData = [
-            'username' => $request->username,
-            'password' => $request->password,
-        ];
+
+        if ($request->password == null) {
+            $formData = [
+                'username' => $request->username,
+            ];
+        } else {
+            $request->password = password_hash($request->password, PASSWORD_BCRYPT);
+            $formData = [
+                'username' => $request->username,
+                'password' => $request->password,
+            ];
+        }
 
         User::where('id', '=', $request->id)->update($formData);
         // -- User table --

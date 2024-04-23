@@ -289,12 +289,37 @@
     });
 
     function togglePasswordField() {
-    var passwordField = document.getElementById("passwordField");
-    passwordField.disabled = !passwordField.disabled;
-}
+        var passwordField = document.getElementById("passwordField");
+        var cPasswordField = document.getElementById("cPasswordField");
+        var pass = "{{ auth()->user()->password }}";
 
-function toggleConfirmPasswordField() {
-    var cPasswordField = document.getElementById("cPasswordField");
-    cPasswordField.disabled = !cPasswordField.disabled;
-}
+        passwordField.disabled = !passwordField.disabled;
+        cPasswordField.disabled = passwordField.disabled;
+
+        if (passwordField.disabled) {
+            passwordField.value = pass;
+            cPasswordField.value = pass;
+        } else {
+            passwordField.value = "";
+            cPasswordField.value = "";
+        }
+    }
+
+    function toggleConfirmPasswordField() {
+        var passwordField = document.getElementById("passwordField");
+        var cPasswordField = document.getElementById("cPasswordField");
+        var pass = "{{ auth()->user()->password }}";
+
+        passwordField.disabled = !passwordField.disabled;
+        cPasswordField.disabled = passwordField.disabled;
+
+        if (passwordField.disabled) {
+            passwordField.value = pass;
+            cPasswordField.value = pass;
+        } else {
+            passwordField.value = "";
+            cPasswordField.value = "";
+        }
+    }
+
 </script>
