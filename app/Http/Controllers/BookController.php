@@ -19,6 +19,7 @@ class BookController extends Controller
      */
     public function index()
     {
+        $currentUserId = auth()->user()->id;
         $renderData = [
             'rooms' => Rooms::select('rooms.id', 'rooms.room_image', 'rooms.room_no', 'rooms.room_name', 'room_types.room_type', 'room_types.room_rate')
             ->join('room_types', 'room_types.id', '=', 'rooms.room_type_id')
@@ -27,6 +28,7 @@ class BookController extends Controller
             ->first(),
             'current_user' => User::select('users.id', DB::raw('CONCAT(ordinary_users.first_name, " ", ordinary_users.last_name) AS ordinary_user_fullname'), 'ordinary_users.address', 'ordinary_users.c_number')
                 ->join('ordinary_users', 'ordinary_users.id', '=', 'users.user_info_id')
+                ->where('users.id', $currentUserId)
                 ->where('users.user_type', 2)
                 ->first(),
         ];
