@@ -205,6 +205,25 @@ class CustomerLoginController extends Controller
 
         User::where('id', '=', $request->id)->update($formData);
         // -- User table --
+        
+        $userCredentials = User::select('users.id', 'users.username', 'users.password', 'users.user_type', 'ordinary_users.first_name'
+                                , 'ordinary_users.last_name', 'ordinary_users.address', 'ordinary_users.c_number', 'ordinary_users.id AS ordinary_id',
+                                DB::raw('CONCAT(ordinary_users.first_name, " ", ordinary_users.last_name) AS ordinary_users'))
+                                ->join('ordinary_users', 'users.user_info_id', '=', 'ordinary_users.id')
+                                ->where('users.user_type', 2)
+                                ->where('users.username', $request->username)
+                                ->where('users.status', '=', 1)
+                                ->first();
+
+        $arr_sessions = [
+            'first_name' => $userCredentials->first_name,
+            'last_name' => $userCredentials->last_name,
+            'address' => $userCredentials->address,
+            'c_number' => $userCredentials->c_number,
+            'ordinary_id' => $userCredentials->ordinary_id,
+        ];
+
+        Session::put($arr_sessions);
 
         $renderMessage = [
             'response' => 1,
