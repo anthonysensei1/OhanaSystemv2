@@ -23,7 +23,11 @@ class BookController extends Controller
         $renderData = [
             'rooms' => Rooms::select('rooms.id', 'rooms.room_image', 'rooms.room_no', 'rooms.room_name', 'room_types.room_type', 'room_types.room_rate')
             ->join('room_types', 'room_types.id', '=', 'rooms.room_type_id')
-            ->get(),
+            ->get()
+            ->map(function ($room) {
+                $room->room_image = explode(',', $room->room_image);
+                return $room;
+            }),
             'function_hall' => FunctionHall::select('id', 'function_hall_image', 'function_hall_description', 'function_hall_rate')
             ->first(),
             'current_user' => User::select('users.id', DB::raw('CONCAT(ordinary_users.first_name, " ", ordinary_users.last_name) AS ordinary_user_fullname'), 'ordinary_users.address', 'ordinary_users.c_number')
