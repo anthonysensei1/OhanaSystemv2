@@ -112,7 +112,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Role::factory()->create([
-            'role' => 'Dummy'
+            'role' => 'Staff'
         ]);
 
         $password = "1234a";
@@ -129,7 +129,7 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'user_info_id' => '2',
-            'username' => 'Dummy',
+            'username' => 'staff',
             'password' => $hash,
             'roles_id' => '2',
             'user_type' => '1',
@@ -141,7 +141,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         SuperUser::factory()->create([
-            'name' => 'Dummy',
+            'name' => 'Staff',
         ]);
 
         AssignPermissionAndRole::factory()->create([

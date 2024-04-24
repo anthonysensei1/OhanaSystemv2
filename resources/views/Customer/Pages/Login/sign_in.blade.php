@@ -170,6 +170,7 @@
         }
         .sign_in_up{
             width: 40%;
+            margin:15px 0 15px 0;
         }
 
         .words:nth-child(1){
@@ -310,6 +311,17 @@
         background-color: #a50f15;
 	    color: #fff;
     }
+
+    .scrollable{
+        max-height: 500px;
+        overflow-y: auto;
+    }
+
+    .reg_scrollable{
+        max-height: 400px;
+        overflow-y: auto;
+    }
+
     </style>
 </head>
 
@@ -374,8 +386,8 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
-                            <form action="{{ route('customer_store') }}" class="formPost">
+                        <form action="{{ route('customer_store') }}" class="formPost">
+                            <div class="modal-body reg_scrollable">
                                 <div class="labels">Firstname</div>
                                     <input type="text" class="form-control" name="firstname" placeholder="Firstname" autofocus required autocomplete="given-name">
                                 <div class="labels">Lastname</div>
@@ -390,19 +402,20 @@
                                     <input type="password" class="form-control" name="password" placeholder="Password" required autocomplete="current-password">
                                 <div class="labels">Confirm-Password</div>
                                     <input type="password" class="form-control" name="c_password" placeholder="Confirm Password" required autocomplete="new-password">
-                                <div class="modal-footer mod_bot">
-                                    <div class="tac">
-                                        <input type="checkbox" id="myCheckbox" name="myCheckbox" value="1" onchange="toggleSubmit()">
-                                        <label for="myCheckbox"></label>
-                                            I agree to the 
-                                            <a href="#" class="tac_pop" id="termsLink" data-toggle="modal" data-target="#termsandconditions">terms and conditions</a>.
-                                    </div>
-                                    <div class="reg_sub">
-                                        <button type="submit" id="submitButton" class="btn btn-md btn-outline-success" disabled>Submit</button>
-                                    </div>
-                                </div>
-                            </form>
+                            </div>
+                        
+                        <div class="modal-footer mod_bot">
+                            <div class="tac">
+                                <input type="checkbox" id="myCheckbox" name="myCheckbox" value="1" onchange="toggleSubmit()">
+                                <label for="myCheckbox"></label>
+                                    I agree to the 
+                                    <a href="#" class="tac_pop" id="termsLink" data-toggle="modal" data-target="#termsandconditions">terms and conditions</a>.
+                            </div>
+                            <div class="reg_sub">
+                                <button type="submit" id="submitButton" class="btn btn-md btn-outline-success" disabled>Submit</button>
+                            </div>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -415,11 +428,11 @@
                     <div class="modal-content">
                         <div class="modal-header card-header-color">
                             <h4 class="modal-title title">Ohana Resort Booking System - Terms and Conditions</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" id="termsCloseButton" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body scrollable">
                             <div class="termscond">
                                 <div class="nums">1. Room Types and Rates</div>
                                 <div class="desc">
@@ -500,12 +513,10 @@
                                 <div class="desc">
                                     - Ohana Resort is not responsible for accidents, injuries, or loss of personal property during the stay or event.
                                 </div>
-
-                                <div class="byohana mt-3">
-                                    By using the Ohana Resort Booking System, users agree to abide by these terms and conditions. Ohana Resort may update these terms periodically, and users are encouraged to review them regularly.
-                                </div>
-
                             </div>
+                        </div>
+                        <div class="modal-footer byohana mt-3 mb-3">
+                            By using the Ohana Resort Booking System, users agree to abide by these terms and conditions. Ohana Resort may update these terms periodically, and users are encouraged to review them regularly.
                         </div>
                     </div><!-- /.modal-content -->
                 </div> <!-- /.modal-dialog -->
@@ -607,9 +618,13 @@
     }
 
     document.getElementById("termsLink").addEventListener("click", function(event) {
-        event.preventDefault(); // Prevent the default behavior of the link
-        $('#popup_reg').modal('hide'); // Close the registration modal
-        $('#termsandconditions').modal('show'); // Show the terms and conditions modal
+        event.preventDefault();
+        $('#popup_reg').modal('hide');
+        $('#termsandconditions').modal('show');
+    });
+
+    document.getElementById("termsCloseButton").addEventListener("click", function() {
+        $('#popup_reg').modal('show');
     });
 
 </script>

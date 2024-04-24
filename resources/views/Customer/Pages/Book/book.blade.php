@@ -139,7 +139,7 @@
 			let div_payment = '<input type="number" class="form-control mb-3" id="payment" name="payment" placeholder="Payment" required>';
          	$('#div_payment').html(div_payment);
 		} else {
-			let div_payment = '<img src="{{asset('/images/qrcode.jpg')}}" class="rqcode_image mb-2"><img><input type="text" class="form-control mb-3" id="reference_num" name="reference_num" placeholder="Reference Number" required><input type="number" class="form-control mb-3" id="payment" name="payment" placeholder="Payment" required>';
+			let div_payment = '<div class="center_img"><input type="text" class="form-control "placeholder="09925312738" disabled><img src="{{asset('/images/qrcode.jpg')}}" class="rqcode_image mb-2"><img></div><input type="text" class="form-control mb-3" id="reference_num" name="reference_num" placeholder="Reference Number" required><input type="number" class="form-control mb-3" id="payment" name="payment" placeholder="Payment" required>';
          	$('#div_payment').html(div_payment);
 		}
 	});
@@ -162,8 +162,13 @@
 
 <style scoped>
 	.rqcode_image{
-		width:450px;
-		height: 450px;
+		width:150px;
+		height: 150px;
+	}
+	.center_img {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
    .divide_box{
       width: 100%;
