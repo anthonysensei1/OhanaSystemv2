@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class UsersAccountController extends Controller
 {
@@ -18,14 +19,20 @@ class UsersAccountController extends Controller
      */
     public function index()
     {
+        $arr_permission = explode(',', session('assign_permission'));
+
+        if (!in_array('7', $arr_permission) && session('username') != 'Admin') {
+            abort(404);
+        }
+
         $renderData = [
             'roles' => Role::all(),
             'users' => DB::table('users')
-                    ->select('users.*', 'users.id AS user_id', 'super_users.*', 'roles.role AS role_name')
-                    ->leftJoin('super_users', 'users.user_info_id', '=', 'super_users.id')
-                    ->leftJoin('roles', 'users.roles_id', '=', 'roles.id')
-                    ->whereNotNull('users.roles_id')
-                    ->get()
+                ->select('users.*', 'users.id AS user_id', 'super_users.*', 'roles.role AS role_name')
+                ->leftJoin('super_users', 'users.user_info_id', '=', 'super_users.id')
+                ->leftJoin('roles', 'users.roles_id', '=', 'roles.id')
+                ->whereNotNull('users.roles_id')
+                ->get()
         ];
 
         return view('/Admin/Pages/UsersAccount/users_account', $renderData);
@@ -49,7 +56,7 @@ class UsersAccountController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->password != $request->cpassword) {
+        if ($request->password != $request->cpassword) {
 
             $renderMessage = [
                 'response' => 0,
@@ -69,15 +76,15 @@ class UsersAccountController extends Controller
                 'path' => '/Admin/Pages/UsersAccount/users_account'
             ];
 
-            return response()->json($renderMessage); 
+            return response()->json($renderMessage);
         }
-        
+
         $formData = [
             'name' => $request->fullname,
         ];
 
         SuperUser::create($formData);
-        
+
         $request->password = password_hash($request->password, PASSWORD_BCRYPT);
         $super_user = SuperUser::latest()->first();
         $formData = [
@@ -151,22 +158,75 @@ class UsersAccountController extends Controller
 
     public function user_login(Request $request)
     {
-        
-        $userCredentials = User::select('users.id', 'super_users.name', 'users.username', 'users.password')
-                                ->join('super_users', 'users.user_info_id', '=', 'super_users.id')
-                                ->where('users.user_type', 1)
-                                ->where('users.username', $request->username)
-                                ->first();
+
+        $userCredentials = User::select('users.id', 'super_users.name', 'users.username', 'users.password');
+
+        if ($request->username != 'admin') {
+            $userCredentials = User::select('users.id', 'super_users.name', 'users.username', 'users.password', 'assign_permission_and_roles.assign_permission');
+            $userCredentials = $userCredentials->join('roles', 'users.roles_id', '=', 'roles.id');
+            $userCredentials = $userCredentials->join('assign_permission_and_roles', 'roles.id', '=', 'assign_permission_and_roles.assign_role');
+        }
+
+        $userCredentials = $userCredentials->join('super_users', 'users.user_info_id', '=', 'super_users.id');
+        $userCredentials = $userCredentials->where('users.user_type', 1);
+        $userCredentials = $userCredentials->where('users.username', $request->username);
+        $userCredentials = $userCredentials->first();
 
         if ($userCredentials && Hash::check($request->password, $userCredentials->password)) {
 
             if (auth()->attempt(['username' => $request->username, 'password' => $request->password])) {
                 $request->session()->regenerate();
+                $request->session()->regenerateToken();
+
+
+                $arr_sessions = [
+                    'assign_permission' => $userCredentials->assign_permission,
+                    'username' => $userCredentials->username,
+                ];
+
+                Session::put($arr_sessions);
+
+                $permissions = explode(',', $userCredentials->assign_permission);
+                $path = '/Admin/Pages/Dashboard/dashboard';
+
+                if ($request->username != 'Admin') {
+                    foreach ($permissions as $permission) {
+                        switch ($permission) {
+                            case "1":
+                                $path = '/Admin/Pages/Dashboard/dashboard';
+                                break 2;
+                            case "2":
+                                $path = '/Admin/Pages/Guests/guests';
+                                break 2;
+                            case "3":
+                                $path = '/Admin/Pages/Bookings/pending_bookings';
+                                break 2;
+                            case "4":
+                                $path = '/Admin/Pages/Calendar/calendar';
+                                break 2;
+                            case "5":
+                                $path = '/Admin/Pages/Rooms/rooms';
+                                break 2;
+                            case "6":
+                                $path = '/Admin/Pages/FunctionHall/function_hall';
+                                break 2;
+                            case "7":
+                                $path = '/Admin/Pages/UsersAccount/users_account';
+                                break 2;
+                            case "8":
+                                $path = '/Admin/Pages/Roles_and_Permissions/permissions';
+                                break 2;
+                            case "9":
+                                $path = '/Admin/Pages/Report/report';
+                                break 2;
+                        }
+                    }
+                }
 
                 $renderMessage = [
                     'response' => 1,
                     'message' => 'Login successful! Hi ' . $userCredentials->name,
-                    'path' => '/Admin/Pages/Dashboard/dashboard'
+                    'path' => $path
                 ];
 
                 return response()->json($renderMessage);
@@ -186,9 +246,8 @@ class UsersAccountController extends Controller
 
             return response()->json($renderMessage);
         }
-
     }
-    
+
     public function user_logout(Request $request)
     {
         auth()->logout();

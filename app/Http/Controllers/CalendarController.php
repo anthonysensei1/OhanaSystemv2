@@ -14,6 +14,12 @@ class CalendarController extends Controller
      */
     public function index()
     {
+        $arr_permission = explode(',', session('assign_permission'));
+
+        if(!in_array('4', $arr_permission) && session('username') != 'Admin') {
+            abort(404);
+        }
+
         $renderData = [
             'bookings' => DB::table('bookings')
                         ->select('bookings.id', 'bookings.auth_user_id', 'bookings.book_from', 'bookings.book_start_date', 'bookings.book_end_date',

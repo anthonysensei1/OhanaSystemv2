@@ -15,6 +15,12 @@ class GuestsController extends Controller
      */
     public function index()
     {
+        $arr_permission = explode(',', session('assign_permission'));
+
+        if(!in_array('2', $arr_permission) && session('username') != 'Admin') {
+            abort(404);
+        }
+
         $renderData = [
             'users' => DB::table('users')
                     ->select('users.*', 'users.id AS user_id', 'ordinary_users.*')

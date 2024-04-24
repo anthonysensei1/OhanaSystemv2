@@ -16,6 +16,12 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $arr_permission = explode(',', session('assign_permission'));
+
+        if(!in_array('1', $arr_permission) && session('username') != 'Admin') {
+            abort(404);
+        }
+
         $bookings = Bookings::where('status', 2)->get();
         $arr_last_year = array_fill(0, 12, 0);
         $arr_current_year = array_fill(0, 12, 0);
