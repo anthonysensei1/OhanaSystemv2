@@ -14,6 +14,12 @@ class RolesController extends Controller
      */
     public function index()
     {
+        $arr_permission = explode(',', session('assign_permission'));
+
+        if(!in_array('8', $arr_permission) && session('username') != 'Admin') {
+            abort(404);
+        }
+        
         $renderData = [
             'roles' => Role::all()
         ];

@@ -14,6 +14,12 @@ class RoomTypeController extends Controller
      */
     public function index()
     {
+        $arr_permission = explode(',', session('assign_permission'));
+
+        if(!in_array('5', $arr_permission) && session('username') != 'Admin') {
+            abort(404);
+        }
+        
         $renderData = [
             'room_types' => RoomType::all(),
         ];
