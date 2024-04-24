@@ -52,7 +52,23 @@
 						<div class="card-body">
 							<div class="room-item">
 								<div style="display: flex; justify-content: center;">
-									<img class="img_fix_size" src="{{ asset('images/' . $room['room_image']) }}"><!-- This should not be in circular form-->
+									<div id="carouselExampleAutoplaying{{ $loop->index }}" class="carousel slide img_fix_size" data-bs-ride="carousel" style="width: 300px; border: 2px solid #000;">
+										<div class="carousel-inner">
+											@foreach ($room['room_image'] as $index => $room_image)
+												<div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+													<img src="{{ asset('/images/' . $room_image) }}" class="d-block" alt="Room Image" style="width: 500px; height: 250px;">
+												</div>
+											@endforeach
+										</div>
+										<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying{{ $loop->index }}" data-bs-slide="prev">
+											<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+											<span class="visually-hidden">Previous</span>
+										</button>
+										<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying{{ $loop->index }}" data-bs-slide="next">
+											<span class="carousel-control-next-icon" aria-hidden="true"></span>
+											<span class="visually-hidden">Next</span>
+										</button>
+									</div>
 								</div>
 								<h5 class="text-center p-3">{{ $room['room_name'] }}</h5>
 								<h4 class="m-2"> RATE:P{{ number_format($room['room_rate'], 2, '.', ',') }} per day</h4>
@@ -194,6 +210,7 @@
       justify-content: center;
       flex-direction: row;
       align-content: center;
+	gap: 10px;
    }
 
    .room-item{

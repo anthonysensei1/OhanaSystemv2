@@ -25,7 +25,11 @@ class RoomsController extends Controller
             'room_types' => RoomType::all(),
             'rooms' => Rooms::join('room_types', 'rooms.room_type_id', '=', 'room_types.id')
             ->select('rooms.*','room_types.room_type' , 'room_types.room_rate')
-            ->get(),
+            ->get()
+            ->map(function ($room) {
+                $room->room_image = explode(',', $room->room_image);
+                return $room;
+            }),
         ];
         // dd($renderData);
 
@@ -60,9 +64,9 @@ class RoomsController extends Controller
 
             return response()->json($renderMessage);
         }
-        
+
         $formData = [
-            'room_image' => $request->room_image,
+            'room_image' => implode(",", $request->room_image),
             'room_no' => $request->room_no,
             'room_name' => $request->room_name,
             'room_type_id' => $request->_room_type,
@@ -95,7 +99,8 @@ class RoomsController extends Controller
 
             $renderMessage = [
                 'response' => 1,
-                'message' => $imageName
+                'message' => $imageName,
+                'room_image_hidden' => $request->room_image_hidden
             ];
 
             return response()->json($renderMessage);
