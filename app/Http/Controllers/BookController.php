@@ -55,10 +55,10 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $arr_reservation = explode("-", $request->reservation);
-        
+
         $i = 0;
         while ($i < count($arr_reservation)) {
-            $date = DateTime::createFromFormat('m/d/Y',  trim($arr_reservation[$i]));
+            $date = DateTime::createFromFormat('m/d/Y', trim($arr_reservation[$i]));
             if ($i < 1) {
                 $book_start = $date->format('Y-m-d');
             } else {
@@ -68,15 +68,19 @@ class BookController extends Controller
             $i++;
         }
 
+        $modal_type = $request->modal_type;
         $currentDateTime = date("Y-m-d");
-        $date1 = new DateTime($book_start);
-        $date2 = new DateTime($book_end);
+        $date1 = new DateTime($book_start . ' 14:00:00');
+        $date2 = new DateTime($book_end . ' 12:00:00');
         $interval = $date1->diff($date2);
-        $total_days = $interval->days + 1;
-        $request->room_rate = $request->room_rate * $total_days;
+        $total_days = $interval->days + (int)$modal_type;
 
-        if ($currentDateTime > $book_start) 
-        {
+        $room_rate_per_day = $request->room_rate;
+        $total_amount = $room_rate_per_day * $total_days;
+
+        
+
+        if ($currentDateTime > $book_start) {
             $renderMessage = [
                 'response' => 0,
                 'message' => 'Invalid date, Please try again!',
@@ -85,11 +89,10 @@ class BookController extends Controller
             return response()->json($renderMessage);
         }
 
-        if($request->room_rate != $request->payment)
-        {
+        if ($request->payment != $total_amount) {
             $renderMessage = [
                 'response' => 0,
-                'message' => 'Invalid payment, Total book must be: P ' . number_format($request->room_rate),
+                'message' => 'Invalid payment,Total amount is P' . number_format($total_amount, 2),
             ];
 
             return response()->json($renderMessage);

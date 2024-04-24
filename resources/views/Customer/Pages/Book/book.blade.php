@@ -88,6 +88,7 @@
 				<form action="{{ route('book_store') }}" class="formPost">
 					<div class="row">
 						<div class="col">
+							<input type="hidden" id="modal_type" name="modal_type" value="">
 							<input type="text" class="form-control mb-3" id="auth_id" name="auth_id" value="{{ auth()->user()->id }}" readonly hidden>
 							<input type="text" class="form-control mb-3" id="b_id" name="b_id" readonly hidden>
 							<input type="text" class="form-control mb-3" id="b_from" name="b_from" readonly hidden>
@@ -161,12 +162,14 @@
     $('#reservation').daterangepicker()
   })
 
-  document.getElementById('function_hall_btn').addEventListener('click', function() {
+  	document.getElementById('function_hall_btn').addEventListener('click', function() {
         document.getElementById('time-range').value = 'P5,000 per 5hours';
+		document.getElementById('modal_type').value = '2';
     });
 
     document.getElementById('room_btn').addEventListener('click', function() {
-        document.getElementById('time-range').value = '2:00 PM - 12:00 PM';
+        document.getElementById('time-range').value = 'start 2:00 PM - 12:00 PM end counted as 1 day';
+		document.getElementById('modal_type').value = '1';
     });
 
 </script>
