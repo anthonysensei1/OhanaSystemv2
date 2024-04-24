@@ -16,7 +16,7 @@
                            <tr class="text-center">
                               <th>Id</th>
                               <th>Customer Information</th>
-                              <th>Room No. and Room Type</th>
+                              <th>Room No. and Room Type / Function Hall</th>
                               <th>Arrival Time and Date</th>
                               <th>Departure Time and Date</th>
                               <th>Payment Method(Ref. No.)</th>

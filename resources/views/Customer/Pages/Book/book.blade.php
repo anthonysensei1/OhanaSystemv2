@@ -20,13 +20,13 @@
 												<img class="img_fix_size_f" src="{{ isset($function_hall['function_hall_image']) ? asset('functional_hall_images/' . $function_hall['function_hall_image']) : asset('dist/img/default.png')}}">
 											</div>
 											<h5 class="text-center p-3">{{ $function_hall['function_hall_description'] ?? ''}}</h5>
-											<div><h4 class="m-2">( Per Day ) RATE: P{{ $function_hall['function_hall_rate'] ?? ''}}</h4></div>
+											<div><h4 class="m-2">RATE: P{{ number_format($function_hall['function_hall_rate'] ?? '', 2, '.', ',') }} per 5hours</h4></div>
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-sm-12 d-flex justify-content-end">
-										<button class="btn btn-md card-header-color" data-toggle="modal" data-target="#book_now_d" onclick="edit({{ $function_hall['function_hall_rate'] ?? '' }}, {{ $function_hall['id'] ?? '' }}, 'hall')">
+										<button class="btn btn-md card-header-color" id="function_hall_btn" data-toggle="modal" data-target="#book_now_d" onclick="edit({{ $function_hall['function_hall_rate'] ?? '' }}, {{ $function_hall['id'] ?? '' }}, 'hall')">
 											<i class="fas fa-tag"></i> 
 											Book Now!
 										</button>
@@ -55,11 +55,11 @@
 									<img class="img_fix_size" src="{{ asset('images/' . $room['room_image']) }}"><!-- This should not be in circular form-->
 								</div>
 								<h5 class="text-center p-3">{{ $room['room_name'] }}</h5>
-								<h4 class="m-2">RATE: {{ $room['room_rate'] }}/night</h4>
+								<h4 class="m-2"> RATE:P{{ number_format($room['room_rate'], 2, '.', ',') }} per day</h4>
 							</div>                      
 							<div class="row">
 								<div class="col-sm-12 d-flex justify-content-end">
-									<button class="btn btn-md card-header-color" data-toggle="modal" data-target="#book_now_d" onclick="edit({{ $room['room_rate'] }}, {{ $room['id'] }}, 'room')">
+									<button class="btn btn-md card-header-color" id="room_btn" data-toggle="modal" data-target="#book_now_d" onclick="edit({{ $room['room_rate'] }}, {{ $room['id'] }}, 'room')">
 										<i class="fas fa-tag"></i> 
 										Book Now!
 									</button>
@@ -95,13 +95,15 @@
 							<input type="text" class="form-control mb-3" id="room_address" name="room_address" readonly required placeholder="Address" value="{{ $current_user['address'] }}">
 							<input type="text" class="form-control mb-3" id="room_contact_number" name="room_contact_number" readonly required placeholder="Contact Number" value="{{ $current_user['c_number'] }}">
 							<div class="input-group mb-3">
-									<div class="input-group-prepend">
-										<span class="input-group-text">
-											<i class="far fa-calendar-alt"></i>
-										</span>
-									</div>
-									<input type="text" class="form-control" name="reservation" id="reservation" required>
+								<div class="input-group-prepend">
+									<span class="input-group-text">
+										<i class="far fa-calendar-alt"></i>
+									</span>
+								</div>
+								<input type="text" class="form-control" name="reservation" id="reservation" required>
 							</div>
+							<input type="text" class="form-control mb-3" name="time-range" id="time-range" readonly>
+
 							<!-- If 0 = Cash is selected there must be another input field for amount, and if 1 = Gcash is selected, there must be another input field for amount and reference number appear below this portion -->
 							<select class="form-control mb-3 text-center" name="payment_method" id="payment_method" required>
 									<option value="" selected disabled>- Payment Method -</option>
@@ -158,6 +160,15 @@
     //Date range picker
     $('#reservation').daterangepicker()
   })
+
+  document.getElementById('function_hall_btn').addEventListener('click', function() {
+        document.getElementById('time-range').value = 'P5,000 per 5hours';
+    });
+
+    document.getElementById('room_btn').addEventListener('click', function() {
+        document.getElementById('time-range').value = '2:00 PM - 12:00 PM';
+    });
+
 </script>
 
 <style scoped>
