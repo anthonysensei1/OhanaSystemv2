@@ -15,6 +15,12 @@ class ReportController extends Controller
      */
     public function index()
     {
+        $arr_permission = explode(',', session('assign_permission'));
+
+        if(!in_array('9', $arr_permission) && session('username') != 'Admin') {
+            abort(404);
+        }
+        
         $renderData = [
             'bookings' => Bookings::select('book_end_date', DB::raw('SUM(payment) as total'))
                         ->groupBy('book_end_date')
