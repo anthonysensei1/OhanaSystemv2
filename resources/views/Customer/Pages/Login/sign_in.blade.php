@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Ohana Resort Online Booking</title>
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
     <!-- Theme style -->
@@ -19,101 +21,112 @@
     <link rel="stylesheet" href="{{asset('plugins/toastr/toastr.min.css')}}">
 
     <style scoped>
-    *{
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+    * {
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
     }
 
     body {
-        background-image:url('/images/ohanabg.png')!important;
-        background-repeat: no-repeat!important;
-        background-size: cover!important;
+        background-image: url('/images/ohanabg.png') !important;
+        background-repeat: no-repeat !important;
+        background-size: cover !important;
     }
-    .main-footer a{
+
+    .main-footer a {
         text-decoration: none;
     }
 
-    .display a{
+    .display a {
         text-decoration: none;
     }
-    .labels{
+
+    .labels {
         color: #000;
         font-size: 15px;
         font-weight: bold;
         margin: 5px 0;
     }
 
-    .sign_in_up{
-    width: 22%;
-    height: 450px;
-    background: rgba(0, 0, 0, .4);
-    border: 2px solid rgba(255, 255, 255, .8);
-    backdrop-filter: blur(9px);
-    color: #fff;
-    border-radius: 12px;
-    transition:0.5s;
-    padding: 30px 40px;
+    .sign_in_up {
+        width: 22%;
+        height: 450px;
+        background: rgba(0, 0, 0, .4);
+        border: 2px solid rgba(255, 255, 255, .8);
+        backdrop-filter: blur(9px);
+        color: #fff;
+        border-radius: 12px;
+        transition: 0.5s;
+        padding: 30px 40px;
 
     }
-    .sign_in_up h1{
-    font-size: 36px;
-    text-align: center;
+
+    .sign_in_up h1 {
+        font-size: 36px;
+        text-align: center;
     }
-    .sign_in_up .input-box{
-    position: relative;
-    width: 100%;
-    height: auto;
-    margin: 30px 0;
+
+    .sign_in_up .input-box {
+        position: relative;
+        width: 100%;
+        height: auto;
+        margin: 30px 0;
     }
-    .input-box input{
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    border: 2px solid rgba(255, 255, 255, .2);
-    border-radius: 40px;
-    font-size: 16px;
-    color: #fff;
-    padding: 20px 45px 20px 20px;
+
+    .input-box input {
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        border: 2px solid rgba(255, 255, 255, .2);
+        border-radius: 40px;
+        font-size: 16px;
+        color: #fff;
+        padding: 20px 45px 20px 20px;
     }
-    .input-box input::placeholder{
-    color: #fff;
+
+    .input-box input::placeholder {
+        color: #fff;
     }
-    .input-box i{
-    position: absolute;
-    right: 20px;
-    top: 30%;
-    transform: translate(-50%);
-    font-size: 20px;
+
+    .input-box i {
+        position: absolute;
+        right: 20px;
+        top: 30%;
+        transform: translate(-50%);
+        font-size: 20px;
 
     }
-    .sign_in_up .btn{
-    width: 100%;
-    height: 45px;
-    background: #fff;
-    border: none;
-    outline: none;
-    border-radius: 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-    cursor: pointer;
-    font-size: 16px;
-    color: #333;
-    font-weight: 600;
+
+    .sign_in_up .btn {
+        width: 100%;
+        height: 45px;
+        background: #fff;
+        border: none;
+        outline: none;
+        border-radius: 40px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+        cursor: pointer;
+        font-size: 16px;
+        color: #333;
+        font-weight: 600;
     }
-    .sign_in_up .register-link{
-    font-size: 14.5px;
-    text-align: center;
-    margin: 20px 0 15px;
+
+    .sign_in_up .register-link {
+        font-size: 14.5px;
+        text-align: center;
+        margin: 20px 0 15px;
     }
-    .register-link p a{
-        color:#a50f15;
-    text-decoration: none;
-    font-weight: 600;
+
+    .register-link p a {
+        color: #a50f15;
+        text-decoration: none;
+        font-weight: 600;
     }
-    .register-link p a:hover{
-    text-decoration: underline;
-    color:#fff;
+
+    .register-link p a:hover {
+        text-decoration: underline;
+        color: #fff;
     }
 
     .content-wrapper {
@@ -125,20 +138,22 @@
         justify-content: space-evenly;
     }
 
-    .words{
+    .words {
         font-weight: bolder;
     }
 
-    .words:nth-child(1){
-        font-size:8rem;
+    .words:nth-child(1) {
+        font-size: 8rem;
         margin-left: 110px;
     }
-    .words:nth-child(2){
-        font-size:5rem;
+
+    .words:nth-child(2) {
+        font-size: 5rem;
         margin-left: 110px;
     }
-    .words:nth-child(3){
-        font-size:5rem;
+
+    .words:nth-child(3) {
+        font-size: 5rem;
         margin-left: 110px;
         background-color: #a50f15;
         text-align: center;
@@ -146,104 +161,109 @@
         /* width: 1100px; */
     }
 
-    .main-footer{
-            background: rgba(0, 0, 0, .8);
-            backdrop-filter: blur(30px);
-            color: #fff;
-            border-top:3px  solid #fff;
-        }
+    .main-footer {
+        background: rgba(0, 0, 0, .8);
+        backdrop-filter: blur(30px);
+        color: #fff;
+        border-top: 3px solid #fff;
+    }
 
-        .main-footer a{
-            color:#fff;
-            font-weight: bolder;
-        }
+    .main-footer a {
+        color: #fff;
+        font-weight: bolder;
+    }
 
-        .footer_single_letter {
-            font-size: 25px;
-            color: #a50f15;
-        }
+    .footer_single_letter {
+        font-size: 25px;
+        color: #a50f15;
+    }
 
-    @media screen and (max-width: 1740px){
+    @media screen and (max-width: 1740px) {
 
-        .content-wrapper{
+        .content-wrapper {
             flex-direction: column;
         }
-        .sign_in_up{
+
+        .sign_in_up {
             width: 40%;
-            margin:15px 0 15px 0;
+            margin: 15px 0 15px 0;
         }
 
-        .words:nth-child(1){
-        font-size: 50px;
-        margin-left: 0px;
-        text-align:center;
-    }
-    .words:nth-child(2){
-        font-size:30px;
-        margin-left: 0px;
-        text-align:center;
-    }
-    .words:nth-child(3){
-        font-size:30px;
-        margin-left: 0px;
-        text-align:center;
-        color: #fff;
-        background-color: #a50f15;
-    }
+        .words:nth-child(1) {
+            font-size: 50px;
+            margin-left: 0px;
+            text-align: center;
+        }
+
+        .words:nth-child(2) {
+            font-size: 30px;
+            margin-left: 0px;
+            text-align: center;
+        }
+
+        .words:nth-child(3) {
+            font-size: 30px;
+            margin-left: 0px;
+            text-align: center;
+            color: #fff;
+            background-color: #a50f15;
+        }
 
 
     }
-    @media screen and (max-width: 960px){
-        .sign_in_up{
+
+    @media screen and (max-width: 960px) {
+        .sign_in_up {
             width: 450px;
         }
-        .navar_customized{
-            display:none;
+
+        .navar_customized {
+            display: none;
         }
     }
 
 
-    @media screen and (max-width: 520px){
-        .sign_in_up{
+    @media screen and (max-width: 520px) {
+        .sign_in_up {
             width: 350px;
         }
     }
 
-        .navbar_cust{
-            background: rgba(0, 0, 0, .9);
-            backdrop-filter: blur(25px);
-            border-bottom: 3px solid #fff;
-        }
+    .navbar_cust {
+        background: rgba(0, 0, 0, .9);
+        backdrop-filter: blur(25px);
+        border-bottom: 3px solid #fff;
+    }
 
-        .single_letter {
-            font-size: 45px;
-            color: #a50f15;
-        }
+    .single_letter {
+        font-size: 45px;
+        color: #a50f15;
+    }
 
-        .ohana_text{
-            font-size: 30px;
-            font-weight: bolder;
-            letter-spacing: 8px;
-            color: #fff;
+    .ohana_text {
+        font-size: 30px;
+        font-weight: bolder;
+        letter-spacing: 8px;
+        color: #fff;
+        display: flex;
+    }
+
+    @media screen and (max-width:767px) {
+
+        .container_fluid_767 .navbar-nav {
             display: flex;
+            flex-direction: column;
+            align-content: center;
+            align-items: center;
         }
 
-        @media screen and (max-width:767px){
-            
-            .container_fluid_767 .navbar-nav{
-                display: flex;
-                flex-direction: column;
-                align-content: center;
-                align-items: center;
-            }
+    }
 
+    @media screen and (max-width:365px) {
+        .ohana_text {
+            font-size: 18px;
         }
-
-        @media screen and (max-width:365px){
-            .ohana_text{
-                font-size: 18px;
-            }
-        }
+    }
 
     /* For Chrome, Safari, and Opera */
     input[type=number]::-webkit-inner-spin-button,
@@ -257,16 +277,16 @@
         -moz-appearance: textfield;
     }
 
-    .tac{
+    .tac {
         color: #000;
         font-size: 15px;
     }
 
-    .tac_pop:hover{
+    .tac_pop:hover {
         text-decoration: underline;
     }
 
-    .mod_bot{
+    .mod_bot {
         display: flex;
         flex-direction: column;
         align-content: center;
@@ -278,66 +298,65 @@
     }
 
     .tac input[type="checkbox"]:hover {
-        cursor:pointer;
+        cursor: pointer;
     }
 
-    .termscond{
+    .termscond {
         display: flex;
         color: #000;
         font-size: 15px;
         flex-direction: column;
     }
 
-    .nums{
+    .nums {
         font-weight: 900;
     }
 
-    .desc{
+    .desc {
         font-style: italic;
         margin-left: 10px;
     }
 
-    .byohana{
+    .byohana {
         color: #000;
         font-size: 15px;
     }
 
-    .title{
+    .title {
         font-size: 20px;
         font-weight: 900;
     }
 
-    .card-header-color{
+    .card-header-color {
         background-color: #a50f15;
-	    color: #fff;
+        color: #fff;
     }
 
-    .scrollable{
+    .scrollable {
         max-height: 500px;
         overflow-y: auto;
     }
 
-    .reg_scrollable{
+    .reg_scrollable {
         max-height: 400px;
         overflow-y: auto;
     }
-
     </style>
 </head>
 
 <body class="hold-transition layout-top-nav">
-	<div class="wrapper">
+    <div class="wrapper">
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand-md navbar_cust">
             <div class="container_fluid_767">
                 <a href="#" class="navbar-brand text-white">
-                    <div class="brand-text ohana_text">  
+                    <div class="brand-text ohana_text">
                         <div>
-                            <span class="single_letter">O</span>HANA 
+                            <span class="single_letter">O</span>HANA
                         </div>
-                    <div>
-                        <span class="single_letter">R</span>ESORT
-                    </div>
+                        <div>
+                            <span class="single_letter">R</span>ESORT
+                        </div>
                     </div>
                 </a>
             </div>
@@ -362,16 +381,18 @@
                     <h1>Login</h1>
                     <input type="text" name="input_from" id="input_from" value="2" readonly hidden>
                     <div class="input-box">
-                        <input type="text" placeholder="Username" name="username" id="s_username" required autofocus autocomplete="username">
+                        <input type="text" placeholder="Username" name="username" id="s_username" required autofocus
+                            autocomplete="username">
                         <i class='bx bxs-user icons'></i>
                     </div>
                     <div class="input-box">
                         <input type="password" placeholder="Password" name="password" id="s_password" required>
-                        <i class='bx bxs-lock-alt icons' ></i>
+                        <i class='bx bxs-lock-alt icons'></i>
                     </div>
                     <button type="submit" class="btn">Login</button>
                     <div class="register-link">
-                        <p>Dont have an account? <a href="#" data-toggle="modal" data-target="#popup_reg">Register</a></p>
+                        <p>Dont have an account? <a href="#" data-toggle="modal" data-target="#popup_reg">Register</a>
+                        </p>
                     </div>
                 </form>
             </div>
@@ -389,32 +410,43 @@
                         <form action="{{ route('customer_store') }}" class="formPost">
                             <div class="modal-body reg_scrollable">
                                 <div class="labels">Firstname</div>
-                                    <input type="text" class="form-control" name="firstname" placeholder="Firstname" autofocus required autocomplete="given-name">
+                                <input type="text" class="form-control" name="firstname" placeholder="Firstname"
+                                    autofocus required autocomplete="given-name">
                                 <div class="labels">Lastname</div>
-                                    <input type="text" class="form-control" name="lastname" placeholder="Lastname" required autocomplete="family-name">
+                                <input type="text" class="form-control" name="lastname" placeholder="Lastname" required
+                                    autocomplete="family-name">
                                 <div class="labels">Address</div>
-                                    <input type="text" class="form-control" name="address" placeholder="Address" required autocomplete="address-line1">
+                                <input type="text" class="form-control" name="address" placeholder="Address" required
+                                    autocomplete="address-line1">
                                 <div class="labels">Contact Number</div>
-                                    <input type="number" class="form-control" name="c_number" placeholder="Contact Number" required autocomplete="tel">
+                                <input type="number" class="form-control" name="c_number" placeholder="Contact Number"
+                                    required autocomplete="tel">
                                 <div class="labels">Username</div>
-                                    <input type="text" class="form-control" name="username" placeholder="Username" required autocomplete="username">
+                                <input type="text" class="form-control" name="username" placeholder="Username" required
+                                    autocomplete="username">
                                 <div class="labels">Password</div>
-                                    <input type="password" class="form-control" name="password" placeholder="Password" required autocomplete="current-password">
+                                <input type="password" class="form-control" name="password" placeholder="Password"
+                                    required autocomplete="current-password">
                                 <div class="labels">Confirm-Password</div>
-                                    <input type="password" class="form-control" name="c_password" placeholder="Confirm Password" required autocomplete="new-password">
+                                <input type="password" class="form-control" name="c_password"
+                                    placeholder="Confirm Password" required autocomplete="new-password">
                             </div>
-                        
-                        <div class="modal-footer mod_bot">
-                            <div class="tac">
-                                <input type="checkbox" id="myCheckbox" name="myCheckbox" value="1" onchange="toggleSubmit()">
-                                <label for="myCheckbox"></label>
-                                    I agree to the 
-                                    <a href="#" class="tac_pop" id="termsLink" data-toggle="modal" data-target="#termsandconditions">terms and conditions</a>.
+
+                            <div class="modal-footer mod_bot">
+                                <div class="tac">
+                                    <input type="checkbox" id="myCheckbox" name="myCheckbox" value="1"
+                                        onchange="toggleSubmit()" disabled>
+                                    <label for="myCheckbox"></label>
+                                    I agree to the
+                                    <a href="#" class="tac_pop" id="termsLink" data-toggle="modal"
+                                        data-target="#termsandconditions" onclick="checkCheckbox()">terms and
+                                        conditions</a>.
+                                </div>
+                                <div class="reg_sub">
+                                    <button type="submit" id="submitButton" class="btn btn-md btn-outline-success"
+                                        disabled>Submit</button>
+                                </div>
                             </div>
-                            <div class="reg_sub">
-                                <button type="submit" id="submitButton" class="btn btn-md btn-outline-success" disabled>Submit</button>
-                            </div>
-                        </div>
                         </form>
                     </div>
                 </div>
@@ -428,7 +460,8 @@
                     <div class="modal-content">
                         <div class="modal-header card-header-color">
                             <h4 class="modal-title title">Ohana Resort Booking System - Terms and Conditions</h4>
-                            <button type="button" class="close" id="termsCloseButton" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" id="termsCloseButton" data-dismiss="modal"
+                                aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
@@ -460,7 +493,8 @@
 
                                 <div class="nums">4. Booking and Res</div>
                                 <div class="desc">
-                                    - Users must specify room number, room type and duration of function hall rental during booking.
+                                    - Users must specify room number, room type and duration of function hall rental
+                                    during booking.
                                 </div>
                                 <div class="desc">
                                     - Bookings are subject to availability and confirmation by Ohana Resort.
@@ -474,7 +508,8 @@
                                     - Payments can be made online through GCash Reference Number and Pay Cash based.
                                 </div>
                                 <div class="desc">
-                                    - For online payments, users must provide the GCash reference number to confirm the transaction.
+                                    - For online payments, users must provide the GCash reference number to confirm the
+                                    transaction.
                                 </div>
                                 <div class="desc">
                                     - Cash payments can be made in person at the resort.
@@ -493,30 +528,37 @@
 
                                 <div class="nums">7. Guest Responsibilities</div>
                                 <div class="desc">
-                                    - Guests are responsible for the proper use of the function hall and adherence to resort policies.
+                                    - Guests are responsible for the proper use of the function hall and adherence to
+                                    resort policies.
                                 </div>
                                 <div class="desc">
-                                    - Damages to resort property, including function hall equipment, may result in additional charges.
+                                    - Damages to resort property, including function hall equipment, may result in
+                                    additional charges.
                                 </div>
 
                                 <div class="nums">8. Privacy and Data Security</div>
                                 <div class="desc">
-                                    - Ohana Resort respects user privacy for both room bookings and function hall bookings.
+                                    - Ohana Resort respects user privacy for both room bookings and function hall
+                                    bookings.
                                 </div>
 
                                 <div class="nums">9. Amenities and Services</div>
                                 <div class="desc">
-                                    - Ohana Resort, being a smaller establishment, provides personalized services to ensure a cozy and intimate experience.
+                                    - Ohana Resort, being a smaller establishment, provides personalized services to
+                                    ensure a cozy and intimate experience.
                                 </div>
 
                                 <div class="nums">10. Disclaimer of Liability</div>
                                 <div class="desc">
-                                    - Ohana Resort is not responsible for accidents, injuries, or loss of personal property during the stay or event.
+                                    - Ohana Resort is not responsible for accidents, injuries, or loss of personal
+                                    property during the stay or event.
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer byohana mt-3 mb-3">
-                            By using the Ohana Resort Booking System, users agree to abide by these terms and conditions. Ohana Resort may update these terms periodically, and users are encouraged to review them regularly.
+                            By using the Ohana Resort Booking System, users agree to abide by these terms and
+                            conditions. Ohana Resort may update these terms periodically, and users are encouraged to
+                            review them regularly.
                         </div>
                     </div><!-- /.modal-content -->
                 </div> <!-- /.modal-dialog -->
@@ -524,19 +566,20 @@
             <!-- End of Show Terms and Conditions -->
 
         </div>
-            <!-- /.content-wrapper -->
-	</div>
-	<footer class="main-footer">
+        <!-- /.content-wrapper -->
+    </div>
+    <footer class="main-footer">
         <center>
-            <strong>Copyright &copy; 2024 
+            <strong>Copyright &copy; 2024
                 <a href="#">
-                    <span class="footer_single_letter">O</span>hana 
+                    <span class="footer_single_letter">O</span>hana
                     <span class="footer_single_letter">R</span>esort Booking System</a>.
             </strong>
         </center>
     </footer>
-	<!-- ./wrapper -->
+    <!-- ./wrapper -->
 </body>
+
 </html>
 
 
@@ -546,7 +589,7 @@
 <script src="{{asset('plugins/jquery-ui/jquery-ui.min.js')}}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
-  $.widget.bridge('uibutton', $.ui.button)
+$.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
@@ -559,72 +602,74 @@
 
 
 <script>
-	
-    $('.formPost').on('submit',function(e) {
-        e.preventDefault();
+$('.formPost').on('submit', function(e) {
+    e.preventDefault();
 
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 1500
-        });
-        
-        $.ajax({
-            type     : "POST",
-            cache    : false,
-            url      : $(this).attr('action'),
-            data     : $(this).serialize(),
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success  : function(data) {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 1500
+    });
 
-                switch(data['response']) {
-                    case 1:
-                            Toast.fire({
-                                icon: 'success',
-                                title: '<p class="text-center pt-2 text-bold text-black">' +data['message']+ '</p>'
-                            });
+    $.ajax({
+        type: "POST",
+        cache: false,
+        url: $(this).attr('action'),
+        data: $(this).serialize(),
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(data) {
 
-                            setTimeout(function() {
-                                window.location.href = data['path'];
-                            },1500);
+            switch (data['response']) {
+                case 1:
+                    Toast.fire({
+                        icon: 'success',
+                        title: '<p class="text-center pt-2 text-bold text-black">' + data[
+                            'message'] + '</p>'
+                    });
 
-                        break;
-                    default:
-                            Toast.fire({
-                                icon: 'error',
-                                title: '<p class="text-center pt-2">' +data['message']+ '</p>'
-                            });
-                        break;
-                }
+                    setTimeout(function() {
+                        window.location.href = data['path'];
+                    }, 1500);
 
+                    break;
+                default:
+                    Toast.fire({
+                        icon: 'error',
+                        title: '<p class="text-center pt-2">' + data['message'] + '</p>'
+                    });
+                    break;
             }
-        });
 
-    });
-
-
-    function toggleSubmit() {
-        var checkbox = document.getElementById('myCheckbox');
-        var submitButton = document.getElementById('submitButton');
-        
-        if (checkbox.checked) {
-            submitButton.disabled = false;
-        } else {
-            submitButton.disabled = true;
         }
-    }
-
-    document.getElementById("termsLink").addEventListener("click", function(event) {
-        event.preventDefault();
-        $('#popup_reg').modal('hide');
-        $('#termsandconditions').modal('show');
     });
 
-    document.getElementById("termsCloseButton").addEventListener("click", function() {
-        $('#popup_reg').modal('show');
-    });
+});
 
+
+function toggleSubmit() {
+    var checkbox = document.getElementById("myCheckbox");
+    var submitButton = document.getElementById("submitButton");
+    submitButton.disabled = !(checkbox.checked && checkbox.getAttribute('data-clicked') === "true");
+}
+
+function checkCheckbox() {
+    var checkbox = document.getElementById("myCheckbox");
+    checkbox.checked = true;
+    checkbox.setAttribute('data-clicked', 'true');
+    checkbox.disabled = false;
+    toggleSubmit();
+}
+
+document.getElementById("termsLink").addEventListener("click", function(event) {
+    event.preventDefault();
+    $('#popup_reg').modal('hide');
+    $('#termsandconditions').modal('show');
+});
+
+document.getElementById("termsCloseButton").addEventListener("click", function() {
+    $('#popup_reg').modal('show');
+});
 </script>

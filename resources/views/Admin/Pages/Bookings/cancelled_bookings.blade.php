@@ -24,8 +24,8 @@
                               <th>Id</th>
                               <th>Customer Information</th>
                               <th>Room No. and Room Type / Function Hall</th>
-                              <th>Arrival Time and Date</th>
-                              <th>Departure Time and Date</th>
+                              <th>Arrival Date</th>
+                              <th>Departure Date</th>
                               <th>Payment Method(Ref. No.)</th>
                               <th>Amount</th>
                               <th>Action</th>
@@ -60,8 +60,8 @@
                                  @else
                                     <td>{{ $booking->function_hall_description}}</td>
                                  @endif
-                                 <td>{{ $booking_time[1] . " | " . $book_start_date }}</td>
-                                 <td>{{ $booking_time[1] . " | " . $book_end_date }}</td>
+                                 <td>{{ $book_start_date }}</td>
+                                 <td>{{ $book_end_date }}</td>
                                  <td>{{ $booking->payment_method < 1 ? 'CASH' : 'GCASH ( ' . $booking->reference_num . ' ) '}} </td>
                                  <td>P{{ number_format($booking->payment) }}</td>
                                  <td class="text-center">

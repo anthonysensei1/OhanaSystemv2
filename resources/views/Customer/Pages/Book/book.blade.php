@@ -77,12 +77,14 @@
 </div>
 
 <!-- BookNow Dialog -->
-<div class="modal fade" id="book_now_d">
+<div class="modal fade" id="book_now_d" data-backdrop="static">
    <div class="modal-dialog modal-dialog-info modal-dialog-centered">
       <div class="modal-content">
 			<div class="modal-header card-header-color">
-			
 				<h4 class="modal-title text-center"> <i class="fas fa-tag"></i> BOOK NOW!</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
          <div class="modal-body">
 				<form action="{{ route('book_store') }}" class="formPost">
