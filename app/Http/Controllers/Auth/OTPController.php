@@ -26,7 +26,7 @@ class OTPController extends Controller
             $details = 'This OTP is requesting for a password reset.';
         }
 
-        // $table->enum('status', ['is_cancel', 'is_used', 'is_expired', 'is_error','is_pending','is_resend'])->nullable()->default('is_pending');
+  
     
         $request->validate(['email' => 'required|email']);
 
@@ -46,22 +46,7 @@ class OTPController extends Controller
             ]);
         }
 
-        
-        // $created_at = "2024-04-26 00:56:41";
 
-        // $current_time = new DateTime(); 
-        // $created_time = new DateTime($created_at);
-
-        // $time_difference = $current_time->diff($created_time);
-
-        // $total_minutes = $time_difference->days * 24 * 60 + $time_difference->h * 60 + $time_difference->i;
-
-        // if ($total_minutes >= 60) {
-
-        //     echo "More than 60 minutes have passed since the record was created.";
-        // } else {
-        //     echo "Less than 60 minutes have passed since the record was created.";
-        // }
 
 	    $otp = rand(100000, 999999);
 
