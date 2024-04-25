@@ -121,6 +121,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'user_info_id' => '1',
             'username' => 'Admin',
+	    'email' => 'admin@gmail.com',
             'password' => $hash,
             'roles_id' => '1',
             'user_type' => '1',
@@ -130,6 +131,7 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'user_info_id' => '2',
             'username' => 'staff',
+            'email' => 'staff@gmail.com',
             'password' => $hash,
             'roles_id' => '2',
             'user_type' => '1',

@@ -135,5 +135,10 @@ Route::group(['middleware' => ['web', 'auth', 'ordinary_user']], function () {
     Route::get('/Customer/Pages/About/about',[App\Http\Controllers\AboutController::class,'index'])->name('/Customer/Pages/About/about');
 
 });
+Route::get('/google/direct', [App\Http\Controllers\GoogleController::class, 'redirectToGoogle'])->name('google.direct');
+Route::get('/google/callback', [App\Http\Controllers\GoogleController::class, 'handleGoogleCallback'])->name('google.callback');
 
+Route::post('/send-otp', [App\Http\Controllers\Auth\OTPController::class, 'sendOTP']);
+
+Route::post('/verify-code', [App\Http\Controllers\Auth\OTPController::class, 'verifyCode']);
 

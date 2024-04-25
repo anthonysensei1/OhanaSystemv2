@@ -19,6 +19,7 @@ class CustomerLoginController extends Controller
      */
     public function index()
     {
+        
         return view('/Customer/Pages/Login/sign_in');
     }
 
@@ -95,6 +96,7 @@ class CustomerLoginController extends Controller
         $formData = [
             'user_info_id' => $ordinary_user->id,
             'username' => $request->username,
+            'email' => $request->email,
             'password' => $request->password,
             'user_type' => '2'
         ];

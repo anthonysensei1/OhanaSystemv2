@@ -341,6 +341,50 @@
         max-height: 400px;
         overflow-y: auto;
     }
+
+    #snackbar {
+        visibility: hidden;
+        min-width: 250px;
+        background-color: #66ff85;
+        color: #3e403f;
+        text-align: center;
+        border-radius: 2px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1;
+        left: 50%;
+        bottom: 30px;
+        transform: translateX(-50%);
+    }
+
+    #snackbar.show {
+        visibility: visible;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+    @keyframes fadein {
+        from {
+            bottom: 0;
+            opacity: 0;
+        }
+
+        to {
+            bottom: 30px;
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeout {
+        from {
+            bottom: 30px;
+            opacity: 1;
+        }
+
+        to {
+            bottom: 0;
+            opacity: 0;
+        }
+    }
     </style>
 </head>
 
@@ -376,7 +420,7 @@
 
             <!-- Login -->
             <div class="sign_in_up">
-                <form action="{{ route('customer_login') }}" class="formPost">
+                <form action="{{ route('customer_login') }}" class="login_post" data-num="1">
                     @csrf
                     <h1>Login</h1>
                     <input type="text" name="input_from" id="input_from" value="2" readonly hidden>
@@ -407,7 +451,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="{{ route('customer_store') }}" class="formPost">
+                        <form action="{{ route('customer_store') }}" method="POST" class="signup_post" data-num="2">
                             <div class="modal-body reg_scrollable">
                                 <div class="labels">Firstname</div>
                                 <input type="text" class="form-control" name="firstname" placeholder="Firstname"
@@ -421,6 +465,9 @@
                                 <div class="labels">Contact Number</div>
                                 <input type="number" class="form-control" name="c_number" placeholder="Contact Number"
                                     required autocomplete="tel">
+                                <div class="labels">Email</div>
+                                <input type="email" id="email_id" class="form-control" name="email" placeholder="Email"
+                                    required autocomplete="email">
                                 <div class="labels">Username</div>
                                 <input type="text" class="form-control" name="username" placeholder="Username" required
                                     autocomplete="username">
@@ -430,6 +477,7 @@
                                 <div class="labels">Confirm-Password</div>
                                 <input type="password" class="form-control" name="c_password"
                                     placeholder="Confirm Password" required autocomplete="new-password">
+
                             </div>
 
                             <div class="modal-footer mod_bot">
@@ -451,6 +499,48 @@
                     </div>
                 </div>
             </div>
+
+            <div class="modal fade" id="popup_reg1" aria-hidden="true" data-backdrop="static">
+                <div class="modal-dialog modal-dialog-centered modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" style="font-size:18px; color:black">Verify Your Code</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                   
+                                <div class="form-group">
+                                    <label for="otpCode" style="font-size:15px; color:black">Your code was sent to you
+                                        via email</label>
+                                    <input type="number" class="form-control" id="otpCode" placeholder="Enter code"
+                                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                        maxlength="6" required style="text-align: center;">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <small id="timer" style="font-size:15px; color:black">Time left:
+                                                00:00</small>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <!-- <small id="resend" style="font-size:15px; color:black; display: none"><a href="#" onclick="__makeTime()">
+                                            Resend</a></small> -->
+                                            <small class="float-right text-primary "
+                                                style="font-size:15px; margin-top: 19px ;cursor: pointer;"
+                                                onclick="__resend('is_resend')"><u>Resend</u></small>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <button type="submit" class="btn btn-primary verify_btn" >Verify</button>
+                       
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- End -->
 
 
@@ -568,6 +658,7 @@
         </div>
         <!-- /.content-wrapper -->
     </div>
+
     <footer class="main-footer">
         <center>
             <strong>Copyright &copy; 2024
@@ -578,7 +669,9 @@
         </center>
     </footer>
     <!-- ./wrapper -->
+
 </body>
+<div id="snackbar"><strong><span id="message">Snackbar Message</span></strong></div>
 
 </html>
 
@@ -602,12 +695,25 @@ $.widget.bridge('uibutton', $.ui.button)
 
 
 <script>
-$('.formPost').on('submit', function(e) {
+function showSnackbar(message) {
+    var snackbar = document.getElementById("snackbar");
+    var snackbar_message = document.getElementById("message");
+    snackbar.className = "show";
+    snackbar_message.textContent = message;
+    setTimeout(function() {
+        snackbar.className = snackbar.className.replace("show", "");
+    }, 3000);
+}
+
+
+
+$('.login_post').on('submit', function(e) {
     e.preventDefault();
 
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
+
         showConfirmButton: false,
         timer: 1500
     });
@@ -647,6 +753,190 @@ $('.formPost').on('submit', function(e) {
     });
 
 });
+
+$('.signup_post').on('submit', function(e) {
+    e.preventDefault();
+    var num = $(this).attr('data-num');
+    var email = $('#email_id').val();
+    $('#otpCode').val('')
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 1500
+    });
+
+    var data = {
+        email: email,
+        request_type: '1',
+        is_status: 'is_pending'
+    };
+
+    $('#popup_reg1').modal('show');
+    __makeTime();
+
+    __optSend(data).done(function(response) {
+        console.log('__optSend::: ',response);
+        switch (response.status) {
+            
+            case 'success':
+                // Do nothing, the OTP is sent
+                break;
+            default:
+                // Handle sending OTP failure
+                Toast.fire({
+                    icon: 'error',
+                    title: '<p class="text-center pt-2">' + response.message + '</p>'
+                });
+                break;
+        }
+    }).fail(function(xhr, status, error) {
+
+        Toast.fire({
+            icon: 'error',
+            title: '<p class="text-center pt-2">Failed to send OTP. Please try again later.</p>'
+        });
+    });
+});
+
+
+$('.verify_btn').on('click', function(e) {
+    e.preventDefault();
+   
+    __verifyCode();
+});
+
+function __verifyCode() {
+    var data = {
+        email: $('#email_id').val(),
+        otp_code: $('#otpCode').val()
+    };
+    $.ajax({
+        url: '/verify-code',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        success: function(response) {
+
+            $('#otpCode').val('');
+            if (response.message == "is_verify") {
+         
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                $.ajax({
+                    type: "POST",
+                    cache: false,
+                    url: $('.signup_post').attr('action'),
+                    data: $('.signup_post').serialize(),
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(data) {
+
+                        switch (data['response']) {
+                            case 1:
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: '<p class="text-center pt-2 text-bold text-black">' + data[
+                                        'message'] + '</p>'
+                                });
+
+                                setTimeout(function() {
+                                    window.location.href = data['path'];
+                                }, 1500);
+
+                                break;
+                            default:
+                                Toast.fire({
+                                    icon: 'error',
+                                    title: '<p class="text-center pt-2">' + data['message'] + '</p>'
+                                });
+                                break;
+                        }
+
+                    }
+                });
+
+
+            } else {
+
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                Toast.fire({
+                    icon: 'error',
+                    title: '<p class="text-center pt-2">Invalid OTP code. Please try again.</p>'
+                });
+            }
+        },
+        error: function(xhr, status, error) {
+ 
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            Toast.fire({
+                icon: 'error',
+                title: '<p class="text-center pt-2">Failed to verify code. Please try again later.</p>'
+            });
+        }
+    });
+}
+
+function __optSend(data) {
+    return $.ajax({
+        url: '/send-otp',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data)
+    });
+}
+
+function __resend() {
+    var data = {
+        email: $('#email_id').val(),
+        request_type:'1',
+        is_status: 'is_resend'
+    }
+
+    showSnackbar("Resend OTP..");
+    __makeTime();
+    __optSend(data)
+}
+
+function __makeTime() {
+    var totalTime = 60;
+    var timer = $('#timer');
+
+    var x = setInterval(function() {
+        var minutes = Math.floor(totalTime / 60);
+        var seconds = totalTime % 60;
+
+
+        timer.html('Time left: ' + minutes.toString().padStart(2, '0') + ":" + seconds.toString()
+            .padStart(2, '0'));
+
+        totalTime--;
+
+        if (totalTime < 0) {
+            clearInterval(x);
+            timer.html('Time exp: 00:00');
+
+            $('#resend').attr('style', 'font-size:15px; margin-top: 19px');
+            showSnackbar("Please resend again OTP...");
+        }
+    }, 1000);
+}
 
 
 function toggleSubmit() {
