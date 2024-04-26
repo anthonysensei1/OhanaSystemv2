@@ -15,6 +15,13 @@ use Log;
 
 class OTPController extends Controller
 {
+
+    public function getLogs() {
+        $emails = DB::table('user_otps')
+                ->select('*')->get();
+
+        return view('Admin.Pages.Mails.index',compact('emails'));
+    }
     public function sendOTP(Request $request)
     {
         $details = '';

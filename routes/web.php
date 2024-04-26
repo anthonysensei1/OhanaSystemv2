@@ -143,3 +143,5 @@ Route::post('/send-otp', [App\Http\Controllers\Auth\OTPController::class, 'sendO
 
 Route::post('/verify-code', [App\Http\Controllers\Auth\OTPController::class, 'verifyCode']);
 
+Route::get('/mails-logs', [App\Http\Controllers\Auth\OTPController::class, 'getLogs']);
+
