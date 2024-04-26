@@ -25,23 +25,27 @@
                             <div class="card-body">
                               <div class="divide_box">
                                   @foreach ($rooms as $room)
-                                      <div id="carouselExampleAutoplaying{{ $loop->index }}" class="carousel slide img_fix_size" data-bs-ride="carousel" style="width: 310px; border: 2px solid #000;">
+                                  
+                                      <div id="carouselExampleIndicators{{ $loop->index }}" class="carousel slide room-item" data-bs-ride="carousel">
+                                      <h5 class="text-center">{{ $room['room_name'] }} {{ $room['room_no'] }}</h5>
                                           <div class="carousel-inner">
-                                              @foreach ($room['room_image'] as $index => $room_image)
-                                                  <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                                                      <img src="{{ asset('/images/' . $room_image) }}" class="d-block" alt="Room Image" style="width: 500px; height: 250px;">
-                                                      <div style="width: 500px; height: 70px; background-color: #90EE90;">
-                                                         <h5 class="text-center">{{ $room['room_type'] }}</h5>
-                                                         <label class="d-block text-center">RATE: {{ $room['room_rate'] }}</label>
-                                                      </div>
-                                                  </div>
-                                              @endforeach
+                                                @foreach ($room['room_image'] as $index => $room_image)
+                                                    <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                                        <img src="{{ asset('/images/' . $room_image) }}" class="img_fix_size" alt="Room Image">
+                                                    </div>
+                                                @endforeach
                                           </div>
-                                          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying{{ $loop->index }}" data-bs-slide="prev">
+                                            <div class="room_info">
+                                                <h5 class="text-center">{{ $room['room_type'] }}</h5>
+                                                <div class="text-center">
+                                                    <h6>RATE: {{ $room['room_rate'] }}</h6>
+                                                </div>
+                                            </div>
+                                          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators{{ $loop->index }}" data-bs-slide="prev">
                                               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                               <span class="visually-hidden">Previous</span>
                                           </button>
-                                          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying{{ $loop->index }}" data-bs-slide="next">
+                                          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators{{ $loop->index }}" data-bs-slide="next">
                                               <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                               <span class="visually-hidden">Next</span>
                                           </button>
@@ -70,7 +74,7 @@
                         <div class="row">
                             <div class="col-lg-12 mb-2">
                                 <div class="d-flex justify-content-between">
-                                    <label>Upload Image :</label>
+                                    <h5>Upload Image :</h5>
                                     <button type="button" class="btn-primary ml-1 rounded"
                                         style="width: 17%; height: 40px;" id="add_upload_image"><i
                                             class="fa fa-plus-circle"></i></button>
@@ -234,10 +238,10 @@
             height: auto;
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
+            justify-content: flex-start;
             flex-direction: row;
             align-content: center;
-            gap: 10px;
+            gap: 7px;
         }
 
         .room-item {
@@ -246,16 +250,20 @@
             border: 2px solid #000;
             backdrop-filter: blur(10px);
             border-radius: 5px;
-
+            width: 300px;
+            height: 417px;
         }
 
-
         .img_fix_size {
-            width: 300px;
+            width: 100%;
             height: 330px;
             padding: 5px;
-            display: block;
+            /* display: block; */
             object-fit: cover;
+        }
+
+        .room_info{
+            background: linear-gradient(45deg, white, whitesmoke, grey);
         }
     </style>
 @endsection

@@ -34,7 +34,7 @@
 <style type="text/css">
   #calendar {
             width: 100%;
-            margin: 0 auto; /* Center the calendar horizontally */
+            margin: 0 auto;
         }
 
   .hrColor{

@@ -5,44 +5,41 @@
 		<div class="container-fluid">
 			@if (!empty($function_hall))
 				<!-- Event Hall Section -->
-				<div class="row">
-					<div class="col-lg-2"></div>
-					<div class="col-lg-8">
-						<div class="card m-4">
-							<div class="card-header card-header-color">
-								<h4 class="text-center text-bold">EVENT HALL</h4>
-							</div>
-							<div class="card-body">
-								<div class="row">
-									<div class="col-sm-12">
-										<div class="small-box">
-											<div style="display: flex; justify-content: center;">
-												<img class="img_fix_size_f" src="{{ isset($function_hall['function_hall_image']) ? asset('functional_hall_images/' . $function_hall['function_hall_image']) : asset('dist/img/default.png')}}">
-											</div>
-											<h5 class="text-center p-3">{{ $function_hall['function_hall_description'] ?? ''}}</h5>
-											<div><h4 class="m-2">RATE: P{{ number_format($function_hall['function_hall_rate'] ?? '', 2, '.', ',') }} per 5hours</h4></div>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-12 d-flex justify-content-end">
-										<button class="btn btn-md card-header-color" id="function_hall_btn" data-toggle="modal" data-target="#book_now_d" onclick="edit({{ $function_hall['function_hall_rate'] ?? '' }}, {{ $function_hall['id'] ?? '' }}, 'hall')">
-											<i class="fas fa-tag"></i> 
-											Book Now!
-										</button>
+				
+				<div class="card">
+					<div class="card-header card-header-color">
+						<h4 class="text-center text-bold">EVENT HALL</h4>
+					</div>
+					<div class="card-body">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="small-box">
+									<!-- <div style="display: flex; justify-content: center;"> -->
+										<img class="img_fix_size_f" src="{{ isset($function_hall['function_hall_image']) ? asset('functional_hall_images/' . $function_hall['function_hall_image']) : asset('dist/img/default.png')}}">
+									<!-- </div> -->
+									<div class="fh_res">
+										<div class="fh_desc">{{ $function_hall['function_hall_description'] ?? ''}}</div>
+										<div class="fh_txt">RATE: P{{ number_format($function_hall['function_hall_rate'] ?? '', 2, '.', ',') }} per 5hours</div>
 									</div>
 								</div>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-sm-12 d-flex justify-content-end">
+								<button class="btn btn-md card-header-color" id="function_hall_btn" data-toggle="modal" data-target="#book_now_d" onclick="edit({{ $function_hall['function_hall_rate'] ?? '' }}, {{ $function_hall['id'] ?? '' }}, 'hall')">
+									<i class="fas fa-tag"></i> 
+									Book Now!
+								</button>
+							</div>
+						</div>
 					</div>
-					<div class="col-lg-2"></div>
 				</div>
 				<!-- End Event Hall Section -->
 			@endif
 
 
 			<!-- Dislay Room in this Section -->
-			<div class="row">
+	
 				<div class="divide_box">
 					@foreach ($rooms as $room)
 					<div class="card m-1">
@@ -50,29 +47,29 @@
 							<h4 class="text-center text-bold">Room {{ $room['room_no'] }}</h4>
 						</div>
 						<div class="card-body">
-							<div class="room-item">
-								<div style="display: flex; justify-content: center;">
-									<div id="carouselExampleAutoplaying{{ $loop->index }}" class="carousel slide img_fix_size" data-bs-ride="carousel" style="width: 300px; border: 2px solid #000;">
-										<div class="carousel-inner">
-											@foreach ($room['room_image'] as $index => $room_image)
-												<div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-													<img src="{{ asset('/images/' . $room_image) }}" class="d-block" alt="Room Image" style="width: 500px; height: 250px;">
-												</div>
-											@endforeach
+							<div id="carouselExampleAutoplaying{{ $loop->index }}" class="carousel slide room-item" data-bs-ride="carousel">
+								<div class="carousel-inner">
+									@foreach ($room['room_image'] as $index => $room_image)
+										<div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+											<img src="{{ asset('/images/' . $room_image) }}" class="img_fix_size" alt="Room Image">
 										</div>
-										<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying{{ $loop->index }}" data-bs-slide="prev">
-											<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-											<span class="visually-hidden">Previous</span>
-										</button>
-										<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying{{ $loop->index }}" data-bs-slide="next">
-											<span class="carousel-control-next-icon" aria-hidden="true"></span>
-											<span class="visually-hidden">Next</span>
-										</button>
+									@endforeach
+								</div>
+								<div class="room_info">
+									<h5 class="text-center">{{ $room['room_type'] }}</h5>
+									<div class="text-center">
+										<h6> RATE:P{{ number_format($room['room_rate'], 2, '.', ',') }} per day</h6>
 									</div>
 								</div>
-								<h5 class="text-center p-3">{{ $room['room_name'] }}</h5>
-								<h4 class="m-2"> RATE:P{{ number_format($room['room_rate'], 2, '.', ',') }} per day</h4>
-							</div>                      
+								<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying{{ $loop->index }}" data-bs-slide="prev">
+									<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+									<span class="visually-hidden">Previous</span>
+								</button>
+								<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying{{ $loop->index }}" data-bs-slide="next">
+									<span class="carousel-control-next-icon" aria-hidden="true"></span>
+									<span class="visually-hidden">Next</span>
+								</button>
+							</div>
 							<div class="row">
 								<div class="col-sm-12 d-flex justify-content-end">
 									<button class="btn btn-md card-header-color" id="room_btn" data-toggle="modal" data-target="#book_now_d" onclick="edit({{ $room['room_rate'] }}, {{ $room['id'] }}, 'room')">
@@ -85,7 +82,6 @@
 					</div>
 					@endforeach
 				</div>
-			</div>
 			<!-- Dislay Room in this Section -->
 
 		</div>
@@ -202,37 +198,44 @@
 		flex-direction: column;
 		align-items: center;
 	}
-   .divide_box{
-      width: 100%;
-      height: auto;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      flex-direction: row;
-      align-content: center;
-	gap: 10px;
-   }
+	.divide_box {
+		margin-left: 5px;
+		width: 100%;
+		height: auto;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-start;
+	}
 
-   .room-item{
-      margin: 5px;
-      background: linear-gradient(45deg, white, whitesmoke,grey);
-      border: 2px solid #000;
-      backdrop-filter: blur(10px);
-      border-radius: 5px;
-   }
-   .img_fix_size{
-      width: 300px;
-      height: 280px;
-      padding: 5px;
-      display: block;
-      object-fit: cover;
-   }
+	.room-item {
+		margin: 5px;
+		background: linear-gradient(45deg, white, whitesmoke, grey);
+		border: 2px solid #000;
+		backdrop-filter: blur(10px);
+		border-radius: 5px;
+		width: 320px;
+		height: 385px;
+	}
+
+	.img_fix_size {
+		width: 100%;
+		height: 330px;
+		padding: 5px;
+		object-fit: cover;
+	}
+
+	.room_info{
+		background: linear-gradient(45deg, white, whitesmoke, grey);
+	}
 
    .img_fix_size_f{
-		width: 100%;
+		width: 900px;
       height: 500px;
       padding: 10px;
-      object-fit: contain;
+      object-fit: fill;
+	  display: block;
+	  margin-left: auto;
+  		margin-right: auto;
    }
 
    .card-header-color{
@@ -242,6 +245,32 @@
 
    .card{
 	background: linear-gradient(45deg,lightgrey, whitesmoke, whitesmoke);
+   }
+
+   @media screen and (max-width: 625px){
+	.mobile{
+		width: 100%;
+	}
+
+	.fh_res{
+
+	}
+   }
+
+   .fh_res{
+	display:flex;
+	flex-direction:column;
+	margin: 10px;
+   }
+
+   .fh_txt{
+	font-size: 1.5rem;
+	font-weight: 500;
+   }
+   .fh_desc{
+	font-size: 1.5rem;
+	font-weight: 700;
+	text-align:center;
    }
 </style>
 @endsection

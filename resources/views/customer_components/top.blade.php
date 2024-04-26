@@ -244,79 +244,69 @@
 
 }
 
-@media screen and (max-width:767px) {
-    .btn-group-lo {
-        position: relative;
-        vertical-align: middle;
+    @media screen and (max-width:767px) {
+        .btn-group-lo {
+            position: relative;
+            vertical-align: middle;
+        }
+
+        .navbar-collapse {
+            display: none !important;
+        }
+
+        .navbar-collapse.show {
+            display: block !important;
+        }
+
+        .container_fluid_767 .navbar-nav {
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            align-items: center;
+        }
+
+        .c_active {
+            background: #a50f15 !important;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .navbar-nav .nav-item .nav-link {
+            color: #fff !important;
+            font-weight: bold;
+        }
+
+        .navbar-toggler-icon {
+            width: 30px;
+            height: 3px;
+            background-color: #fff;
+            display: block;
+            transition: background-color 0.3s;
+            margin: 5px 0px 5px 0px;
+        }
+
+        .navbar-toggler[aria-expanded="true"].navbar-toggler-icon {
+            background-color: #fff;
+        }
+
+        .navbar-toggler:focus .navbar-toggler-icon {
+            outline: none;
+        }
     }
 
-    .navbar-collapse {
-        display: none !important;
+    @media screen and (max-width: 424px) {
+        .ohana_text {
+            font-size: 6vw;
+            font-weight: bolder;
+            letter-spacing: 8px;
+            color: #fff;
+            display: flex;
+        }
+
+        .single_letter {
+            font-size: 8vw;
+        }
     }
-
-    .navbar-collapse.show {
-        display: block !important;
-    }
-
-    .container_fluid_767 .navbar-nav {
-        display: flex;
-        flex-direction: column;
-        align-content: center;
-        align-items: center;
-    }
-
-    .c_active {
-        background: #a50f15 !important;
-        border-radius: 5px;
-        width: 100%;
-    }
-
-    .navbar-nav .nav-item .nav-link {
-        color: #fff !important;
-        font-weight: bold;
-    }
-
-
-    /* Style for the hamburger icon */
-    .navbar-toggler-icon {
-        width: 30px;
-        /* Adjust the size as needed */
-        height: 3px;
-        /* Adjust the size as needed */
-        background-color: #fff;
-        /* Set the color to white */
-        display: block;
-        transition: background-color 0.3s;
-        margin: 5px 0px 5px 0px;
-    }
-
-    /* Style for the hamburger icon when toggled */
-    .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
-        background-color: #fff;
-        /* Set the color to white when toggled */
-    }
-
-    /* Style for the hamburger icon when focused */
-    .navbar-toggler:focus .navbar-toggler-icon {
-        outline: none;
-        /* Remove the outline when focused */
-    }
-
-}
-
-@media screen and (max-width: 424px) {
-    .ohana_text {
-        font-size: 6vw;
-        font-weight: bolder;
-        letter-spacing: 8px;
-        color: #fff;
-        display: flex;
-    }
-
-    .single_letter {
-        font-size: 8vw;
-    }
-}
 </style>
 
 
