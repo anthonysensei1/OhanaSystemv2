@@ -20,47 +20,68 @@ class OTPController extends Controller
         $details = '';
         $is_status = 'is_pending';
 
-        if($request->request_type === '1'){
-            $details = 'This OTP is requesting for registration.';
-        }else{
-            $details = 'This OTP is requesting for a password reset.';
-        }
-
-  
-    
-        $request->validate(['email' => 'required|email']);
-
-        // LOG::info('Request:: '.json_encode($request->input()));
-
-        $get_time = DB::table('user_otps')
-                    ->select('*')
-                    ->where('email',$request->email)
-                    ->whereNull('updated_at')
-                    ->first();
-
-        if($get_time){
-            DB::table('user_otps')
-            ->where('email', $request->email)
-            ->update([
+        if($request->request_type === '3'){
+            $otp = 000000;
+            DB::table('user_otps')->insert([
+                'email' => $request->email,
+                'details' => 'Sending confirmation.',
+                'status' => 'is_confirm',
+                'otp' => $otp,
+                'created_at' => now(),
                 'updated_at' => now(),
             ]);
+    
+            $res = Mail::to($request->email)->send(new OTPMail($otp,$request->request_type));
+            // LOG::info('Main return:: '. json_encode($res));
+            return response()->json(['message' => 'OTP sent to email.']);
+
+        }else{
+
+            if($request->request_type === '1'){
+                $details = 'This OTP is requesting for registration.';
+            }else{
+                $details = 'This OTP is requesting for a password reset.';
+            }
+    
+      
+        
+            $request->validate(['email' => 'required|email']);
+    
+            // LOG::info('Request:: '.json_encode($request->input()));
+    
+            $get_time = DB::table('user_otps')
+                        ->select('*')
+                        ->where('email',$request->email)
+                        ->whereNull('updated_at')
+                        ->first();
+    
+            if($get_time){
+                DB::table('user_otps')
+                ->where('email', $request->email)
+                ->update([
+                    'updated_at' => now(),
+                ]);
+            }
+    
+    
+    
+            $otp = rand(100000, 999999);
+    
+            DB::table('user_otps')->insert([
+                'email' => $request->email,
+                'details' => $details,
+                'status' => $request->is_status,
+                'otp' => $otp,
+                'created_at' => now(),
+            ]);
+    
+            $res = Mail::to($request->email)->send(new OTPMail($otp,$request->request_type));
+            // LOG::info('Main return:: '. json_encode($res));
+            return response()->json(['message' => 'OTP sent to email.']);
+
         }
 
-
-
-	    $otp = rand(100000, 999999);
-
-        DB::table('user_otps')->insert([
-            'email' => $request->email,
-            'details' => $details,
-            'status' => $request->is_status,
-            'otp' => $otp,
-            'created_at' => now(),
-        ]);
-
-        $res = Mail::to($request->email)->send(new OTPMail($otp));
-	    // LOG::info('Main return:: '. json_encode($res));
-        return response()->json(['message' => 'OTP sent to email.']);
+       
     }
 
     function verifyCode(Request $request) {
@@ -93,8 +114,6 @@ class OTPController extends Controller
             'status' => $getText,
             'updated_at' => now(),
         ]);
-
-
 
         return response()->json(['message' => $getText, 'data' => $get_time,'data_time'=>  $time_difference]);
 

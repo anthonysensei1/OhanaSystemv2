@@ -17,14 +17,21 @@ class OTPMail extends Mailable
      * @return void
      */
     public $otp;
+    public $status;
 
-    public function __construct($otp)
+    public function __construct($otp,$status)
     {
         $this->otp = $otp;
+        $this->status = $status;
     }
 
     public function build()
     {
+        if ($this->status == '3') {
+            return $this->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
+            ->subject('Confirmation')
+            ->view('emails.notify');
+        }
         return $this->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
                     ->subject('Your OTP')
                     ->view('emails.otp');

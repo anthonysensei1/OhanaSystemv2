@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Log;
 
 class UsersAccountController extends Controller
 {
@@ -158,94 +159,109 @@ class UsersAccountController extends Controller
 
     public function user_login(Request $request)
     {
+        $use_name = $this->checkUser($request->username);
+        $valid = User::select('roles_id')->where($use_name , $request->username)->first();
 
-        $userCredentials = User::select('users.id', 'super_users.name', 'users.username', 'users.password');
+        if ($valid) {
 
-        if ($request->username != 'admin') {
-            $userCredentials = User::select('users.id', 'super_users.name', 'users.username', 'users.password', 'assign_permission_and_roles.assign_permission');
-            $userCredentials = $userCredentials->join('roles', 'users.roles_id', '=', 'roles.id');
-            $userCredentials = $userCredentials->join('assign_permission_and_roles', 'roles.id', '=', 'assign_permission_and_roles.assign_role');
-        }
+            $userCredentials = User::select('users.id', 'super_users.name', 'users.username', 'users.password','users.email');
 
-        $userCredentials = $userCredentials->join('super_users', 'users.user_info_id', '=', 'super_users.id');
-        $userCredentials = $userCredentials->where('users.user_type', 1);
-        $userCredentials = $userCredentials->where('users.username', $request->username);
-        $userCredentials = $userCredentials->first();
+            if ($valid->roles_id != '1') {
+                $userCredentials = User::select('users.id', 'super_users.name', 'users.username', 'users.password', 'assign_permission_and_roles.assign_permission','users.email');
+                $userCredentials = $userCredentials->join('roles', 'users.roles_id', '=', 'roles.id');
+                $userCredentials = $userCredentials->join('assign_permission_and_roles', 'roles.id', '=', 'assign_permission_and_roles.assign_role');
+            }
 
-        if ($userCredentials && Hash::check($request->password, $userCredentials->password)) {
+            $userCredentials = $userCredentials->join('super_users', 'users.user_info_id', '=', 'super_users.id');
+            $userCredentials = $userCredentials->where('users.user_type', 1);
+            $userCredentials = $userCredentials->where($use_name, $request->username);
+            $userCredentials = $userCredentials->first();
 
-            if (auth()->attempt(['username' => $request->username, 'password' => $request->password])) {
-                $request->session()->regenerate();
-                $request->session()->regenerateToken();
+            if ($userCredentials && Hash::check($request->password, $userCredentials->password)) {
+
+                if (auth()->attempt(['username' => $userCredentials->username, 'password' => $request->password])) {
+                    $request->session()->regenerate();
+                    $request->session()->regenerateToken();
 
 
-                $arr_sessions = [
-                    'assign_permission' => $userCredentials->assign_permission,
-                    'username' => $userCredentials->username,
-                ];
+                    $arr_sessions = [
+                        'assign_permission' => $userCredentials->assign_permission,
+                        'username' => $userCredentials->username,
+                    ];
 
-                Session::put($arr_sessions);
+                    Session::put($arr_sessions);
 
-                $permissions = explode(',', $userCredentials->assign_permission);
-                $path = '/Admin/Pages/Dashboard/dashboard';
+                    $permissions = explode(',', $userCredentials->assign_permission);
+                    $path = '/Admin/Pages/Dashboard/dashboard';
 
-                if ($request->username != 'Admin') {
-                    foreach ($permissions as $permission) {
-                        switch ($permission) {
-                            case "1":
-                                $path = '/Admin/Pages/Dashboard/dashboard';
-                                break 2;
-                            case "2":
-                                $path = '/Admin/Pages/Guests/guests';
-                                break 2;
-                            case "3":
-                                $path = '/Admin/Pages/Bookings/pending_bookings';
-                                break 2;
-                            case "4":
-                                $path = '/Admin/Pages/Calendar/calendar';
-                                break 2;
-                            case "5":
-                                $path = '/Admin/Pages/Rooms/rooms';
-                                break 2;
-                            case "6":
-                                $path = '/Admin/Pages/FunctionHall/function_hall';
-                                break 2;
-                            case "7":
-                                $path = '/Admin/Pages/UsersAccount/users_account';
-                                break 2;
-                            case "8":
-                                $path = '/Admin/Pages/Roles_and_Permissions/permissions';
-                                break 2;
-                            case "9":
-                                $path = '/Admin/Pages/Report/report';
-                                break 2;
+                    if ($valid->roles_id != '1') {
+                        foreach ($permissions as $permission) {
+                            switch ($permission) {
+                                case "1":
+                                    $path = '/Admin/Pages/Dashboard/dashboard';
+                                    break 2;
+                                case "2":
+                                    $path = '/Admin/Pages/Guests/guests';
+                                    break 2;
+                                case "3":
+                                    $path = '/Admin/Pages/Bookings/pending_bookings';
+                                    break 2;
+                                case "4":
+                                    $path = '/Admin/Pages/Calendar/calendar';
+                                    break 2;
+                                case "5":
+                                    $path = '/Admin/Pages/Rooms/rooms';
+                                    break 2;
+                                case "6":
+                                    $path = '/Admin/Pages/FunctionHall/function_hall';
+                                    break 2;
+                                case "7":
+                                    $path = '/Admin/Pages/UsersAccount/users_account';
+                                    break 2;
+                                case "8":
+                                    $path = '/Admin/Pages/Roles_and_Permissions/permissions';
+                                    break 2;
+                                case "9":
+                                    $path = '/Admin/Pages/Report/report';
+                                    break 2;
+                            }
                         }
                     }
+
+                    $renderMessage = [
+                        'response' => 1,
+                        'message' => 'Login successful! Hi ' . $userCredentials->name,
+                        'path' => $path
+                    ];
+
+                    return response()->json($renderMessage);
+                } else {
+                    $renderMessage = [
+                        'response' => 0,
+                        'message' => 'Failed to authenticate!',
+                    ];
+
+                    return response()->json($renderMessage);
                 }
-
-                $renderMessage = [
-                    'response' => 1,
-                    'message' => 'Login successful! Hi ' . $userCredentials->name,
-                    'path' => $path
-                ];
-
-                return response()->json($renderMessage);
             } else {
                 $renderMessage = [
                     'response' => 0,
-                    'message' => 'Failed to authenticate!',
+                    'message' => 'Wrong username or password!',
                 ];
 
                 return response()->json($renderMessage);
             }
-        } else {
+
+        }else{
             $renderMessage = [
                 'response' => 0,
-                'message' => 'Wrong username or password!',
+                'message' => 'User not exist!',
             ];
 
             return response()->json($renderMessage);
         }
+
+        
     }
 
     public function user_logout(Request $request)
@@ -263,4 +279,21 @@ class UsersAccountController extends Controller
 
         return response()->json($renderMessage);
     }
+
+    public function checkUser($data) {
+        $valid = User::select('*')->where('username', $data)->first();
+        if($valid){
+            return 'username';
+        }
+        return 'email';
+    }
+
+    // public function checkUserRole($data) {
+        
+    //     $valid = User::select('role')->where($data->name, $data->value)->first();
+    //     if($valid){
+    //         return 'username';
+    //     }
+    //     return 'email';
+    // }
 }

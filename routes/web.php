@@ -112,6 +112,7 @@ Route::group(['middleware' => ['web', 'auth', 'super_user']], function () {
 Route::get('/',[App\Http\Controllers\CustomerLoginController::class,'index']);
 Route::get('/Customer/Pages/Login/sign_in',[App\Http\Controllers\CustomerLoginController::class,'index'])->name('/Customer/Pages/Login/sign_in');
 Route::post('/Customer/Pages/Login/sign_in/store',[CustomerLoginController::class,'store'])->name('customer_store');
+Route::post('/store-validate',[CustomerLoginController::class,'storeValidate'])->name('store-validate');
 Route::post('/Customer/Pages/Login/sign_in/customer_login',[CustomerLoginController::class,'customer_login'])->name('customer_login');
 
 

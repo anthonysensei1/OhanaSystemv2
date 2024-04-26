@@ -39,8 +39,40 @@ class CustomerLoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function storeValidate(Request $request) {
+        try {
+            // Validate the request
+            $validatedData = $request->validate([
+                "firstname" => "required",
+                "lastname" => "required",
+                "address" => "required",
+                "c_number" => "required|digits:11",
+                "email" => "required|email",
+                "username" => "required",
+                "password" => "required",
+                "c_password" => "required",
+                "myCheckbox" => "required"
+            ]);
+    
+
+            return response()->json("success");
+    
+        } catch (\Illuminate\Validation\ValidationException $exception) {
+
+            $errors = $exception->errors();
+            
+            return response()->json([
+                'message' => 'The given data was invalid.',
+                'errors' => $errors
+            ], 422);
+        }
+    }
+
     public function store(Request $request)
     {
+
+       
+
         if($request->password != $request->c_password) {
 
             $renderMessage = [

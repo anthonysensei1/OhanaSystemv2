@@ -44,7 +44,8 @@ class ConfirmedBookingsController extends Controller
                         'ordinary_users.first_name',
                         'ordinary_users.last_name',
                         'ordinary_users.address',
-                        'ordinary_users.c_number'
+                        'ordinary_users.c_number',
+                        'users.email',
                     )
                     ->join('users', 'bookings.auth_user_id', '=', 'users.id')
                     ->join('ordinary_users', 'users.user_info_id', '=', 'ordinary_users.id')

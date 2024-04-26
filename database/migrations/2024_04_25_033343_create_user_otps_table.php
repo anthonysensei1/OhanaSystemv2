@@ -18,7 +18,7 @@ class CreateUserOtpsTable extends Migration
             $table->string('email');
             $table->string('otp');
             $table->text('details');
-            $table->enum('status', ['is_cancel', 'is_verify', 'is_expired', 'is_error','is_pending','is_resend'])->nullable()->default('is_pending');
+            $table->enum('status', ['is_confirm', 'is_cancel', 'is_verify', 'is_expired', 'is_error','is_pending','is_resend'])->nullable()->default('is_pending');
             $table->timestamps();
         });
     }
