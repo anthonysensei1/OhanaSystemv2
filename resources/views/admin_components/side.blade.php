@@ -55,7 +55,7 @@
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>{{ $sub_permission }}</p>
                                 @if ($sub_permission == 'Pending Bookings')
-                                <span class="badge badge-light right">{{ $getbadges }}</span>
+                                <span class="badge badge-light right text-warning">{{ $getbadges }}</span>
                                 @endif
                             </a>
                         </li>
