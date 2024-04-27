@@ -55,12 +55,12 @@
                               @endphp
                               <tr>
                                  <td>{{ $date->format('F, Y')}}</td>
-                                 <td>P {{ number_format($booking->total) }}</td>
+                                 <td class="income_amount">P {{ number_format($booking->total) }}</td>
                               </tr>
                            @endforeach
                         </tbody>
                      </table>
-                     <label class="mt-2" for="total_income">Total Income: </label>
+                     <label class="mt-2" for="total_income">Total Income: <span id="totalIncome"></span> </label>
                   </div>
                </div>
             </div>
@@ -91,7 +91,9 @@
       });
 
       function filterTable(startMonth, startYear, endMonth, endYear) {
+         var totalIncome = 0;
          var tableRows = $('#bookingTable tbody tr');
+
          tableRows.hide().filter(function() {
                var rowDate = moment($(this).find('td:first').text(), 'MMMM, YYYY');
                var rowMonth = rowDate.month();
@@ -99,31 +101,62 @@
 
                return (rowYear > startYear || (rowYear === startYear && rowMonth >= startMonth)) &&
                   (rowYear < endYear || (rowYear === endYear && rowMonth <= endMonth));
-         }).show();
+         }).each(function() {
+            var incomeValue = $(this).find('td.income_amount').text();
+            incomeValue = parseFloat(incomeValue.replace('P', '').replace(/,/g, ''));
+            totalIncome += isNaN(incomeValue) ? 0 : incomeValue;
+            $(this).show();
+         });
+
+         $('#totalIncome').text('P ' + totalIncome.toLocaleString());
       }
    });
 
-  document.getElementById('searchInput').addEventListener('input', function() {
-        var input = this.value.trim().toLowerCase();
-        var table = document.getElementById('bookingTable');
-        var rows = table.getElementsByTagName('tr');
 
-        for (var i = 0; i < rows.length; i++) {
-            var cells = rows[i].getElementsByTagName('td');
-            
-            if (cells.length > 0) {
-                var dateCell = cells[0]; 
-                var dateParts = dateCell.innerText.split(', ');
-                var month = dateParts[0];
-                var year = dateParts[1];
+   document.getElementById('searchInput').addEventListener('input', function() {
+      var input = this.value.trim().toLowerCase();
+      var table = document.getElementById('bookingTable');
+      var rows = table.getElementsByTagName('tr');
+      var totalIncome = 0;
 
-                if ((month.toLowerCase().indexOf(input) > -1 || year.toLowerCase().indexOf(input) > -1)) {
-                    rows[i].style.display = '';
-                } else {
-                    rows[i].style.display = 'none';
-                }
-            }
-        }
-    });
+      for (var i = 1; i < rows.length; i++) {
+         var cells = rows[i].getElementsByTagName('td');
+
+         if (cells.length > 0) {
+               var dateCell = cells[0]; 
+               var dateParts = dateCell.innerText.split(', ');
+               var month = dateParts[0];
+               var year = dateParts[1];
+               var displayRow = (month.toLowerCase().indexOf(input) > -1 || year.toLowerCase().indexOf(input) > -1);
+
+               rows[i].style.display = displayRow ? '' : 'none';
+
+               
+               if (displayRow) {
+                  var incomeValue = cells[1].innerText;
+                  incomeValue = parseFloat(incomeValue.replace('P', '').replace(/,/g, ''));
+                  totalIncome += isNaN(incomeValue) ? 0 : incomeValue;
+               }
+         }
+      }
+
+      
+      document.getElementById('totalIncome').innerText = 'P' + totalIncome.toLocaleString();
+   });
+
+
+    $(document).ready(function(){
+      var totalIncome = 0;
+
+      $('.income_amount').each(function() {
+         var incomeValue = $(this).text();
+         incomeValue = parseFloat(incomeValue.replace('P', '').replace(/,/g, ''));
+         totalIncome += incomeValue;
+      });
+
+      $('#totalIncome').text('P' + totalIncome.toLocaleString());
+   });
+
+
 </script>
 @endsection
