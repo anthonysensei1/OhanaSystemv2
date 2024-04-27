@@ -4,7 +4,7 @@
    <!-- Main content -->
    <section class="content pt-3">
       <div class="container-fluid">
-         <div class="row text-end">
+         <div class="row">
             <div class="col-lg-12">
                <div class="card">
                   <div class="card-header d-flex justify-content-between align-items-center">
@@ -16,7 +16,7 @@
                   <div class="card-body">
                     <table class="table table-bordered table-striped">
                         <thead>
-                            <tr class="text-center">
+                            <tr>
                                 <th>Room Type</th>
                                 <th>Rate</th>
                                 <th>Action</th>
@@ -24,10 +24,10 @@
                         </thead>
                         <tbody>
                            @foreach ($room_types as $room_type)
-                              <tr>
+                              <tr class="text-center">
                                  <td>{{ $room_type['room_type'] }}</td>
                                  <td>{{ $room_type['room_rate'] }}</td>
-                                 <td class="text-center">
+                                 <td >
                                     <button class="btn btn-info btn-md" data-toggle="modal" data-id="{{ $room_type['id'] }}" data-target="#edit_room_type" onclick="edit('{{ $room_type['id'] }}', '{{ $room_type['room_type'] }}', '{{ $room_type['room_rate'] }}')">
                                           <i class="fas fa-pen"></i>
                                           edit
