@@ -91,7 +91,9 @@ class OTPController extends Controller
        
     }
 
-    function verifyCode(Request $request) {
+    
+
+    public function verifyCode(Request $request) {
 
         $request->validate(['otp_code' => 'required']);
 
@@ -124,5 +126,13 @@ class OTPController extends Controller
 
         return response()->json(['message' => $getText, 'data' => $get_time,'data_time'=>  $time_difference]);
 
+    }
+
+    public function checkEmail(Request $request) {
+        $user = User::where('email',$request->email)->first();
+        if ($user) {
+           return 1;
+        }
+        return 0;
     }
 }

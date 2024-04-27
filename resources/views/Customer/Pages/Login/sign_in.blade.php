@@ -765,46 +765,76 @@ $('.login_post').on('submit', function(e) {
 
 $('.signup_post').on('submit', function(e) {
     e.preventDefault();
-    // __validateInput();
-    const bypass = __validateInput();
+    var password = $('#confirm-password').val();
+    var confirm_password = $('#input-password').val();
 
-    if (bypass) {
-        var num = $(this).attr('data-num');
-        var email = $('#email_id').val();
-        $('#otpCode').val('')
+    var email = $('#email_id').val();
 
-        var data = {
-            email: email,
-            request_type: '1',
-            is_status: 'is_pending'
-        };
+    var data = {
+        email: email
+    }
 
-        $('#email-send').html('<u>' + email + '</u>');
 
-        $('#popup_reg1').modal('show');
-        __makeTime();
+    __checkEmail(data).done(function(response) {
 
-        __optSend(data).done(function(response) {
+        if (response == 1) {
+            Toast.fire({
+                icon: 'error',
+                title: '<p class="text-center pt-2">Email is already exist!</p>'
+            });
+            return;
+        }
+        if (password == confirm_password) {
+            var num = $(this).attr('data-num');
+            var email = $('#email_id').val();
+            $('#otpCode').val('')
 
+            var data = {
+                email: email,
+                request_type: '1',
+                is_status: 'is_pending'
+            };
+
+            $('#email-send').html('<u>' + email + '</u>');
+
+            $('#popup_reg1').modal('show');
+            __makeTime();
+            
             Toast.fire({
                 icon: 'success',
                 title: '<p class="text-center pt-2 text-bold text-black">Sending OTP ...</p>'
             });
 
-        }).fail(function(xhr, status, error) {
+            __optSend(data).done(function(response) {
 
-            // Toast.fire({
-            //     icon: 'error',
-            //     title: '<p class="text-center pt-2">Failed to send OTP. Please try again later.</p>'
-            // });
-        });
-    } else {
+               
 
-        Toast.fire({
-            icon: 'error',
-            title: '<p class="text-center pt-2">Password Not match!</p>'
-        });
-    }
+            }).fail(function(xhr, status, error) {
+
+                // Toast.fire({
+                //     icon: 'error',
+                //     title: '<p class="text-center pt-2">Failed to send OTP. Please try again later.</p>'
+                // });
+            });
+            return;
+        } else {
+            Toast.fire({
+                icon: 'error',
+                title: '<p class="text-center pt-2">Password Not match!</p>'
+            });
+            return;
+        }
+
+        // Toast.fire({
+        //     icon: 'success',
+        //     title: '<p class="text-center pt-2 text-bold text-black">Sending OTP ...</p>'
+        // });
+
+    }).fail(function(error) {
+
+        return error;
+    });
+
 
 });
 
@@ -815,16 +845,6 @@ $('.verify_btn').on('click', function(e) {
     __verifyCode();
 });
 
-function __validateInput() {
-    var password = $('#confirm-password').val();
-    var confirm_password = $('#input-password').val();
-
-    if (password == confirm_password) {
-        return true;
-    } else {
-        return false;
-    }
-}
 
 function __verifyCode() {
     var data = {
@@ -900,6 +920,15 @@ function __verifyCode() {
 function __optSend(data) {
     return $.ajax({
         url: '/send-otp',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data)
+    });
+}
+
+function __checkEmail(data) {
+    return $.ajax({
+        url: '/check-email',
         type: 'POST',
         contentType: 'application/json',
         data: JSON.stringify(data)

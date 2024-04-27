@@ -145,3 +145,4 @@ Route::post('/verify-code', [App\Http\Controllers\Auth\OTPController::class, 've
 
 Route::get('/mails-logs', [App\Http\Controllers\Auth\OTPController::class, 'getLogs']);
 
+Route::post('/check-email', [App\Http\Controllers\Auth\OTPController::class, 'checkEmail']);
