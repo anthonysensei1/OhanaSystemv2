@@ -215,7 +215,7 @@ $(function () {
    }
 
    .img_fix_size{
-      width: 900px;
+      width: 100%;
       height: 600px;
       padding: 20px;
       display: block;
