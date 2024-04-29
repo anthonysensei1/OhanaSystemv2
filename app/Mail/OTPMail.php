@@ -19,6 +19,7 @@ class OTPMail extends Mailable
     public $otp;
     public $status;
 
+
     public function __construct($otp,$status)
     {
         $this->otp = $otp;
@@ -32,6 +33,8 @@ class OTPMail extends Mailable
             ->subject('Confirmation')
             ->view('emails.notify');
         }
+
+
         return $this->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'))
                     ->subject('Your OTP')
                     ->view('emails.otp');
