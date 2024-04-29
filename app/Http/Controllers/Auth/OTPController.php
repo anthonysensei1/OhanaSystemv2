@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Mail\OTPMail;
+use App\Mail\forgotpass;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\User;
 use Carbon\Carbon;
 use Log;
+
+
 
 
 class OTPController extends Controller
@@ -134,5 +137,57 @@ class OTPController extends Controller
            return 1;
         }
         return 0;
+    }
+
+
+    public function forgotPass(Request $request){
+        
+        $otp = 000000;
+        $user = User::where('email',$request->email)->first();
+
+        DB::table('user_otps')->insert([
+            'email' => $user->email,
+            'details' => 'User Forgot password!.',
+            'status' => 'is_confirm',
+            'otp' => $otp,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $res = Mail::to($request->email)->send(new forgotpass($user->id));
+        // LOG::info('Main return:: '. json_encode($res));
+        return response()->json(['message' => 'OTP sent to email.']);
+        
+    }
+    
+    public function requestPass(Request $request){
+        if ($request->id) {
+            $user = User::where('id',$request->id)->first();
+            $user->password = password_hash($request->new_password, PASSWORD_BCRYPT);
+            $user->save();
+
+            return response()->json(['message' => 'success']);
+            
+        }else{
+            return response()->json(['message' => 'error']);
+        }
+    }
+
+    public function resetPassword(Request $request){
+        $id = isset($_GET['id']) ? $_GET['id'] : '0';
+
+        if ($id == '0') {
+            return redirect('/');
+        }
+
+        $user = User::where('id',$id)->first();
+        if (!$user) {
+            return redirect('/');
+        }
+
+        return redirect('/request-password')->with('id',$id);
+    }
+    public function routeEmail(){
+        return view('emails.recover');
     }
 }

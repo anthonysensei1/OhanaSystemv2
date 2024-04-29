@@ -437,6 +437,8 @@
                     <div class="register-link">
                         <p>Dont have an account? <a href="#" data-toggle="modal" data-target="#popup_reg">Register</a>
                         </p>
+                        <p> <a href="#" onclick="__res()" style="color:#007bff">Forgot password?</a>
+                        </p>
                     </div>
                 </form>
             </div>
@@ -658,6 +660,44 @@
         <!-- /.content-wrapper -->
     </div>
 
+
+
+    <div class="modal fade" id="modal-sm" aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title">Request new password</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                   
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control email_request" id="email_request" placeholder="Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="submit" onclick="__forgot()" class="btn btn-primary btn-block">Request new password</button>
+                        </div>
+
+                    </div>
+        
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
     <footer class="main-footer">
         <center>
             <strong>Copyright &copy; 2024
@@ -694,6 +734,7 @@ $.widget.bridge('uibutton', $.ui.button)
 
 
 <script>
+
 var intervalID;
 var totalTime = 60;
 const Toast = Swal.mixin({
@@ -720,6 +761,10 @@ function showSnackbar(message) {
     setTimeout(function() {
         snackbar.className = snackbar.className.replace("show", "");
     }, 3000);
+}
+
+function __res(){
+    $('#modal-sm').modal('show');
 }
 
 
@@ -807,7 +852,7 @@ $('.signup_post').on('submit', function(e) {
 
             __optSend(data).done(function(response) {
 
-               
+
 
             }).fail(function(xhr, status, error) {
 
@@ -916,6 +961,37 @@ function __verifyCode() {
         }
     });
 }
+
+
+
+function __forgot() {
+
+    var data = {
+        email: $('#email_request').val(),
+    };
+    $.ajax({
+        url: '/forgot-password',
+        type: 'POST',
+        contentType: 'application/json',
+        data:JSON.stringify(data),
+        success: function(response) {
+            console.log(response);
+            $('#modal-sm').modal('hide');
+            Toast.fire({
+                icon: 'success',
+                title: '<p class="text-center pt-2 text-bold text-black"> Send Success. Please check to your email. </p>'
+            });
+
+        },
+        error: function(xhr, status, error) {
+            Toast.fire({
+                icon: 'error',
+                title: '<p class="text-center pt-2">Failed to send request. Please try again later.</p>'
+            });
+        }
+    });
+}
+
 
 function __optSend(data) {
     return $.ajax({

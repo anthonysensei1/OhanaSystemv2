@@ -146,3 +146,13 @@ Route::post('/verify-code', [App\Http\Controllers\Auth\OTPController::class, 've
 Route::get('/mails-logs', [App\Http\Controllers\Auth\OTPController::class, 'getLogs']);
 
 Route::post('/check-email', [App\Http\Controllers\Auth\OTPController::class, 'checkEmail']);
+
+Route::get('/reset-password', [App\Http\Controllers\Auth\OTPController::class, 'resetPassword']);
+
+Route::post('/forgot-password', [App\Http\Controllers\Auth\OTPController::class, 'forgotPass']);
+
+Route::get('/request-password', [App\Http\Controllers\Auth\OTPController::class, 'routeEmail']);
+
+
+Route::post('/request-pass', [App\Http\Controllers\Auth\OTPController::class, 'requestPass']);
+
