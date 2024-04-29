@@ -102,8 +102,8 @@
               @endphp
                 {
                   title          : '{{ $book_title }}',
-                  start          : new Date('{{ $booking->book_start_date["0"] }}', '{{ $booking->book_start_date["1"] - 1  }}', '{{ $booking->book_start_date["2"] }}'),
-                  end            : new Date('{{ $booking->book_end_date["0"] }}', '{{ $booking->book_end_date["1"] - 1  }}', '{{ $booking->book_end_date["2"] + 1}}'),
+                  start          : new Date('{{ (int)$booking->book_start_date["0"] }}', '{{  (int)$booking->book_start_date["1"] - 1  }}', '{{  (int)$booking->book_start_date["2"] }}'),
+                  end            : new Date('{{  (int)$booking->book_end_date["0"] }}', '{{ (int)$booking->book_end_date["1"] - 1  }}', '{{  (int)$booking->book_end_date["2"] + 1}}'),
                   backgroundColor: '{{ $backgroundColor }}',
                   textColor      : '{{ $textColor}}',
                   borderColor    : '{{ $backgroundColor }}',

@@ -465,7 +465,7 @@
                                 <div class="labels">Contact Number</div>
                                 <input type="text" class="form-control" name="c_number" id="c_number"
                                     placeholder="Contact Number" pattern="\d{11}" title="Please enter 11 digits"
-                                    inputmode="numeric">
+                                    inputmode="numeric" required>
                                 <div class="labels">Email</div>
                                 <input type="email" id="email_id" class="form-control" name="email" placeholder="Email"
                                     required autocomplete="email">
@@ -799,7 +799,7 @@ $('.signup_post').on('submit', function(e) {
 
             $('#popup_reg1').modal('show');
             __makeTime();
-            
+
             Toast.fire({
                 icon: 'success',
                 title: '<p class="text-center pt-2 text-bold text-black">Sending OTP ...</p>'

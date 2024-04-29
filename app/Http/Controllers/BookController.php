@@ -58,82 +58,89 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        $arr_reservation = explode("-", $request->reservation);
 
-        $i = 0;
-        while ($i < count($arr_reservation)) {
-            $date = DateTime::createFromFormat('m/d/Y', trim($arr_reservation[$i]));
-            if ($i < 1) {
-                $book_start = $date->format('Y-m-d');
-            } else {
-                $book_end = $date->format('Y-m-d');
+        // Explode reservation dates and time range from the request
+        $arr_reservation = explode(" - ", $request->reservation); 
+        $book_start = null;
+        $book_end = null;
+
+        // Parse the dates
+        for ($i = 0; $i < count($arr_reservation); $i++) {
+            $date = DateTime::createFromFormat('m/d/Y H:i', trim($arr_reservation[$i]));
+            if ($date === false) {
+                // Return a response immediately if a date is invalid
+                return response()->json([
+                    'response' => 0,
+                    'message' => 'Invalid date format in reservation array at index ' . $i
+                ]);
             }
 
-            $i++;
+            if ($i == 0) {
+                $book_start = $date;  // Keep as DateTime object for start
+            } elseif ($i == 1) {
+                $book_end = $date;  // Keep as DateTime object for end
+            }
         }
 
+        // Calculate the booking interval and total days
         $modal_type = $request->modal_type;
-        $currentDateTime = date("Y-m-d");
-        $date1 = new DateTime($book_start . ' 14:00:00');
-        $date2 = new DateTime($book_end . ' 12:00:00');
-        $interval = $date1->diff($date2);
+        $interval = $book_start->diff($book_end);
         $total_days = $interval->days + (int)$modal_type;
 
+        // Calculate the total amount
         $room_rate_per_day = $request->room_rate;
         $total_amount = $room_rate_per_day * $total_days;
 
-        
-
+        // Check if the booking start date is in the past
+        $currentDateTime = new DateTime("now");
         if ($currentDateTime > $book_start) {
-            $renderMessage = [
+            return response()->json([
                 'response' => 0,
-                'message' => 'Invalid date, Please try again!',
-            ];
-
-            return response()->json($renderMessage);
+                'message' => 'Invalid date, Please try again!'
+            ]);
         }
 
+        // Verify payment amount
         if ($request->payment != $total_amount) {
-            $renderMessage = [
+            return response()->json([
                 'response' => 0,
-                'message' => 'Invalid payment,Total amount is P' . number_format($total_amount, 2),
-            ];
-
-            return response()->json($renderMessage);
+                'message' => 'Invalid payment, Total amount is P' . number_format($total_amount, 2)
+            ]);
         }
 
+        // Check for existing bookings that might overlap
         $book = DB::table('bookings')
-                    ->where(function ($query) use ($book_start, $book_end) {
-                        $query->where(function ($query) use ($book_start, $book_end) {
-                            $query->where('book_start_date', '=', $book_start)
-                                ->orWhere('book_end_date', '=', $book_end);
-                        })
-                        ->orWhere(function ($query) use ($book_start, $book_end) {
-                            $query->where('book_start_date', '<=', $book_start)
-                                ->where('book_end_date', '>=', $book_start);
-                        });
-                    })
-                    ->where('room_or_hall_id', '=', $request->b_id)
-                    ->where('book_from', '=', $request->b_from)
-                    // ->where('status', '=', '1')
-                    ->first();
-                    
+            ->where(function ($query) use ($book_start, $book_end) {
+                $query->where(function ($query) use ($book_start, $book_end) {
+                    $query->where('book_start_date', '=', $book_start)
+                        ->orWhere('book_end_date', '=', $book_end);
+                })
+                ->orWhere(function ($query) use ($book_start, $book_end) {
+                    $query->where('book_start_date', '<=', $book_start)
+                        ->where('book_end_date', '>=', $book_start);
+                });
+            })
+            ->where('room_or_hall_id', '=', $request->b_id)
+            ->where('book_from', '=', $request->b_from)
+            // Uncomment the following line if status checking is needed
+            // ->where('status', '=', '1')
+            ->first();
+
+        // Handle existing bookings
         if (!empty($book)) {
-
-            $renderMessage = [
+            return response()->json([
                 'response' => 0,
-                'message' => 'This day is already book, please see calendar for available days!',
-            ];
-
-            return response()->json($renderMessage);
+                'message' => 'This day is already booked, please see calendar for available days!',
+            ]);
         }
 
+        // Create booking record
         $formData = [
             'auth_user_id' => $request->auth_id,
             'room_or_hall_id' => $request->b_id,
             'book_from' => $request->b_from,
-            'book_start_date' => $book_start,
-            'book_end_date' => $book_end,
+            'book_start_date' => $book_start->format('Y-m-d H:i:s'),  // Formatting DateTime object
+            'book_end_date' => $book_end->format('Y-m-d H:i:s'),
             'payment_method' => $request->payment_method,
             'reference_num' => $request->reference_num,
             'payment' => $request->payment,
@@ -142,13 +149,12 @@ class BookController extends Controller
 
         Bookings::create($formData);
 
-        $renderMessage = [
+        // Return a success response
+        return response()->json([
             'response' => 1,
-            'message' => 'Booking sucess!',
+            'message' => 'Booking success!',
             'path' => '/Customer/Pages/Book/book'
-        ];
-
-        return response()->json($renderMessage);
+        ]);
     }
 
     /**

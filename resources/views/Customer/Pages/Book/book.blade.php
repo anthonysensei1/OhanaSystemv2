@@ -137,7 +137,47 @@
     $(document).ready(function () {
         $('#book_now').addClass('c_active');
 
-		$('#reservation').daterangepicker();
+		$('#reservation').daterangepicker({
+          "timePicker": true,
+          "locale": {
+            "direction": "ltr",
+            "format": "MM/DD/YYYY HH:mm",
+            "separator": " - ",
+            "applyLabel": "Apply",
+            "cancelLabel": "Cancel",
+            "fromLabel": "From",
+            "toLabel": "To",
+            "customRangeLabel": "Custom",
+            "daysOfWeek": [
+              "Su",
+              "Mo",
+              "Tu",
+              "We",
+              "Th",
+              "Fr",
+              "Sa"
+            ],
+            "monthNames": [
+              "January",
+              "February",
+              "March",
+              "April",
+              "May",
+              "June",
+              "July",
+              "August",
+              "September",
+              "October",
+              "November",
+              "December"
+            ],
+            "firstDay": 1
+          },
+          "startDate": "04/23/2024",
+          "endDate": "04/29/2024"
+        }, function (start, end, label) {
+          console.log("New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')");
+        });
 
         $('#function_hall_btn').on('click', function () {
             $('#time-range').val('P5,000 per 5hours');
